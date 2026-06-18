@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
-     crossorigin="anonymous"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ledger Hours — Calculate Total, Business, Weekend &amp; Weekday Hours from a Spreadsheet</title>
-<meta name="description" content="Upload a spreadsheet with start and end timestamps and get total hours, business hours, weekend hours, and weekday hours calculated to the minute. Free, runs entirely in your browser." />
+<meta name="description" content="Upload a spreadsheet with start/end timestamps and get total hours, business hours, weekend hours, and weekday hours calculated to the minute. Free, runs entirely in your browser." />
+<meta name="keywords" content="hours calculator, business hours calculator, weekend hours calculator, weekday hours calculator, time between dates calculator, excel hours between two dates, timesheet calculator, payroll hours calculator, elapsed time calculator excel" />
+<link rel="canonical" href="https://alblum528.github.io/Timespan/" />
+
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Ledger Hours — Calculate Total, Business, Weekend & Weekday Hours from a Spreadsheet" />
 <meta property="og:description" content="Upload a spreadsheet with start/end timestamps and get total, business, weekend, and weekday hours calculated to the minute. Free, runs entirely in your browser." />
 <meta property="og:url" content="https://alblum528.github.io/Timespan/" />
 <meta property="og:site_name" content="Ledger Hours" />
- 
+
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Ledger Hours — Calculate Total, Business, Weekend & Weekday Hours from a Spreadsheet" />
-<meta name="twitter:description" content="Upload a spreadsheet with columns for start & end timestamps and get total, business, weekend, and weekday hours calculated to the minute. Free, runs entirely in your browser." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<meta name="twitter:description" content="Upload a spreadsheet with start/end timestamps and get total, business, weekend, and weekday hours calculated to the minute. Free, runs entirely in your browser." />
 
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,14 +34,18 @@
   }
 }
 </script>
- 
+
+<!-- Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
- 
+
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: 'Inter', 'Segoe UI', sans-serif; }
@@ -58,7 +57,8 @@
 <script>
 const {
   useState,
-  useCallback
+  useCallback,
+  useEffect
 } = React;
 const MS_PER_HOUR = 3600000;
 
@@ -203,6 +203,8 @@ const COLORS = {
 const FONT_DISPLAY = "'Fraunces', 'Georgia', serif";
 const FONT_BODY = "'Inter', 'Segoe UI', sans-serif";
 const FONT_MONO = "'JetBrains Mono', 'Courier New', monospace";
+// Your AdSense publisher ID — same value as the ca-pub-XXXXXXXXXXXXXXXX in the <head> script above
+const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX";
 function WeekStrip({
   size = 7,
   gap = 4
@@ -231,40 +233,94 @@ function WeekStrip({
 function AdSlot({
   width,
   height,
+  slot = "",
   label = "Advertisement",
   style = {}
 }) {
+  const isFixedSize = typeof width === "number";
+  // Request the ad once this slot mounts with a real ad unit ID. Placeholder
+  // slots (slot === "") skip this and just render the dashed-border box below.
+  useEffect(() => {
+    if (!slot) return;
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      // adsbygoogle.js not loaded yet, or blocked by an ad blocker — fail silently
+    }
+  }, [slot]);
+  if (!slot) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: width || "100%",
+        height,
+        maxWidth: width,
+        margin: "0 auto",
+        background: "#EFEBE2",
+        border: `1px dashed ${COLORS.line}`,
+        borderRadius: 8,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        gap: 4,
+        ...style
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        color: COLORS.textMuted,
+        fontFamily: FONT_BODY
+      }
+    }, label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: "#B8B2A4",
+        fontFamily: FONT_BODY
+      }
+    }, width, " \xD7 ", height));
+  }
   return /*#__PURE__*/React.createElement("div", {
     style: {
-      width: width || "100%",
-      height,
-      maxWidth: width,
+      width: isFixedSize ? width : "100%",
+      maxWidth: isFixedSize ? width : "100%",
       margin: "0 auto",
-      background: "#EFEBE2",
-      border: `1px dashed ${COLORS.line}`,
-      borderRadius: 8,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      flexDirection: "column",
-      gap: 4,
       ...style
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, isFixedSize ? /*#__PURE__*/React.createElement("ins", {
+    className: "adsbygoogle",
     style: {
-      fontSize: 10,
-      letterSpacing: "0.12em",
-      textTransform: "uppercase",
-      color: COLORS.textMuted,
-      fontFamily: FONT_BODY
-    }
-  }, label), /*#__PURE__*/React.createElement("div", {
+      display: "inline-block",
+      width,
+      height
+    },
+    "data-ad-client": ADSENSE_CLIENT,
+    "data-ad-slot": slot
+  }) : /*#__PURE__*/React.createElement("ins", {
+    className: "adsbygoogle",
     style: {
-      fontSize: 11,
-      color: "#B8B2A4",
-      fontFamily: FONT_BODY
-    }
-  }, width, " \xD7 ", height));
+      display: "block"
+    },
+    "data-ad-client": ADSENSE_CLIENT,
+    "data-ad-slot": slot,
+    "data-ad-format": "auto",
+    "data-full-width-responsive": "true"
+  }));
+}
+function useMinViewportWidth(px) {
+  // Tracks whether the viewport is at least `px` wide, via matchMedia rather
+  // than CSS alone — so components that depend on it (like sidebar ads) only
+  // mount, and only request an ad, when they're actually going to be visible.
+  const [matches, setMatches] = useState(() => window.innerWidth >= px);
+  useEffect(() => {
+    const mq = window.matchMedia(`(min-width: ${px}px)`);
+    const onChange = () => setMatches(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [px]);
+  return matches;
 }
 
 // ---- Component ------------------------------------------------------------
@@ -282,6 +338,7 @@ function HoursCalculator() {
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState("");
   const [rawWorkbook, setRawWorkbook] = useState(null);
+  const isDesktop = useMinViewportWidth(980);
   const handleFile = useCallback(f => {
     setError("");
     setProcessed(false);
@@ -449,7 +506,8 @@ function HoursCalculator() {
     }
   }, /*#__PURE__*/React.createElement(AdSlot, {
     width: 728,
-    height: 90
+    height: 90,
+    slot: "" // ← paste your AdSense ad unit ID for the 728x90 leaderboard here
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       maxWidth: 1180,
@@ -486,7 +544,7 @@ function HoursCalculator() {
       color: COLORS.textMuted,
       fontWeight: 600
     }
-  }, "Go beyond NETWORKDAYS and MOD functions")), /*#__PURE__*/React.createElement("h1", {
+  }, "Mon \u2013 Fri quiet \xB7 Sat / Sun in amber")), /*#__PURE__*/React.createElement("h1", {
     style: {
       fontFamily: FONT_DISPLAY,
       fontSize: 34,
@@ -495,7 +553,7 @@ function HoursCalculator() {
       margin: "0 0 12px 0",
       lineHeight: 1.15
     }
-  }, "Easy Excel Timespan Calculator"), /*#__PURE__*/React.createElement("p", {
+  }, "Hours Calculator"), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 15,
       color: COLORS.inkSoft,
@@ -503,7 +561,7 @@ function HoursCalculator() {
       margin: 0,
       maxWidth: 620
     }
-  }, "Upload a spreadsheet of start and end timestamps with a header row, choose one or more ways to measure the time between them, and download the result with new columns added \u2014 each calculated from exact timestamps down to the minute and reported to two decimal places. All processing happens locally in your browser; nothing is uploaded to a server.")), /*#__PURE__*/React.createElement("div", {
+  }, "Upload a spreadsheet with start and end timestamps, choose one or more ways to measure the time between them, and download the result with new columns added \u2014 each calculated from exact timestamps down to the minute and reported to two decimal places. All processing happens locally in your browser; nothing is uploaded to a server.")), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       borderRadius: 12,
@@ -1040,7 +1098,8 @@ function HoursCalculator() {
     }
   }, /*#__PURE__*/React.createElement(AdSlot, {
     width: "100%",
-    height: 100
+    height: 100,
+    slot: "" // ← paste your AdSense ad unit ID for the in-content banner here
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 28,
@@ -1048,13 +1107,11 @@ function HoursCalculator() {
       color: "#AEA89A",
       textAlign: "center"
     }
-  }, "Business Hours and Weekend Hours count exact minute-level overlap with their respective windows \xB7 all processing runs locally in your browser")), /*#__PURE__*/React.createElement("div", {
+  }, "Business Hours and Weekend Hours count exact minute-level overlap with their respective windows \xB7 all processing runs locally in your browser")), isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
       width: 300,
-      flexShrink: 0,
-      display: "none"
-    },
-    className: "sidebar-ad"
+      flexShrink: 0
+    }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       position: "sticky",
@@ -1065,15 +1122,13 @@ function HoursCalculator() {
     }
   }, /*#__PURE__*/React.createElement(AdSlot, {
     width: 300,
-    height: 250
+    height: 250,
+    slot: "" // ← paste your AdSense ad unit ID for the 300x250 sidebar unit here
   }), /*#__PURE__*/React.createElement(AdSlot, {
     width: 300,
-    height: 600
-  })))), /*#__PURE__*/React.createElement("style", null, `
-        @media (min-width: 980px) {
-          .sidebar-ad { display: block !important; }
-        }
-      `), /*#__PURE__*/React.createElement("div", {
+    height: 600,
+    slot: "" // ← paste your AdSense ad unit ID for the 300x600 sidebar unit here
+  })))), /*#__PURE__*/React.createElement("div", {
     style: {
       borderTop: `1px solid ${COLORS.line}`,
       padding: "24px 28px",
