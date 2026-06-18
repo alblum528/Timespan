@@ -12,7 +12,7 @@
 
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <style>
@@ -23,7 +23,7 @@
 <body>
 <div id="root"></div>
 
-<script type="text/babel">
+<script type="text/babel" data-presets="react" data-type="script">
 const { useState, useCallback } = React;
 
 const MS_PER_HOUR = 3600000;
