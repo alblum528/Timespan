@@ -147,6 +147,11 @@ function computeMetric(key, start, end, bizStartHour, bizEndHour) {
 
 // ---- Parsing / formatting ----------------------------------------------
 
+const SUPPORTED_EXTENSIONS = [".xlsx", ".xls", ".ods", ".csv"];
+function getFileExtension(filename) {
+  const match = /\.[^.]+$/.exec(filename || "");
+  return match ? match[0].toLowerCase() : "";
+}
 function parseExcelDateTime(val) {
   if (!val && val !== 0) return null;
   if (val instanceof Date) return isNaN(val) ? null : val;
@@ -347,10 +352,25 @@ function HoursCalculator() {
     setStartCol("");
     setEndCol("");
     setRawWorkbook(null);
+    const ext = getFileExtension(f.name);
+    if (!SUPPORTED_EXTENSIONS.includes(ext)) {
+      setError("Unsupported file type. Please upload a .xlsx, .xls, .ods, or .csv file.");
+      return;
+    }
+    const isCsv = ext === ".csv";
     const reader = new FileReader();
     reader.onload = e => {
       try {
-        const wb = XLSX.read(e.target.result, {
+        // CSV is plain text, so it's read and parsed as a string; the
+        // binary spreadsheet formats (xlsx/xls/ods) are zip-based and are
+        // read and parsed as a binary string, same as before.
+        let raw = e.target.result;
+        if (isCsv && typeof raw === "string" && raw.charCodeAt(0) === 0xFEFF) {
+          raw = raw.slice(1); // strip UTF-8 BOM some CSV exporters (incl. Excel) prepend
+        }
+        const wb = isCsv ? XLSX.read(raw, {
+          type: "string"
+        }) : XLSX.read(raw, {
           type: "binary",
           cellDates: false
         });
@@ -375,10 +395,14 @@ function HoursCalculator() {
         if (startGuess >= 0) setStartCol(String(startGuess));
         if (endGuess >= 0) setEndCol(String(endGuess));
       } catch {
-        setError("Could not read the file. Please upload a valid .xlsx or .xls file.");
+        setError("Could not read the file. Please upload a valid .xlsx, .xls, .ods, or .csv file.");
       }
     };
-    reader.readAsBinaryString(f);
+    if (isCsv) {
+      reader.readAsText(f);
+    } else {
+      reader.readAsBinaryString(f);
+    }
   }, []);
   const onDrop = useCallback(e => {
     e.preventDefault();
@@ -738,13 +762,13 @@ function HoursCalculator() {
       marginBottom: 6,
       fontFamily: FONT_BODY
     }
-  }, "Drop your Excel file here"), /*#__PURE__*/React.createElement("div", {
+  }, "Drop your spreadsheet here"), /*#__PURE__*/React.createElement("div", {
     style: {
       color: COLORS.textMuted,
       fontSize: 13,
       marginBottom: 22
     }
-  }, "Supports .xlsx and .xls \xB7 date+time columns used directly"), /*#__PURE__*/React.createElement("label", {
+  }, "Supports .xlsx, .xls, .ods, and .csv \xB7 date+time columns used directly"), /*#__PURE__*/React.createElement("label", {
     style: {
       background: COLORS.ink,
       color: COLORS.paper,
@@ -757,7 +781,7 @@ function HoursCalculator() {
     }
   }, "Choose File", /*#__PURE__*/React.createElement("input", {
     type: "file",
-    accept: ".xlsx,.xls",
+    accept: ".xlsx,.xls,.ods,.csv",
     onChange: e => e.target.files[0] && handleFile(e.target.files[0]),
     style: {
       display: "none"
