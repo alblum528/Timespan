@@ -67,7 +67,7 @@ const MS_PER_HOUR = 3600000;
 function calcTotalHours(start, end) {
   return (end.getTime() - start.getTime()) / MS_PER_HOUR;
 }
-function calcWeekendHours(start, end) {
+function calcWeekendHours(start, end, weekendDays) {
   let ms = 0;
   const cursor = new Date(start);
   cursor.setHours(0, 0, 0, 0);
@@ -76,7 +76,7 @@ function calcWeekendHours(start, end) {
     const dayEnd = new Date(cursor);
     dayEnd.setDate(dayEnd.getDate() + 1);
     const dow = cursor.getDay();
-    if (dow === 0 || dow === 6) {
+    if (weekendDays.includes(dow)) {
       const overlapStart = Math.max(dayStart.getTime(), start.getTime());
       const overlapEnd = Math.min(dayEnd.getTime(), end.getTime());
       if (overlapEnd > overlapStart) ms += overlapEnd - overlapStart;
@@ -85,13 +85,13 @@ function calcWeekendHours(start, end) {
   }
   return ms / MS_PER_HOUR;
 }
-function calcBusinessHours(start, end, bizStartHour, bizEndHour) {
+function calcBusinessHours(start, end, bizStartHour, bizEndHour, weekendDays) {
   let ms = 0;
   const cursor = new Date(start);
   cursor.setHours(0, 0, 0, 0);
   while (cursor < end) {
     const dow = cursor.getDay();
-    if (dow >= 1 && dow <= 5) {
+    if (!weekendDays.includes(dow)) {
       const windowStart = new Date(cursor);
       windowStart.setHours(bizStartHour, 0, 0, 0);
       const windowEnd = new Date(cursor);
@@ -116,30 +116,30 @@ const METRICS = [{
   key: "business",
   label: "Business Hours",
   short: "Business Hrs",
-  description: "Counts hours on weekdays only, between the business hours selected below."
+  description: "Counts hours on non-weekend days only, within the configurable time window below."
 }, {
   key: "weekend",
   label: "Weekend Hours",
   short: "Weekend Hrs",
-  description: "Counts hours that fall between 12:00 AM Saturday and 11:59 PM Sunday."
+  description: "Counts hours that fall on days marked as weekend above, from midnight to midnight."
 }, {
   key: "weekday",
   label: "Weekday Hours",
   short: "Weekday Hrs",
-  description: "Counts all hours on Monday\u2013Friday (Total Hours minus Weekend Hours)."
+  description: "Total Hours minus Weekend Hours \u2014 all hours on non-weekend days, full 24-hour span."
 }];
-function computeMetric(key, start, end, bizStartHour, bizEndHour) {
+function computeMetric(key, start, end, bizStartHour, bizEndHour, weekendDays) {
   if (!start || !end || isNaN(start) || isNaN(end)) return "";
   if (end < start) return "Invalid dates";
   switch (key) {
     case "total":
       return parseFloat(calcTotalHours(start, end).toFixed(2));
     case "weekend":
-      return parseFloat(calcWeekendHours(start, end).toFixed(2));
+      return parseFloat(calcWeekendHours(start, end, weekendDays).toFixed(2));
     case "weekday":
-      return parseFloat(calcWeekdayHours(calcTotalHours(start, end), calcWeekendHours(start, end)).toFixed(2));
+      return parseFloat(calcWeekdayHours(calcTotalHours(start, end), calcWeekendHours(start, end, weekendDays)).toFixed(2));
     case "business":
-      return parseFloat(calcBusinessHours(start, end, bizStartHour, bizEndHour).toFixed(2));
+      return parseFloat(calcBusinessHours(start, end, bizStartHour, bizEndHour, weekendDays).toFixed(2));
     default:
       return "";
   }
@@ -339,6 +339,7 @@ function HoursCalculator() {
   const [selectedMetrics, setSelectedMetrics] = useState([]);
   const [bizStartHour, setBizStartHour] = useState(9);
   const [bizEndHour, setBizEndHour] = useState(17);
+  const [weekendDays, setWeekendDays] = useState([0, 6]);
   const [processed, setProcessed] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState("");
@@ -417,7 +418,7 @@ function HoursCalculator() {
   const results = processed ? Object.fromEntries(selectedMetrics.map(key => [key, rows.map(row => {
     const s = parseExcelDateTime(row[parseInt(startCol)]);
     const en = parseExcelDateTime(row[parseInt(endCol)]);
-    return computeMetric(key, s, en, bizStartHour, bizEndHour);
+    return computeMetric(key, s, en, bizStartHour, bizEndHour, weekendDays);
   })])) : {};
   const handleProcess = () => {
     if (startCol === "" || endCol === "") {
@@ -480,6 +481,7 @@ function HoursCalculator() {
     setProcessed(false);
     setError("");
     setRawWorkbook(null);
+    setWeekendDays([0, 6]);
   };
   const previewRows = rows.slice(0, 6);
   const totals = processed ? Object.fromEntries(selectedMetrics.map(key => [key, results[key].reduce((sum, v) => sum + (typeof v === "number" ? v : 0), 0)])) : {};
@@ -605,6 +607,62 @@ function HoursCalculator() {
   }, "Calculation Options \u2014 select one or more"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
+      alignItems: "center",
+      gap: 10,
+      padding: "10px 14px",
+      marginBottom: 4,
+      background: "#EEEBE3",
+      borderRadius: 8,
+      flexWrap: "wrap"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      fontWeight: 700,
+      color: "#555",
+      flexShrink: 0,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      marginRight: 2
+    }
+  }, "Weekend Days:"), [{
+    label: "Fri",
+    dow: 5
+  }, {
+    label: "Sat",
+    dow: 6
+  }, {
+    label: "Sun",
+    dow: 0
+  }].map(({label, dow}) => {
+    const isWknd = weekendDays.includes(dow);
+    return /*#__PURE__*/React.createElement("button", {
+      key: dow,
+      onClick: () => {
+        setWeekendDays(prev => isWknd ? prev.filter(d => d !== dow) : [...prev, dow]);
+        setProcessed(false);
+      },
+      style: {
+        padding: "4px 13px",
+        borderRadius: 6,
+        border: isWknd ? `1.5px solid ${COLORS.amber}` : `1.5px solid ${COLORS.line}`,
+        background: isWknd ? COLORS.amberSoft : "#fff",
+        color: isWknd ? COLORS.amber : "#666",
+        fontSize: 12,
+        fontWeight: 600,
+        cursor: "pointer",
+        transition: "all 0.12s"
+      }
+    }, label);
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textMuted,
+      marginLeft: 2
+    }
+  }, "Applies to Business Hours, Weekend Hours & Weekday Hours")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
       flexDirection: "column",
       gap: 10
     }
@@ -723,13 +781,7 @@ function HoursCalculator() {
     }, hourOptions().map(o => /*#__PURE__*/React.createElement("option", {
       key: o.value,
       value: o.value
-    }, o.label)))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: "#888",
-        paddingBottom: 9
-      }
-    }, "Applies Monday\u2013Friday only")));
+    }, o.label))))));
   }))), !file && /*#__PURE__*/React.createElement("div", {
     onDrop: onDrop,
     onDragOver: e => {
