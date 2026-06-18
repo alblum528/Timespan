@@ -12,7 +12,6 @@
 
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <style>
@@ -23,9 +22,11 @@
 <body>
 <div id="root"></div>
 
-<script type="text/babel" data-presets="react" data-type="script">
-const { useState, useCallback } = React;
-
+<script>
+const {
+  useState,
+  useCallback
+} = React;
 const MS_PER_HOUR = 3600000;
 
 // ---- Calculation engine ----------------------------------------------
@@ -33,17 +34,14 @@ const MS_PER_HOUR = 3600000;
 function calcTotalHours(start, end) {
   return (end.getTime() - start.getTime()) / MS_PER_HOUR;
 }
-
 function calcWeekendHours(start, end) {
   let ms = 0;
   const cursor = new Date(start);
   cursor.setHours(0, 0, 0, 0);
-
   while (cursor < end) {
     const dayStart = new Date(cursor);
     const dayEnd = new Date(cursor);
     dayEnd.setDate(dayEnd.getDate() + 1);
-
     const dow = cursor.getDay();
     if (dow === 0 || dow === 6) {
       const overlapStart = Math.max(dayStart.getTime(), start.getTime());
@@ -54,12 +52,10 @@ function calcWeekendHours(start, end) {
   }
   return ms / MS_PER_HOUR;
 }
-
 function calcBusinessHours(start, end, bizStartHour, bizEndHour) {
   let ms = 0;
   const cursor = new Date(start);
   cursor.setHours(0, 0, 0, 0);
-
   while (cursor < end) {
     const dow = cursor.getDay();
     if (dow >= 1 && dow <= 5) {
@@ -67,7 +63,6 @@ function calcBusinessHours(start, end, bizStartHour, bizEndHour) {
       windowStart.setHours(bizStartHour, 0, 0, 0);
       const windowEnd = new Date(cursor);
       windowEnd.setHours(bizEndHour, 0, 0, 0);
-
       const overlapStart = Math.max(windowStart.getTime(), start.getTime());
       const overlapEnd = Math.min(windowEnd.getTime(), end.getTime());
       if (overlapEnd > overlapStart) ms += overlapEnd - overlapStart;
@@ -76,42 +71,33 @@ function calcBusinessHours(start, end, bizStartHour, bizEndHour) {
   }
   return ms / MS_PER_HOUR;
 }
-
 function calcWeekdayHours(totalHours, weekendHours) {
   return totalHours - weekendHours;
 }
-
-const METRICS = [
-  {
-    key: "total",
-    label: "Total Hours",
-    short: "Total Hrs",
-    description: "Counts all elapsed hours between the start and end timestamp, with no exclusions.",
-  },
-  {
-    key: "business",
-    label: "Business Hours",
-    short: "Business Hrs",
-    description: "Counts hours on weekdays only, between the business hours selected below.",
-  },
-  {
-    key: "weekend",
-    label: "Weekend Hours",
-    short: "Weekend Hrs",
-    description: "Counts hours that fall between 12:00 AM Saturday and 11:59 PM Sunday.",
-  },
-  {
-    key: "weekday",
-    label: "Weekday Hours",
-    short: "Weekday Hrs",
-    description: "Counts all hours on Monday\u2013Friday (Total Hours minus Weekend Hours).",
-  },
-];
-
+const METRICS = [{
+  key: "total",
+  label: "Total Hours",
+  short: "Total Hrs",
+  description: "Counts all elapsed hours between the start and end timestamp, with no exclusions."
+}, {
+  key: "business",
+  label: "Business Hours",
+  short: "Business Hrs",
+  description: "Counts hours on weekdays only, between the business hours selected below."
+}, {
+  key: "weekend",
+  label: "Weekend Hours",
+  short: "Weekend Hrs",
+  description: "Counts hours that fall between 12:00 AM Saturday and 11:59 PM Sunday."
+}, {
+  key: "weekday",
+  label: "Weekday Hours",
+  short: "Weekday Hrs",
+  description: "Counts all hours on Monday\u2013Friday (Total Hours minus Weekend Hours)."
+}];
 function computeMetric(key, start, end, bizStartHour, bizEndHour) {
   if (!start || !end || isNaN(start) || isNaN(end)) return "";
   if (end < start) return "Invalid dates";
-
   switch (key) {
     case "total":
       return parseFloat(calcTotalHours(start, end).toFixed(2));
@@ -142,7 +128,6 @@ function parseExcelDateTime(val) {
   }
   return null;
 }
-
 function formatDateTime(val) {
   const d = parseExcelDateTime(val);
   if (!d) return "";
@@ -154,12 +139,14 @@ function formatDateTime(val) {
   const ss = String(d.getSeconds()).padStart(2, "0");
   return `${mm}/${dd}/${yy} ${hh}:${min}:${ss}`;
 }
-
 function hourOptions() {
   const opts = [];
   for (let h = 0; h < 24; h++) {
     const label = h === 0 ? "12:00 AM" : h < 12 ? `${h}:00 AM` : h === 12 ? "12:00 PM" : `${h - 12}:00 PM`;
-    opts.push({ value: h, label });
+    opts.push({
+      value: h,
+      label
+    });
   }
   return opts;
 }
@@ -178,62 +165,73 @@ const COLORS = {
   line: "#E4E0D6",
   textMuted: "#8A8478",
   danger: "#B3402C",
-  dangerSoft: "#FBEAE6",
+  dangerSoft: "#FBEAE6"
 };
-
 const FONT_DISPLAY = "'Fraunces', 'Georgia', serif";
 const FONT_BODY = "'Inter', 'Segoe UI', sans-serif";
 const FONT_MONO = "'JetBrains Mono', 'Courier New', monospace";
-
-function WeekStrip({ size = 7, gap = 4 }) {
+function WeekStrip({
+  size = 7,
+  gap = 4
+}) {
   const days = ["M", "T", "W", "T", "F", "S", "S"];
-  return (
-    <div style={{ display: "flex", gap }}>
-      {days.map((d, i) => {
-        const isWeekend = i === 5 || i === 6;
-        return (
-          <div
-            key={i}
-            title={d}
-            style={{
-              width: size,
-              height: size * 2.4,
-              borderRadius: 2,
-              background: isWeekend ? COLORS.amber : COLORS.inkSoft,
-              opacity: isWeekend ? 1 : 0.35,
-            }}
-          />
-        );
-      })}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap
+    }
+  }, days.map((d, i) => {
+    const isWeekend = i === 5 || i === 6;
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      title: d,
+      style: {
+        width: size,
+        height: size * 2.4,
+        borderRadius: 2,
+        background: isWeekend ? COLORS.amber : COLORS.inkSoft,
+        opacity: isWeekend ? 1 : 0.35
+      }
+    });
+  }));
 }
-
-function AdSlot({ width, height, label = "Advertisement", style = {} }) {
-  return (
-    <div
-      style={{
-        width: width || "100%",
-        height,
-        maxWidth: width,
-        margin: "0 auto",
-        background: "#EFEBE2",
-        border: `1px dashed ${COLORS.line}`,
-        borderRadius: 8,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        gap: 4,
-        ...style,
-      }}
-    >
-      <div style={{ fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: COLORS.textMuted, fontFamily: FONT_BODY }}>
-        {label}
-      </div>
-      <div style={{ fontSize: 11, color: "#B8B2A4", fontFamily: FONT_BODY }}>{width} × {height}</div>
-    </div>
-  );
+function AdSlot({
+  width,
+  height,
+  label = "Advertisement",
+  style = {}
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: width || "100%",
+      height,
+      maxWidth: width,
+      margin: "0 auto",
+      background: "#EFEBE2",
+      border: `1px dashed ${COLORS.line}`,
+      borderRadius: 8,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+      gap: 4,
+      ...style
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      color: COLORS.textMuted,
+      fontFamily: FONT_BODY
+    }
+  }, label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: "#B8B2A4",
+      fontFamily: FONT_BODY
+    }
+  }, width, " \xD7 ", height));
 }
 
 // ---- Component ------------------------------------------------------------
@@ -251,27 +249,36 @@ function HoursCalculator() {
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState("");
   const [rawWorkbook, setRawWorkbook] = useState(null);
-
-  const handleFile = useCallback((f) => {
-    setError(""); setProcessed(false); setRows([]); setHeaders([]);
-    setStartCol(""); setEndCol(""); setRawWorkbook(null);
-
+  const handleFile = useCallback(f => {
+    setError("");
+    setProcessed(false);
+    setRows([]);
+    setHeaders([]);
+    setStartCol("");
+    setEndCol("");
+    setRawWorkbook(null);
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = e => {
       try {
-        const wb = XLSX.read(e.target.result, { type: "binary", cellDates: false });
+        const wb = XLSX.read(e.target.result, {
+          type: "binary",
+          cellDates: false
+        });
         const ws = wb.Sheets[wb.SheetNames[0]];
-        const data = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true });
-        if (!data.length) { setError("The spreadsheet appears to be empty."); return; }
-
-        const hdrs = data[0].map((h) => (h != null ? String(h).trim() : ""));
+        const data = XLSX.utils.sheet_to_json(ws, {
+          header: 1,
+          raw: true
+        });
+        if (!data.length) {
+          setError("The spreadsheet appears to be empty.");
+          return;
+        }
+        const hdrs = data[0].map(h => h != null ? String(h).trim() : "");
         const dataRows = data.slice(1).filter(r => r.some(c => c != null && c !== ""));
-
         setHeaders(hdrs);
         setRows(dataRows);
         setRawWorkbook(wb);
         setFile(f);
-
         const lower = hdrs.map(h => h.toLowerCase());
         const startGuess = lower.findIndex(h => h.includes("start"));
         const endGuess = lower.findIndex(h => h.includes("end") || h.includes("finish") || h.includes("close"));
@@ -283,33 +290,21 @@ function HoursCalculator() {
     };
     reader.readAsBinaryString(f);
   }, []);
-
-  const onDrop = useCallback((e) => {
-    e.preventDefault(); setDragging(false);
+  const onDrop = useCallback(e => {
+    e.preventDefault();
+    setDragging(false);
     const f = e.dataTransfer.files[0];
     if (f) handleFile(f);
   }, [handleFile]);
-
-  const toggleMetric = (key) => {
+  const toggleMetric = key => {
     setProcessed(false);
-    setSelectedMetrics((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-    );
+    setSelectedMetrics(prev => prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]);
   };
-
-  const results = processed
-    ? Object.fromEntries(
-        selectedMetrics.map((key) => [
-          key,
-          rows.map((row) => {
-            const s = parseExcelDateTime(row[parseInt(startCol)]);
-            const en = parseExcelDateTime(row[parseInt(endCol)]);
-            return computeMetric(key, s, en, bizStartHour, bizEndHour);
-          }),
-        ])
-      )
-    : {};
-
+  const results = processed ? Object.fromEntries(selectedMetrics.map(key => [key, rows.map(row => {
+    const s = parseExcelDateTime(row[parseInt(startCol)]);
+    const en = parseExcelDateTime(row[parseInt(endCol)]);
+    return computeMetric(key, s, en, bizStartHour, bizEndHour);
+  })])) : {};
   const handleProcess = () => {
     if (startCol === "" || endCol === "") {
       setError("Please select both a Start Date and End Date column.");
@@ -330,29 +325,22 @@ function HoursCalculator() {
     setError("");
     setProcessed(true);
   };
-
   const handleDownload = () => {
     if (!rawWorkbook) return;
     const wb = XLSX.utils.book_new();
     const startColIdx = parseInt(startCol);
     const endColIdx = parseInt(endCol);
-    const outputHeaders = [
-      ...headers,
-      ...selectedMetrics.map((key) => METRICS.find((m) => m.key === key).label),
-    ];
-    const outputData = [
-      outputHeaders,
-      ...rows.map((row, i) => {
-        const formattedRow = row.map((cell, ci) => {
-          if (ci === startColIdx || ci === endColIdx) {
-            return formatDateTime(cell) || cell;
-          }
-          return cell;
-        });
-        const metricValues = selectedMetrics.map((key) => results[key][i]);
-        return [...formattedRow, ...metricValues];
-      }),
-    ];
+    const outputHeaders = [...headers, ...selectedMetrics.map(key => METRICS.find(m => m.key === key).label)];
+    const outputData = [outputHeaders, ...rows.map((row, i) => {
+      const formattedRow = row.map((cell, ci) => {
+        if (ci === startColIdx || ci === endColIdx) {
+          return formatDateTime(cell) || cell;
+        }
+        return cell;
+      });
+      const metricValues = selectedMetrics.map(key => results[key][i]);
+      return [...formattedRow, ...metricValues];
+    })];
     const ws = XLSX.utils.aoa_to_sheet(outputData);
     selectedMetrics.forEach((_, idx) => {
       const colIdx = headers.length + idx;
@@ -368,352 +356,714 @@ function HoursCalculator() {
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
     XLSX.writeFile(wb, "hours_calculation_output.xlsx");
   };
-
   const reset = () => {
-    setFile(null); setHeaders([]); setRows([]);
-    setStartCol(""); setEndCol(""); setSelectedMetrics([]);
-    setProcessed(false); setError(""); setRawWorkbook(null);
+    setFile(null);
+    setHeaders([]);
+    setRows([]);
+    setStartCol("");
+    setEndCol("");
+    setSelectedMetrics([]);
+    setProcessed(false);
+    setError("");
+    setRawWorkbook(null);
   };
-
   const previewRows = rows.slice(0, 6);
-
-  const totals = processed
-    ? Object.fromEntries(
-        selectedMetrics.map((key) => [
-          key,
-          results[key].reduce((sum, v) => sum + (typeof v === "number" ? v : 0), 0),
-        ])
-      )
-    : {};
-  const invalidCount = processed && selectedMetrics.length
-    ? results[selectedMetrics[0]].filter((v) => typeof v === "string").length
-    : 0;
-
-  return (
-    <div style={{ minHeight: "100vh", background: COLORS.paper, fontFamily: FONT_BODY, color: COLORS.ink }}>
-
-      {/* Top nav */}
-      <div style={{ background: COLORS.ink, padding: "16px 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <WeekStrip size={5} gap={3} />
-          <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, fontSize: 17, color: COLORS.paper, letterSpacing: "-0.01em" }}>
-            Ledger Hours
-          </div>
-        </div>
-        <div style={{ fontSize: 12, color: "#9AA3AF", fontFamily: FONT_BODY }}>Free spreadsheet utility</div>
-      </div>
-
-      {/* Header ad slot */}
-      <div style={{ padding: "16px 0", background: "#EFEBE2", borderBottom: `1px solid ${COLORS.line}` }}>
-        <AdSlot width={728} height={90} />
-      </div>
-
-      {/* Main layout: tool column + sidebar */}
-      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "36px 24px", display: "flex", gap: 32, alignItems: "flex-start" }}>
-
-        <div style={{ flex: 1, minWidth: 0 }}>
-
-          {/* Hero / title */}
-          <div style={{ marginBottom: 30 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-              <WeekStrip size={6} gap={3} />
-              <span style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: COLORS.textMuted, fontWeight: 600 }}>
-                Mon – Fri quiet · Sat / Sun in amber
-              </span>
-            </div>
-            <h1 style={{ fontFamily: FONT_DISPLAY, fontSize: 34, fontWeight: 700, letterSpacing: "-0.01em", margin: "0 0 12px 0", lineHeight: 1.15 }}>
-              Hours Calculator
-            </h1>
-            <p style={{ fontSize: 15, color: COLORS.inkSoft, lineHeight: 1.65, margin: 0, maxWidth: 620 }}>
-              Upload a spreadsheet with start and end timestamps, choose one or more ways to measure
-              the time between them, and download the result with new columns added — each calculated
-              from exact timestamps down to the minute and reported to two decimal places. All processing
-              happens locally in your browser; nothing is uploaded to a server.
-            </p>
-          </div>
-
-          {/* Metric selector */}
-          <div style={{ background: COLORS.card, borderRadius: 12, border: `1px solid ${COLORS.line}`, padding: "22px 24px", marginBottom: 20 }}>
-            <div style={{ fontWeight: 600, fontSize: 11, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textMuted }}>
-              Calculation Options — select one or more
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {METRICS.map((m) => {
-                const active = selectedMetrics.includes(m.key);
-                return (
-                  <div key={m.key}>
-                    <button
-                      onClick={() => toggleMetric(m.key)}
-                      style={{
-                        width: "100%",
-                        padding: "14px 16px",
-                        borderRadius: 10,
-                        border: active ? `1.5px solid ${COLORS.forest}` : `1.5px solid ${COLORS.line}`,
-                        background: active ? COLORS.forestSoft : "#FBFAF7",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: 12,
-                        textAlign: "left",
-                        transition: "all 0.12s",
-                      }}
-                    >
-                      <span style={{
-                        width: 18, height: 18, borderRadius: 5, marginTop: 1,
-                        border: active ? "none" : `1.5px solid ${COLORS.line}`,
-                        background: active ? COLORS.forest : "transparent",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontSize: 11, color: "#fff", flexShrink: 0,
-                      }}>
-                        {active ? "✓" : ""}
-                      </span>
-                      <div>
-                        <div style={{ fontSize: 14, fontWeight: 700, color: active ? COLORS.forest : COLORS.ink, marginBottom: 3, fontFamily: FONT_BODY }}>
-                          {m.label}
-                        </div>
-                        <div style={{ fontSize: 12.5, color: active ? "#2E5440" : COLORS.textMuted, lineHeight: 1.5 }}>
-                          {m.description}
-                        </div>
-                      </div>
-                    </button>
-
-                    {m.key === "business" && active && (
-                      <div style={{ marginTop: 8, marginLeft: 30, padding: "12px 16px", background: "#FBFAF7", border: `1px solid ${COLORS.line}`, borderRadius: 8, display: "flex", gap: 16, alignItems: "flex-end", flexWrap: "wrap" }}>
-                        <div>
-                          <label style={{ fontSize: 12, fontWeight: 600, display: "block", marginBottom: 6, color: "#444" }}>Start Time</label>
-                          <select value={bizStartHour} onChange={(e) => { setBizStartHour(parseInt(e.target.value)); setProcessed(false); }}
-                            style={{ padding: "7px 10px", borderRadius: 7, border: `1px solid ${COLORS.line}`, fontSize: 13, background: "#fff" }}>
-                            {hourOptions().map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-                          </select>
-                        </div>
-                        <div style={{ fontSize: 13, color: "#999", paddingBottom: 9 }}>to</div>
-                        <div>
-                          <label style={{ fontSize: 12, fontWeight: 600, display: "block", marginBottom: 6, color: "#444" }}>End Time</label>
-                          <select value={bizEndHour} onChange={(e) => { setBizEndHour(parseInt(e.target.value)); setProcessed(false); }}
-                            style={{ padding: "7px 10px", borderRadius: 7, border: `1px solid ${COLORS.line}`, fontSize: 13, background: "#fff" }}>
-                            {hourOptions().map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-                          </select>
-                        </div>
-                        <div style={{ fontSize: 12, color: "#888", paddingBottom: 9 }}>Applies Monday–Friday only</div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Upload zone */}
-          {!file && (
-            <div
-              onDrop={onDrop}
-              onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-              onDragLeave={() => setDragging(false)}
-              style={{
-                border: `2px dashed ${dragging ? COLORS.amber : COLORS.line}`,
-                borderRadius: 12, background: dragging ? COLORS.amberSoft : "#FBFAF7",
-                padding: "52px 32px", textAlign: "center", cursor: "pointer",
-                transition: "all 0.15s",
-              }}
-            >
-              <div style={{ marginBottom: 16, display: "flex", justifyContent: "center" }}>
-                <WeekStrip size={9} gap={5} />
-              </div>
-              <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 6, fontFamily: FONT_BODY }}>Drop your Excel file here</div>
-              <div style={{ color: COLORS.textMuted, fontSize: 13, marginBottom: 22 }}>Supports .xlsx and .xls · date+time columns used directly</div>
-              <label style={{ background: COLORS.ink, color: COLORS.paper, padding: "10px 26px", borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: "pointer", display: "inline-block" }}>
-                Choose File
-                <input type="file" accept=".xlsx,.xls" onChange={(e) => e.target.files[0] && handleFile(e.target.files[0])} style={{ display: "none" }} />
-              </label>
-            </div>
-          )}
-
-          {error && (
-            <div style={{ background: COLORS.dangerSoft, border: `1px solid #E8C2B8`, borderRadius: 8, padding: "12px 16px", color: COLORS.danger, fontSize: 13, marginTop: 16 }}>
-              {error}
-            </div>
-          )}
-
-          {file && (
-            <div style={{ background: COLORS.card, borderRadius: 12, border: `1px solid ${COLORS.line}`, overflow: "hidden" }}>
-
-              <div style={{ padding: "16px 24px", borderBottom: `1px solid ${COLORS.line}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{ width: 32, height: 32, background: COLORS.amberSoft, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <WeekStrip size={3} gap={2} />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: 14 }}>{file.name}</div>
-                    <div style={{ fontSize: 12, color: COLORS.textMuted }}>{rows.length} data rows · {headers.length} columns</div>
-                  </div>
-                </div>
-                <button onClick={reset} style={{ background: "none", border: `1px solid ${COLORS.line}`, borderRadius: 6, padding: "5px 12px", fontSize: 12, cursor: "pointer", color: "#555" }}>
-                  Upload new file
-                </button>
-              </div>
-
-              <div style={{ padding: "24px", borderBottom: `1px solid ${COLORS.line}` }}>
-                <div style={{ fontWeight: 600, fontSize: 11, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textMuted }}>Column Mapping</div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-                  {[
-                    { label: "Start Date + Time Column", val: startCol, set: (v) => { setStartCol(v); setProcessed(false); } },
-                    { label: "End Date + Time Column", val: endCol, set: (v) => { setEndCol(v); setProcessed(false); } },
-                  ].map(({ label, val, set }, i) => (
-                    <div key={i}>
-                      <label style={{ fontSize: 12, fontWeight: 600, display: "block", marginBottom: 6, color: "#444" }}>{label}</label>
-                      <select value={val} onChange={e => set(e.target.value)}
-                        style={{ width: "100%", padding: "8px 10px", borderRadius: 7, border: `1px solid ${COLORS.line}`, fontSize: 13, background: "#FBFAF7" }}>
-                        <option value="">— Select —</option>
-                        {headers.map((h, ci) => <option key={ci} value={String(ci)}>{h || `Column ${ci + 1}`}</option>)}
-                      </select>
-                    </div>
-                  ))}
-                </div>
-                <div style={{ marginTop: 10, fontSize: 12, color: COLORS.textMuted }}>
-                  Hours are calculated from exact timestamps — partial hours counted to the minute, reported to 2 decimal places.
-                </div>
-              </div>
-
-              <div style={{ padding: "24px", borderBottom: `1px solid ${COLORS.line}` }}>
-                <div style={{ fontWeight: 600, fontSize: 11, marginBottom: 12, textTransform: "uppercase", letterSpacing: "0.08em", color: COLORS.textMuted }}>
-                  Preview — first {Math.min(6, rows.length)} of {rows.length} rows
-                </div>
-                <div style={{ overflowX: "auto" }}>
-                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-                    <thead>
-                      <tr style={{ background: COLORS.paper }}>
-                        {headers.map((h, i) => (
-                          <th key={i} style={{
-                            padding: "8px 12px", textAlign: "left", fontWeight: 600, whiteSpace: "nowrap",
-                            color: (String(i) === startCol || String(i) === endCol) ? COLORS.forest : "#555",
-                            borderBottom: `2px solid ${COLORS.line}`,
-                          }}>
-                            {h || `Col ${i + 1}`}
-                            {String(i) === startCol && <span style={{ fontSize: 10, marginLeft: 5, background: COLORS.forestSoft, padding: "1px 5px", borderRadius: 4, color: COLORS.forest }}>START</span>}
-                            {String(i) === endCol && <span style={{ fontSize: 10, marginLeft: 5, background: COLORS.forestSoft, padding: "1px 5px", borderRadius: 4, color: COLORS.forest }}>END</span>}
-                          </th>
-                        ))}
-                        {processed && selectedMetrics.map((key) => (
-                          <th key={key} style={{ padding: "8px 12px", textAlign: "left", fontWeight: 700, color: COLORS.amber, borderBottom: `2px solid ${COLORS.line}`, background: COLORS.amberSoft, whiteSpace: "nowrap" }}>
-                            {METRICS.find((m) => m.key === key).short}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {previewRows.map((row, ri) => (
-                        <tr key={ri} style={{ borderBottom: `1px solid #EEEAE0` }}>
-                          {headers.map((_, ci) => (
-                            <td key={ci} style={{
-                              padding: "8px 12px", color: "#333", whiteSpace: "nowrap", fontFamily: (String(ci) === startCol || String(ci) === endCol) ? FONT_MONO : FONT_BODY,
-                              fontSize: (String(ci) === startCol || String(ci) === endCol) ? 12.5 : 13,
-                              background: (String(ci) === startCol || String(ci) === endCol) ? "#FAFAF6" : "transparent"
-                            }}>
-                              {(String(ci) === startCol || String(ci) === endCol)
-                                ? formatDateTime(row[ci])
-                                : (row[ci] != null ? String(row[ci]) : "—")}
-                            </td>
-                          ))}
-                          {processed && selectedMetrics.map((key) => (
-                            <td key={key} style={{ padding: "8px 12px", fontWeight: 700, fontFamily: FONT_MONO, color: typeof results[key][ri] === "number" ? COLORS.amber : COLORS.danger, background: "#FFF8F2", whiteSpace: "nowrap" }}>
-                              {typeof results[key][ri] === "number" ? `${results[key][ri].toFixed(2)} hrs` : (results[key][ri] || "—")}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {rows.length > 6 && (
-                    <div style={{ padding: "8px 12px", fontSize: 12, color: "#AAA" }}>+ {rows.length - 6} more rows · all included in download</div>
-                  )}
-                </div>
-              </div>
-
-              {processed && (
-                <div style={{ padding: "16px 24px", borderBottom: `1px solid ${COLORS.line}`, display: "flex", gap: 32, flexWrap: "wrap", background: "#FFFBF6" }}>
-                  {selectedMetrics.map((key) => (
-                    <div key={key}>
-                      <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em", color: COLORS.textMuted, marginBottom: 3 }}>
-                        Total {METRICS.find((m) => m.key === key).label}
-                      </div>
-                      <div style={{ fontWeight: 700, fontSize: 22, color: COLORS.amber, fontFamily: FONT_MONO }}>{totals[key].toFixed(2)}</div>
-                    </div>
-                  ))}
-                  <div>
-                    <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em", color: COLORS.textMuted, marginBottom: 3 }}>Rows Processed</div>
-                    <div style={{ fontWeight: 700, fontSize: 22, fontFamily: FONT_MONO }}>{rows.length}</div>
-                  </div>
-                  {invalidCount > 0 && (
-                    <div>
-                      <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.06em", color: COLORS.textMuted, marginBottom: 3 }}>Parse Errors</div>
-                      <div style={{ fontWeight: 700, fontSize: 22, color: COLORS.danger, fontFamily: FONT_MONO }}>{invalidCount}</div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <div style={{ padding: "20px 24px", display: "flex", gap: 12, alignItems: "center" }}>
-                {!processed ? (
-                  <button onClick={handleProcess}
-                    style={{ background: COLORS.ink, color: COLORS.paper, border: "none", padding: "11px 28px", borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
-                    Calculate Hours
-                  </button>
-                ) : (
-                  <>
-                    <button onClick={handleDownload}
-                      style={{ background: COLORS.forest, color: "#fff", border: "none", padding: "11px 28px", borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
-                      Download Updated Excel
-                    </button>
-                    <button onClick={() => setProcessed(false)}
-                      style={{ background: "none", color: "#555", border: `1px solid ${COLORS.line}`, padding: "10px 20px", borderRadius: 8, fontSize: 14, cursor: "pointer" }}>
-                      Reconfigure
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* In-content ad slot, appears once a result exists */}
-          {processed && (
-            <div style={{ marginTop: 24 }}>
-              <AdSlot width={"100%"} height={100} />
-            </div>
-          )}
-
-          <div style={{ marginTop: 28, fontSize: 12, color: "#AEA89A", textAlign: "center" }}>
-            Business Hours and Weekend Hours count exact minute-level overlap with their respective windows · all processing runs locally in your browser
-          </div>
-        </div>
-
-        {/* Sidebar — sticky ad rail, desktop only */}
-        <div style={{ width: 300, flexShrink: 0, display: "none" }} className="sidebar-ad">
-          <div style={{ position: "sticky", top: 24, display: "flex", flexDirection: "column", gap: 20 }}>
-            <AdSlot width={300} height={250} />
-            <AdSlot width={300} height={600} />
-          </div>
-        </div>
-      </div>
-
-      <style>{`
+  const totals = processed ? Object.fromEntries(selectedMetrics.map(key => [key, results[key].reduce((sum, v) => sum + (typeof v === "number" ? v : 0), 0)])) : {};
+  const invalidCount = processed && selectedMetrics.length ? results[selectedMetrics[0]].filter(v => typeof v === "string").length : 0;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      minHeight: "100vh",
+      background: COLORS.paper,
+      fontFamily: FONT_BODY,
+      color: COLORS.ink
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.ink,
+      padding: "16px 28px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(WeekStrip, {
+    size: 5,
+    gap: 3
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: FONT_DISPLAY,
+      fontWeight: 600,
+      fontSize: 17,
+      color: COLORS.paper,
+      letterSpacing: "-0.01em"
+    }
+  }, "Ledger Hours")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: "#9AA3AF",
+      fontFamily: FONT_BODY
+    }
+  }, "Free spreadsheet utility")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "16px 0",
+      background: "#EFEBE2",
+      borderBottom: `1px solid ${COLORS.line}`
+    }
+  }, /*#__PURE__*/React.createElement(AdSlot, {
+    width: 728,
+    height: 90
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1180,
+      margin: "0 auto",
+      padding: "36px 24px",
+      display: "flex",
+      gap: 32,
+      alignItems: "flex-start"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 30
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement(WeekStrip, {
+    size: 6,
+    gap: 3
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 11,
+      letterSpacing: "0.1em",
+      textTransform: "uppercase",
+      color: COLORS.textMuted,
+      fontWeight: 600
+    }
+  }, "Mon \u2013 Fri quiet \xB7 Sat / Sun in amber")), /*#__PURE__*/React.createElement("h1", {
+    style: {
+      fontFamily: FONT_DISPLAY,
+      fontSize: 34,
+      fontWeight: 700,
+      letterSpacing: "-0.01em",
+      margin: "0 0 12px 0",
+      lineHeight: 1.15
+    }
+  }, "Hours Calculator"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 15,
+      color: COLORS.inkSoft,
+      lineHeight: 1.65,
+      margin: 0,
+      maxWidth: 620
+    }
+  }, "Upload a spreadsheet with start and end timestamps, choose one or more ways to measure the time between them, and download the result with new columns added \u2014 each calculated from exact timestamps down to the minute and reported to two decimal places. All processing happens locally in your browser; nothing is uploaded to a server.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      borderRadius: 12,
+      border: `1px solid ${COLORS.line}`,
+      padding: "22px 24px",
+      marginBottom: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      fontSize: 11,
+      marginBottom: 16,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      color: COLORS.textMuted
+    }
+  }, "Calculation Options \u2014 select one or more"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 10
+    }
+  }, METRICS.map(m => {
+    const active = selectedMetrics.includes(m.key);
+    return /*#__PURE__*/React.createElement("div", {
+      key: m.key
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => toggleMetric(m.key),
+      style: {
+        width: "100%",
+        padding: "14px 16px",
+        borderRadius: 10,
+        border: active ? `1.5px solid ${COLORS.forest}` : `1.5px solid ${COLORS.line}`,
+        background: active ? COLORS.forestSoft : "#FBFAF7",
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 12,
+        textAlign: "left",
+        transition: "all 0.12s"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 18,
+        height: 18,
+        borderRadius: 5,
+        marginTop: 1,
+        border: active ? "none" : `1.5px solid ${COLORS.line}`,
+        background: active ? COLORS.forest : "transparent",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 11,
+        color: "#fff",
+        flexShrink: 0
+      }
+    }, active ? "✓" : ""), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 14,
+        fontWeight: 700,
+        color: active ? COLORS.forest : COLORS.ink,
+        marginBottom: 3,
+        fontFamily: FONT_BODY
+      }
+    }, m.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12.5,
+        color: active ? "#2E5440" : COLORS.textMuted,
+        lineHeight: 1.5
+      }
+    }, m.description))), m.key === "business" && active && /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 8,
+        marginLeft: 30,
+        padding: "12px 16px",
+        background: "#FBFAF7",
+        border: `1px solid ${COLORS.line}`,
+        borderRadius: 8,
+        display: "flex",
+        gap: 16,
+        alignItems: "flex-end",
+        flexWrap: "wrap"
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      style: {
+        fontSize: 12,
+        fontWeight: 600,
+        display: "block",
+        marginBottom: 6,
+        color: "#444"
+      }
+    }, "Start Time"), /*#__PURE__*/React.createElement("select", {
+      value: bizStartHour,
+      onChange: e => {
+        setBizStartHour(parseInt(e.target.value));
+        setProcessed(false);
+      },
+      style: {
+        padding: "7px 10px",
+        borderRadius: 7,
+        border: `1px solid ${COLORS.line}`,
+        fontSize: 13,
+        background: "#fff"
+      }
+    }, hourOptions().map(o => /*#__PURE__*/React.createElement("option", {
+      key: o.value,
+      value: o.value
+    }, o.label)))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: "#999",
+        paddingBottom: 9
+      }
+    }, "to"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      style: {
+        fontSize: 12,
+        fontWeight: 600,
+        display: "block",
+        marginBottom: 6,
+        color: "#444"
+      }
+    }, "End Time"), /*#__PURE__*/React.createElement("select", {
+      value: bizEndHour,
+      onChange: e => {
+        setBizEndHour(parseInt(e.target.value));
+        setProcessed(false);
+      },
+      style: {
+        padding: "7px 10px",
+        borderRadius: 7,
+        border: `1px solid ${COLORS.line}`,
+        fontSize: 13,
+        background: "#fff"
+      }
+    }, hourOptions().map(o => /*#__PURE__*/React.createElement("option", {
+      key: o.value,
+      value: o.value
+    }, o.label)))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#888",
+        paddingBottom: 9
+      }
+    }, "Applies Monday\u2013Friday only")));
+  }))), !file && /*#__PURE__*/React.createElement("div", {
+    onDrop: onDrop,
+    onDragOver: e => {
+      e.preventDefault();
+      setDragging(true);
+    },
+    onDragLeave: () => setDragging(false),
+    style: {
+      border: `2px dashed ${dragging ? COLORS.amber : COLORS.line}`,
+      borderRadius: 12,
+      background: dragging ? COLORS.amberSoft : "#FBFAF7",
+      padding: "52px 32px",
+      textAlign: "center",
+      cursor: "pointer",
+      transition: "all 0.15s"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 16,
+      display: "flex",
+      justifyContent: "center"
+    }
+  }, /*#__PURE__*/React.createElement(WeekStrip, {
+    size: 9,
+    gap: 5
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 700,
+      fontSize: 16,
+      marginBottom: 6,
+      fontFamily: FONT_BODY
+    }
+  }, "Drop your Excel file here"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: COLORS.textMuted,
+      fontSize: 13,
+      marginBottom: 22
+    }
+  }, "Supports .xlsx and .xls \xB7 date+time columns used directly"), /*#__PURE__*/React.createElement("label", {
+    style: {
+      background: COLORS.ink,
+      color: COLORS.paper,
+      padding: "10px 26px",
+      borderRadius: 8,
+      fontSize: 14,
+      fontWeight: 600,
+      cursor: "pointer",
+      display: "inline-block"
+    }
+  }, "Choose File", /*#__PURE__*/React.createElement("input", {
+    type: "file",
+    accept: ".xlsx,.xls",
+    onChange: e => e.target.files[0] && handleFile(e.target.files[0]),
+    style: {
+      display: "none"
+    }
+  }))), error && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.dangerSoft,
+      border: `1px solid #E8C2B8`,
+      borderRadius: 8,
+      padding: "12px 16px",
+      color: COLORS.danger,
+      fontSize: 13,
+      marginTop: 16
+    }
+  }, error), file && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      borderRadius: 12,
+      border: `1px solid ${COLORS.line}`,
+      overflow: "hidden"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "16px 24px",
+      borderBottom: `1px solid ${COLORS.line}`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 10
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 32,
+      height: 32,
+      background: COLORS.amberSoft,
+      borderRadius: 6,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }
+  }, /*#__PURE__*/React.createElement(WeekStrip, {
+    size: 3,
+    gap: 2
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      fontSize: 14
+    }
+  }, file.name), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted
+    }
+  }, rows.length, " data rows \xB7 ", headers.length, " columns"))), /*#__PURE__*/React.createElement("button", {
+    onClick: reset,
+    style: {
+      background: "none",
+      border: `1px solid ${COLORS.line}`,
+      borderRadius: 6,
+      padding: "5px 12px",
+      fontSize: 12,
+      cursor: "pointer",
+      color: "#555"
+    }
+  }, "Upload new file")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "24px",
+      borderBottom: `1px solid ${COLORS.line}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      fontSize: 11,
+      marginBottom: 16,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      color: COLORS.textMuted
+    }
+  }, "Column Mapping"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 16
+    }
+  }, [{
+    label: "Start Date + Time Column",
+    val: startCol,
+    set: v => {
+      setStartCol(v);
+      setProcessed(false);
+    }
+  }, {
+    label: "End Date + Time Column",
+    val: endCol,
+    set: v => {
+      setEndCol(v);
+      setProcessed(false);
+    }
+  }].map(({
+    label,
+    val,
+    set
+  }, i) => /*#__PURE__*/React.createElement("div", {
+    key: i
+  }, /*#__PURE__*/React.createElement("label", {
+    style: {
+      fontSize: 12,
+      fontWeight: 600,
+      display: "block",
+      marginBottom: 6,
+      color: "#444"
+    }
+  }, label), /*#__PURE__*/React.createElement("select", {
+    value: val,
+    onChange: e => set(e.target.value),
+    style: {
+      width: "100%",
+      padding: "8px 10px",
+      borderRadius: 7,
+      border: `1px solid ${COLORS.line}`,
+      fontSize: 13,
+      background: "#FBFAF7"
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "\u2014 Select \u2014"), headers.map((h, ci) => /*#__PURE__*/React.createElement("option", {
+    key: ci,
+    value: String(ci)
+  }, h || `Column ${ci + 1}`)))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      fontSize: 12,
+      color: COLORS.textMuted
+    }
+  }, "Hours are calculated from exact timestamps \u2014 partial hours counted to the minute, reported to 2 decimal places.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "24px",
+      borderBottom: `1px solid ${COLORS.line}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      fontSize: 11,
+      marginBottom: 12,
+      textTransform: "uppercase",
+      letterSpacing: "0.08em",
+      color: COLORS.textMuted
+    }
+  }, "Preview \u2014 first ", Math.min(6, rows.length), " of ", rows.length, " rows"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: "auto"
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    style: {
+      width: "100%",
+      borderCollapse: "collapse",
+      fontSize: 13
+    }
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", {
+    style: {
+      background: COLORS.paper
+    }
+  }, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
+    key: i,
+    style: {
+      padding: "8px 12px",
+      textAlign: "left",
+      fontWeight: 600,
+      whiteSpace: "nowrap",
+      color: String(i) === startCol || String(i) === endCol ? COLORS.forest : "#555",
+      borderBottom: `2px solid ${COLORS.line}`
+    }
+  }, h || `Col ${i + 1}`, String(i) === startCol && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      marginLeft: 5,
+      background: COLORS.forestSoft,
+      padding: "1px 5px",
+      borderRadius: 4,
+      color: COLORS.forest
+    }
+  }, "START"), String(i) === endCol && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 10,
+      marginLeft: 5,
+      background: COLORS.forestSoft,
+      padding: "1px 5px",
+      borderRadius: 4,
+      color: COLORS.forest
+    }
+  }, "END"))), processed && selectedMetrics.map(key => /*#__PURE__*/React.createElement("th", {
+    key: key,
+    style: {
+      padding: "8px 12px",
+      textAlign: "left",
+      fontWeight: 700,
+      color: COLORS.amber,
+      borderBottom: `2px solid ${COLORS.line}`,
+      background: COLORS.amberSoft,
+      whiteSpace: "nowrap"
+    }
+  }, METRICS.find(m => m.key === key).short)))), /*#__PURE__*/React.createElement("tbody", null, previewRows.map((row, ri) => /*#__PURE__*/React.createElement("tr", {
+    key: ri,
+    style: {
+      borderBottom: `1px solid #EEEAE0`
+    }
+  }, headers.map((_, ci) => /*#__PURE__*/React.createElement("td", {
+    key: ci,
+    style: {
+      padding: "8px 12px",
+      color: "#333",
+      whiteSpace: "nowrap",
+      fontFamily: String(ci) === startCol || String(ci) === endCol ? FONT_MONO : FONT_BODY,
+      fontSize: String(ci) === startCol || String(ci) === endCol ? 12.5 : 13,
+      background: String(ci) === startCol || String(ci) === endCol ? "#FAFAF6" : "transparent"
+    }
+  }, String(ci) === startCol || String(ci) === endCol ? formatDateTime(row[ci]) : row[ci] != null ? String(row[ci]) : "—")), processed && selectedMetrics.map(key => /*#__PURE__*/React.createElement("td", {
+    key: key,
+    style: {
+      padding: "8px 12px",
+      fontWeight: 700,
+      fontFamily: FONT_MONO,
+      color: typeof results[key][ri] === "number" ? COLORS.amber : COLORS.danger,
+      background: "#FFF8F2",
+      whiteSpace: "nowrap"
+    }
+  }, typeof results[key][ri] === "number" ? `${results[key][ri].toFixed(2)} hrs` : results[key][ri] || "—")))))), rows.length > 6 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "8px 12px",
+      fontSize: 12,
+      color: "#AAA"
+    }
+  }, "+ ", rows.length - 6, " more rows \xB7 all included in download"))), processed && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "16px 24px",
+      borderBottom: `1px solid ${COLORS.line}`,
+      display: "flex",
+      gap: 32,
+      flexWrap: "wrap",
+      background: "#FFFBF6"
+    }
+  }, selectedMetrics.map(key => /*#__PURE__*/React.createElement("div", {
+    key: key
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      color: COLORS.textMuted,
+      marginBottom: 3
+    }
+  }, "Total ", METRICS.find(m => m.key === key).label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 700,
+      fontSize: 22,
+      color: COLORS.amber,
+      fontFamily: FONT_MONO
+    }
+  }, totals[key].toFixed(2)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      color: COLORS.textMuted,
+      marginBottom: 3
+    }
+  }, "Rows Processed"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 700,
+      fontSize: 22,
+      fontFamily: FONT_MONO
+    }
+  }, rows.length)), invalidCount > 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      color: COLORS.textMuted,
+      marginBottom: 3
+    }
+  }, "Parse Errors"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 700,
+      fontSize: 22,
+      color: COLORS.danger,
+      fontFamily: FONT_MONO
+    }
+  }, invalidCount))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "20px 24px",
+      display: "flex",
+      gap: 12,
+      alignItems: "center"
+    }
+  }, !processed ? /*#__PURE__*/React.createElement("button", {
+    onClick: handleProcess,
+    style: {
+      background: COLORS.ink,
+      color: COLORS.paper,
+      border: "none",
+      padding: "11px 28px",
+      borderRadius: 8,
+      fontSize: 14,
+      fontWeight: 600,
+      cursor: "pointer"
+    }
+  }, "Calculate Hours") : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    onClick: handleDownload,
+    style: {
+      background: COLORS.forest,
+      color: "#fff",
+      border: "none",
+      padding: "11px 28px",
+      borderRadius: 8,
+      fontSize: 14,
+      fontWeight: 600,
+      cursor: "pointer"
+    }
+  }, "Download Updated Excel"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setProcessed(false),
+    style: {
+      background: "none",
+      color: "#555",
+      border: `1px solid ${COLORS.line}`,
+      padding: "10px 20px",
+      borderRadius: 8,
+      fontSize: 14,
+      cursor: "pointer"
+    }
+  }, "Reconfigure")))), processed && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 24
+    }
+  }, /*#__PURE__*/React.createElement(AdSlot, {
+    width: "100%",
+    height: 100
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 28,
+      fontSize: 12,
+      color: "#AEA89A",
+      textAlign: "center"
+    }
+  }, "Business Hours and Weekend Hours count exact minute-level overlap with their respective windows \xB7 all processing runs locally in your browser")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 300,
+      flexShrink: 0,
+      display: "none"
+    },
+    className: "sidebar-ad"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "sticky",
+      top: 24,
+      display: "flex",
+      flexDirection: "column",
+      gap: 20
+    }
+  }, /*#__PURE__*/React.createElement(AdSlot, {
+    width: 300,
+    height: 250
+  }), /*#__PURE__*/React.createElement(AdSlot, {
+    width: 300,
+    height: 600
+  })))), /*#__PURE__*/React.createElement("style", null, `
         @media (min-width: 980px) {
           .sidebar-ad { display: block !important; }
         }
-      `}</style>
-
-      {/* Footer */}
-      <div style={{ borderTop: `1px solid ${COLORS.line}`, padding: "24px 28px", textAlign: "center" }}>
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: 10 }}>
-          <WeekStrip size={4} gap={3} />
-        </div>
-        <div style={{ fontSize: 12, color: COLORS.textMuted }}>Ledger Hours · a free utility for spreadsheet time math</div>
-      </div>
-    </div>
-  );
+      `), /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderTop: `1px solid ${COLORS.line}`,
+      padding: "24px 28px",
+      textAlign: "center"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "center",
+      marginBottom: 10
+    }
+  }, /*#__PURE__*/React.createElement(WeekStrip, {
+    size: 4,
+    gap: 3
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted
+    }
+  }, "Ledger Hours \xB7 a free utility for spreadsheet time math")));
 }
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<HoursCalculator />);
+root.render( /*#__PURE__*/React.createElement(HoursCalculator, null));
 </script>
 </body>
 </html>
