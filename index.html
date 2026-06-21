@@ -210,6 +210,22 @@ const FONT_BODY = "'Inter', 'Segoe UI', sans-serif";
 const FONT_MONO = "'JetBrains Mono', 'Courier New', monospace";
 // Your AdSense publisher ID — same value as the ca-pub-XXXXXXXXXXXXXXXX in the <head> script above
 const ADSENSE_CLIENT = "ca-pub-4664800783455318";
+function BrandIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    width: 40, height: 24, viewBox: "0 0 40 24",
+    xmlns: "http://www.w3.org/2000/svg", "aria-hidden": "true"
+  },
+    /*#__PURE__*/React.createElement("rect", { x: 0,  y: 6,  width: 2, height: 14, rx: .4, fill: "#7090a8" }),
+    /*#__PURE__*/React.createElement("rect", { x: 4,  y: 2,  width: 3, height: 20, rx: .4, fill: "#8aa4bc" }),
+    /*#__PURE__*/React.createElement("rect", { x: 9,  y: 8,  width: 2, height: 10, rx: .4, fill: "#7090a8" }),
+    /*#__PURE__*/React.createElement("rect", { x: 13, y: 0,  width: 3, height: 24, rx: .4, fill: "#8aa4bc" }),
+    /*#__PURE__*/React.createElement("rect", { x: 18, y: 5,  width: 2, height: 16, rx: .4, fill: "#7090a8" }),
+    /*#__PURE__*/React.createElement("rect", { x: 22, y: 3,  width: 2, height: 19, rx: .4, fill: "#8aa4bc" }),
+    /*#__PURE__*/React.createElement("rect", { x: 26, y: 1,  width: 3, height: 22, rx: .4, fill: "#c9622b" }),
+    /*#__PURE__*/React.createElement("rect", { x: 31, y: 4,  width: 2, height: 16, rx: .4, fill: "#c9622b" }),
+    /*#__PURE__*/React.createElement("rect", { x: 35, y: 0,  width: 3, height: 24, rx: .4, fill: "#c9622b" })
+  );
+}
 function WeekStrip({
   size = 7,
   gap = 4
@@ -509,10 +525,7 @@ function HoursCalculator() {
       gap: 12,
       textDecoration: "none"
     }
-  }, /*#__PURE__*/React.createElement(WeekStrip, {
-    size: 5,
-    gap: 3
-  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(BrandIcon, null), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: FONT_DISPLAY,
       fontWeight: 600,
