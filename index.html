@@ -501,16 +501,18 @@ function HoursCalculator() {
       alignItems: "center",
       justifyContent: "space-between"
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "index.html",
     style: {
       display: "flex",
       alignItems: "center",
-      gap: 12
+      gap: 12,
+      textDecoration: "none"
     }
   }, /*#__PURE__*/React.createElement(WeekStrip, {
     size: 5,
     gap: 3
-  }), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: FONT_DISPLAY,
       fontWeight: 600,
@@ -518,13 +520,38 @@ function HoursCalculator() {
       color: COLORS.paper,
       letterSpacing: "-0.01em"
     }
-  }, "Calculate My Hours")), /*#__PURE__*/React.createElement("div", {
+  }, "Calculate My Hours"), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 12,
+      fontSize: 11,
       color: "#9AA3AF",
-      fontFamily: FONT_BODY
+      fontFamily: FONT_BODY,
+      marginTop: 2
     }
-  }, "Free spreadsheet utility")), /*#__PURE__*/React.createElement("div", {
+  }, "Free spreadsheet utility"))), /*#__PURE__*/React.createElement("nav", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 20
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "about.html",
+    style: {
+      fontSize: 13,
+      color: "#9AA3AF",
+      textDecoration: "none",
+      fontFamily: FONT_BODY,
+      fontWeight: 500
+    }
+  }, "About"), /*#__PURE__*/React.createElement("a", {
+    href: "contact.html",
+    style: {
+      fontSize: 13,
+      color: "#9AA3AF",
+      textDecoration: "none",
+      fontFamily: FONT_BODY,
+      fontWeight: 500
+    }
+  }, "Contact"))), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "16px 0",
       background: "#EFEBE2",
@@ -1222,9 +1249,40 @@ function HoursCalculator() {
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 12,
-      color: COLORS.textMuted
+      color: COLORS.textMuted,
+      marginBottom: 8
     }
-  }, "Calculate My Hours \xB7 a free utility for spreadsheet time math")));
+  }, "\xA9 2026 Calculate My Hours. All rights reserved."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "center",
+      gap: 20
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "index.html",
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      textDecoration: "none",
+      fontFamily: FONT_BODY
+    }
+  }, "Calculator"), /*#__PURE__*/React.createElement("a", {
+    href: "about.html",
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      textDecoration: "none",
+      fontFamily: FONT_BODY
+    }
+  }, "About"), /*#__PURE__*/React.createElement("a", {
+    href: "contact.html",
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      textDecoration: "none",
+      fontFamily: FONT_BODY
+    }
+  }, "Contact"))))
 }
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render( /*#__PURE__*/React.createElement(HoursCalculator, null));
