@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Date & Time Calculator - Calculate My Hours</title>
+<meta name="description" content="Enter a start and end date/time to calculate total hours, business hours, weekend hours, and weekday hours instantly. Free, runs in your browser." />
+<link rel="canonical" href="https://www.timespancalculator.com/calculator.html" />
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318" crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-4664800783455318">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', 'Segoe UI', sans-serif; }
+  input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; }
+  input[type="date"] { cursor: pointer; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+const { useState, useCallback, useEffect } = React;
+const MS_PER_HOUR = 3600000;
+
+// ---- Design tokens (matches index.html) ----
+const COLORS = {
+  ink: "#1B2430",
+  inkSoft: "#3A4452",
+  paper: "#F7F5F0",
+  card: "#FFFFFF",
+  amber: "#C9622B",
+  amberSoft: "#FBEAE0",
+  forest: "#3D6B4F",
+  forestSoft: "#E7F0EA",
+  line: "#E4E0D6",
+  textMuted: "#8A8478",
+  danger: "#B3402C",
+  dangerSoft: "#FBEAE6",
+  blue: "#2C5F8A",
+  blueSoft: "#E3EDF5"
+};
+const FONT_DISPLAY = "'Fraunces', 'Georgia', serif";
+const FONT_BODY = "'Inter', 'Segoe UI', sans-serif";
+const FONT_MONO = "'JetBrains Mono', 'Courier New', monospace";
+const ADSENSE_CLIENT = "ca-pub-4664800783455318";
+
+// ---- Calculation engine (identical to index.html) ----
+function calcTotalHours(start, end) {
+  return (end.getTime() - start.getTime()) / MS_PER_HOUR;
+}
+function calcWeekendHours(start, end, weekendDays) {
+  let ms = 0;
+  const cursor = new Date(start);
+  cursor.setHours(0, 0, 0, 0);
+  while (cursor < end) {
+    const dayStart = new Date(cursor);
+    const dayEnd = new Date(cursor);
+    dayEnd.setDate(dayEnd.getDate() + 1);
+    const dow = cursor.getDay();
+    if (weekendDays.includes(dow)) {
+      const overlapStart = Math.max(dayStart.getTime(), start.getTime());
+      const overlapEnd = Math.min(dayEnd.getTime(), end.getTime());
+      if (overlapEnd > overlapStart) ms += overlapEnd - overlapStart;
+    }
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return ms / MS_PER_HOUR;
+}
+function calcBusinessHours(start, end, bizStartHour, bizEndHour, weekendDays) {
+  let ms = 0;
+  const cursor = new Date(start);
+  cursor.setHours(0, 0, 0, 0);
+  while (cursor < end) {
+    const dow = cursor.getDay();
+    if (!weekendDays.includes(dow)) {
+      const windowStart = new Date(cursor);
+      windowStart.setHours(bizStartHour, 0, 0, 0);
+      const windowEnd = new Date(cursor);
+      windowEnd.setHours(bizEndHour, 0, 0, 0);
+      const overlapStart = Math.max(windowStart.getTime(), start.getTime());
+      const overlapEnd = Math.min(windowEnd.getTime(), end.getTime());
+      if (overlapEnd > overlapStart) ms += overlapEnd - overlapStart;
+    }
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return ms / MS_PER_HOUR;
+}
+
+// ---- Time parsing ----
+// Accepts: "9:30", "9", "930", "0930", "21:30", "2130", "9:30 AM", "9:30PM", etc.
+function parseTimeStr(raw) {
+  if (!raw || !raw.trim()) return null;
+  let s = raw.trim().toUpperCase();
+  let explicitAmPm = null;
+
+  if (/P\.?M\.?\s*$/.test(s)) {
+    explicitAmPm = 'PM';
+    s = s.replace(/\s*P\.?M\.?\s*$/, '').trim();
+  } else if (/A\.?M\.?\s*$/.test(s)) {
+    explicitAmPm = 'AM';
+    s = s.replace(/\s*A\.?M\.?\s*$/, '').trim();
+  }
+
+  s = s.replace(/[^0-9:]/g, '');
+  if (!s) return null;
+
+  let h, m = 0;
+  if (s.includes(':')) {
+    const parts = s.split(':');
+    h = parseInt(parts[0], 10);
+    m = parseInt(parts[1] || '0', 10);
+  } else {
+    const len = s.length;
+    if (len <= 2)      { h = parseInt(s, 10); m = 0; }
+    else if (len === 3){ h = parseInt(s[0], 10); m = parseInt(s.slice(1), 10); }
+    else               { h = parseInt(s.slice(0, 2), 10); m = parseInt(s.slice(2), 10); }
+  }
+
+  if (isNaN(h) || isNaN(m) || m < 0 || m > 59) return null;
+
+  let h24, suggestAmPm;
+
+  if (explicitAmPm !== null) {
+    if (h < 0 || h > 12) return null;
+    suggestAmPm = explicitAmPm;
+    h24 = explicitAmPm === 'AM' ? (h === 12 ? 0 : h) : (h === 12 ? 12 : h + 12);
+  } else if (h >= 13 && h <= 23) {
+    h24 = h;
+    suggestAmPm = 'PM';
+  } else if (h === 0) {
+    h24 = 0;
+    suggestAmPm = 'AM';
+  } else {
+    // Ambiguous (1–12), will use AM/PM toggle
+    h24 = null;
+    suggestAmPm = null;
+  }
+
+  // Display string in 12h (no leading zero on hour)
+  let displayH = h24 !== null
+    ? (h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24)
+    : h;
+  const displayStr = `${displayH}:${String(m).padStart(2, '0')}`;
+
+  return { h24, rawH: h, m, suggestAmPm, displayStr };
+}
+
+function resolveH24(parsed, ampmToggle) {
+  if (parsed.h24 !== null) return parsed.h24;
+  const h = parsed.rawH;
+  return ampmToggle === 'AM' ? (h === 12 ? 0 : h) : (h === 12 ? 12 : h + 12);
+}
+
+function buildDate(dateStr, timeStr, ampmToggle) {
+  if (!dateStr) return null;
+  const parts = dateStr.split('-').map(Number);
+  if (parts.length !== 3 || parts.some(isNaN)) return null;
+  const [year, month, day] = parts;
+
+  let h24 = 0, m = 0;
+  if (timeStr && timeStr.trim()) {
+    const parsed = parseTimeStr(timeStr);
+    if (!parsed) return null;
+    h24 = resolveH24(parsed, ampmToggle);
+    m = parsed.m;
+  }
+  return new Date(year, month - 1, day, h24, m, 0, 0);
+}
+
+function formatDuration(totalHours) {
+  const totalMin = Math.round(totalHours * 60);
+  const days  = Math.floor(totalMin / (24 * 60));
+  const hours = Math.floor((totalMin % (24 * 60)) / 60);
+  const mins  = totalMin % 60;
+  const parts = [];
+  if (days  > 0) parts.push(`${days} day${days !== 1 ? 's' : ''}`);
+  if (hours > 0) parts.push(`${hours} hr${hours !== 1 ? 's' : ''}`);
+  if (mins  > 0 || parts.length === 0) parts.push(`${mins} min${mins !== 1 ? 's' : ''}`);
+  return parts.join(', ');
+}
+
+function hourOptions() {
+  const opts = [];
+  for (let h = 0; h < 24; h++) {
+    const label = h === 0 ? '12:00 AM' : h < 12 ? `${h}:00 AM` : h === 12 ? '12:00 PM' : `${h - 12}:00 PM`;
+    opts.push({ value: h, label });
+  }
+  return opts;
+}
+
+// ---- Shared UI pieces ----
+function BrandIcon() {
+  return React.createElement('svg', { width: 40, height: 24, viewBox: '0 0 40 24', xmlns: 'https://www.w3.org/2000/svg', 'aria-hidden': true },
+    React.createElement('rect', { x: 0,  y: 6,  width: 2, height: 14, rx: .4, fill: '#7090a8' }),
+    React.createElement('rect', { x: 4,  y: 2,  width: 3, height: 20, rx: .4, fill: '#8aa4bc' }),
+    React.createElement('rect', { x: 9,  y: 8,  width: 2, height: 10, rx: .4, fill: '#7090a8' }),
+    React.createElement('rect', { x: 13, y: 0,  width: 3, height: 24, rx: .4, fill: '#8aa4bc' }),
+    React.createElement('rect', { x: 18, y: 5,  width: 2, height: 16, rx: .4, fill: '#7090a8' }),
+    React.createElement('rect', { x: 22, y: 3,  width: 2, height: 19, rx: .4, fill: '#8aa4bc' }),
+    React.createElement('rect', { x: 26, y: 1,  width: 3, height: 22, rx: .4, fill: '#c9622b' }),
+    React.createElement('rect', { x: 31, y: 4,  width: 2, height: 16, rx: .4, fill: '#c9622b' }),
+    React.createElement('rect', { x: 35, y: 0,  width: 3, height: 24, rx: .4, fill: '#c9622b' })
+  );
+}
+
+function WeekStrip({ size = 7, gap = 4 }) {
+  const days = ['M','T','W','T','F','S','S'];
+  return React.createElement('div', { style: { display: 'flex', gap } },
+    days.map((d, i) => React.createElement('div', {
+      key: i,
+      style: {
+        width: size, height: size * 2.4, borderRadius: 2,
+        background: (i === 5 || i === 6) ? COLORS.amber : COLORS.inkSoft,
+        opacity: (i === 5 || i === 6) ? 1 : 0.35
+      }
+    }))
+  );
+}
+
+function AdSlot({ width, height, slot = '', style = {} }) {
+  useEffect(() => {
+    if (!slot) return;
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+  }, [slot]);
+
+  if (!slot) {
+    return React.createElement('div', {
+      style: {
+        width: width || '100%', height, maxWidth: width, margin: '0 auto',
+        background: '#EFEBE2', border: `1px dashed ${COLORS.line}`, borderRadius: 8,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        flexDirection: 'column', gap: 4, ...style
+      }
+    },
+      React.createElement('div', { style: { fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: COLORS.textMuted } }, 'Advertisement'),
+      React.createElement('div', { style: { fontSize: 11, color: '#B8B2A4' } }, `${width} × ${height}`)
+    );
+  }
+
+  const isFixed = typeof width === 'number';
+  return React.createElement('div', { style: { width: isFixed ? width : '100%', maxWidth: isFixed ? width : '100%', margin: '0 auto', ...style } },
+    isFixed
+      ? React.createElement('ins', { className: 'adsbygoogle', style: { display: 'inline-block', width, height }, 'data-ad-client': ADSENSE_CLIENT, 'data-ad-slot': slot })
+      : React.createElement('ins', { className: 'adsbygoogle', style: { display: 'block' }, 'data-ad-client': ADSENSE_CLIENT, 'data-ad-slot': slot, 'data-ad-format': 'auto', 'data-full-width-responsive': 'true' })
+  );
+}
+
+function useMinViewportWidth(px) {
+  const [matches, setMatches] = useState(() => window.innerWidth >= px);
+  useEffect(() => {
+    const mq = window.matchMedia(`(min-width: ${px}px)`);
+    const onChange = () => setMatches(mq.matches);
+    onChange();
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, [px]);
+  return matches;
+}
+
+// ---- AM/PM Toggle ----
+function AmPmToggle({ value, onChange }) {
+  return React.createElement('div', {
+    style: { display: 'flex', borderRadius: 7, overflow: 'hidden', border: `1.5px solid ${COLORS.line}`, flexShrink: 0 }
+  },
+    ['AM', 'PM'].map(v =>
+      React.createElement('button', {
+        key: v,
+        onClick: () => onChange(v),
+        style: {
+          padding: '0 13px', height: 38, border: 'none',
+          background: value === v ? COLORS.ink : '#fff',
+          color: value === v ? '#fff' : '#666',
+          fontSize: 12, fontWeight: 700, cursor: 'pointer',
+          fontFamily: FONT_BODY, letterSpacing: '0.04em',
+          transition: 'all 0.12s'
+        }
+      }, v)
+    )
+  );
+}
+
+// ---- Date + Time input group ----
+function DateTimeField({ label, dateValue, onDateChange, timeValue, onTimeChange, ampm, onAmPmChange, onTimeBlur, id }) {
+  return React.createElement('div', { style: { flex: 1, minWidth: 0 } },
+    React.createElement('label', {
+      htmlFor: `${id}-date`,
+      style: { fontSize: 12, fontWeight: 600, display: 'block', marginBottom: 8, color: '#444', letterSpacing: '0.02em' }
+    }, label),
+    React.createElement('div', { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+      React.createElement('input', {
+        id: `${id}-date`,
+        type: 'date',
+        value: dateValue,
+        onChange: e => onDateChange(e.target.value),
+        style: {
+          padding: '8px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`,
+          fontSize: 13, fontFamily: FONT_BODY, background: '#FBFAF7', color: COLORS.ink,
+          height: 38, outline: 'none', minWidth: 150
+        }
+      }),
+      React.createElement('input', {
+        id: `${id}-time`,
+        type: 'text',
+        value: timeValue,
+        onChange: e => onTimeChange(e.target.value),
+        onBlur: onTimeBlur,
+        placeholder: '9:30',
+        style: {
+          padding: '8px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`,
+          fontSize: 13, fontFamily: FONT_MONO, background: '#FBFAF7', color: COLORS.ink,
+          height: 38, width: 80, outline: 'none'
+        }
+      }),
+      React.createElement(AmPmToggle, { value: ampm, onChange: onAmPmChange })
+    )
+  );
+}
+
+// ---- Result metric card ----
+function MetricCard({ label, description, value, color, colorSoft }) {
+  return React.createElement('div', {
+    style: {
+      flex: 1, minWidth: 160,
+      background: colorSoft, borderRadius: 10,
+      border: `1.5px solid ${color}22`,
+      padding: '18px 20px'
+    }
+  },
+    React.createElement('div', {
+      style: { fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color, marginBottom: 4 }
+    }, label),
+    React.createElement('div', {
+      style: { fontFamily: FONT_MONO, fontSize: 26, fontWeight: 700, color, lineHeight: 1.2, marginBottom: 4 }
+    }, value !== null ? value.toFixed(2) : '—'),
+    React.createElement('div', {
+      style: { fontSize: 11, color: `${color}99`, lineHeight: 1.4 }
+    }, description)
+  );
+}
+
+// ---- Main component ----
+function ManualCalculator() {
+  const today = new Date().toISOString().slice(0, 10);
+
+  const [startDate, setStartDate] = useState('');
+  const [startTime, setStartTime] = useState('9:00');
+  const [startAmPm, setStartAmPm] = useState('AM');
+
+  const [endDate, setEndDate] = useState('');
+  const [endTime, setEndTime] = useState('5:00');
+  const [endAmPm, setEndAmPm] = useState('PM');
+
+  const [bizStartHour, setBizStartHour] = useState(9);
+  const [bizEndHour, setBizEndHour] = useState(17);
+  const [weekendDays, setWeekendDays] = useState([0, 6]);
+
+  const [results, setResults] = useState(null);
+  const [startObj, setStartObj] = useState(null);
+  const [endObj, setEndObj] = useState(null);
+  const [error, setError] = useState('');
+
+  const isDesktop = useMinViewportWidth(980);
+
+  function handleTimeBlur(which) {
+    const raw = which === 'start' ? startTime : endTime;
+    const parsed = parseTimeStr(raw);
+    if (!parsed) return;
+    // Normalize display to "H:MM"
+    const setTime = which === 'start' ? setStartTime : setEndTime;
+    const setAmPm = which === 'start' ? setStartAmPm : setEndAmPm;
+    setTime(parsed.displayStr);
+    if (parsed.suggestAmPm) setAmPm(parsed.suggestAmPm);
+  }
+
+  function handleCalculate() {
+    setError('');
+    setResults(null);
+
+    if (!startDate || !endDate) {
+      setError('Please enter both a start date and an end date.');
+      return;
+    }
+
+    const s = buildDate(startDate, startTime, startAmPm);
+    const e = buildDate(endDate, endTime, endAmPm);
+
+    if (!s) { setError('Could not parse the start date or time. Try formats like 9:30, 2130, or 9:30 PM.'); return; }
+    if (!e) { setError('Could not parse the end date or time. Try formats like 9:30, 2130, or 9:30 PM.'); return; }
+    if (e <= s) { setError('End date/time must be after start date/time.'); return; }
+    if (bizEndHour <= bizStartHour) { setError('Business hours end time must be after start time.'); return; }
+
+    const total   = calcTotalHours(s, e);
+    const weekend = calcWeekendHours(s, e, weekendDays);
+    const weekday = total - weekend;
+    const business = calcBusinessHours(s, e, bizStartHour, bizEndHour, weekendDays);
+
+    setStartObj(s);
+    setEndObj(e);
+    setResults({ total, weekend, weekday, business });
+  }
+
+  function handleReset() {
+    setResults(null);
+    setError('');
+    setStartDate('');
+    setStartTime('9:00');
+    setStartAmPm('AM');
+    setEndDate('');
+    setEndTime('5:00');
+    setEndAmPm('PM');
+  }
+
+  const labelStyle = { fontSize: 12, fontWeight: 600, color: '#444', letterSpacing: '0.02em' };
+
+  return React.createElement('div', {
+    style: { minHeight: '100vh', background: COLORS.paper, fontFamily: FONT_BODY, color: COLORS.ink }
+  },
+
+    // ---- Nav ----
+    React.createElement('div', {
+      style: { background: COLORS.ink, padding: '16px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }
+    },
+      React.createElement('a', { href: 'index.html', style: { display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' } },
+        React.createElement(BrandIcon, null),
+        React.createElement('div', null,
+          React.createElement('div', { style: { fontFamily: FONT_DISPLAY, fontWeight: 600, fontSize: 17, color: COLORS.paper, letterSpacing: '-0.01em' } }, 'Calculate My Hours'),
+          React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', fontFamily: FONT_BODY, marginTop: 2 } }, 'Free spreadsheet utility')
+        )
+      ),
+      React.createElement('nav', { style: { display: 'flex', alignItems: 'center', gap: 20 } },
+        React.createElement('a', { href: 'index.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Spreadsheet'),
+        React.createElement('a', { href: 'about.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'About'),
+        React.createElement('a', { href: 'contact.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Contact')
+      )
+    ),
+
+    // ---- Leaderboard ad ----
+    React.createElement('div', {
+      style: { padding: '16px 0', background: '#EFEBE2', borderBottom: `1px solid ${COLORS.line}` }
+    },
+      React.createElement(AdSlot, { width: 728, height: 90, slot: '3639501291' })
+    ),
+
+    // ---- Main layout ----
+    React.createElement('div', {
+      style: { maxWidth: 1180, margin: '0 auto', padding: '36px 24px', display: 'flex', gap: 32, alignItems: 'flex-start' }
+    },
+
+      // ---- Content column ----
+      React.createElement('div', { style: { flex: 1, minWidth: 0 } },
+
+        // ---- Hero ----
+        React.createElement('div', { style: { marginBottom: 28 } },
+          React.createElement('div', {
+            style: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }
+          },
+            React.createElement(WeekStrip, { size: 6, gap: 3 }),
+            React.createElement('span', {
+              style: { fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: COLORS.textMuted, fontWeight: 600 }
+            }, 'Quick single-entry calculator')
+          ),
+          React.createElement('h1', {
+            style: { fontFamily: FONT_DISPLAY, fontSize: 32, fontWeight: 700, letterSpacing: '-0.01em', margin: '0 0 12px 0', lineHeight: 1.15 }
+          }, 'Date & Time Calculator'),
+          React.createElement('p', {
+            style: { fontSize: 15, color: COLORS.inkSoft, lineHeight: 1.65, margin: 0, maxWidth: 580 }
+          }, 'Enter a start and end date/time to instantly calculate total, business, weekend, and weekday hours. Time can be entered in any format — 9:30, 21:30, or 2130 all work. For bulk spreadsheet calculations, use the ', React.createElement('a', { href: 'index.html', style: { color: COLORS.amber } }, 'spreadsheet calculator'), '.')
+        ),
+
+        // ---- Form card ----
+        React.createElement('div', {
+          style: { background: COLORS.card, borderRadius: 12, border: `1px solid ${COLORS.line}`, padding: '24px', marginBottom: 20 }
+        },
+
+          // Date/time row
+          React.createElement('div', {
+            style: { display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: 24 }
+          },
+            React.createElement(DateTimeField, {
+              label: 'Start Date & Time',
+              id: 'start',
+              dateValue: startDate,
+              onDateChange: setStartDate,
+              timeValue: startTime,
+              onTimeChange: setStartTime,
+              ampm: startAmPm,
+              onAmPmChange: setStartAmPm,
+              onTimeBlur: () => handleTimeBlur('start')
+            }),
+            React.createElement(DateTimeField, {
+              label: 'End Date & Time',
+              id: 'end',
+              dateValue: endDate,
+              onDateChange: setEndDate,
+              timeValue: endTime,
+              onTimeChange: setEndTime,
+              ampm: endAmPm,
+              onAmPmChange: setEndAmPm,
+              onTimeBlur: () => handleTimeBlur('end')
+            })
+          ),
+
+          // Time input hint
+          React.createElement('div', {
+            style: { fontSize: 12, color: COLORS.textMuted, marginBottom: 20, padding: '8px 12px', background: '#F7F5F0', borderRadius: 6 }
+          }, '⏱ Time formats accepted: 9:30 · 930 · 0930 · 21:30 · 2130 · 9:30 AM · 9:30PM — military time auto-sets to PM'),
+
+          // Divider
+          React.createElement('div', { style: { borderTop: `1px solid ${COLORS.line}`, marginBottom: 20 } }),
+
+          // Config row
+          React.createElement('div', { style: { display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' } },
+
+            // Weekend days
+            React.createElement('div', null,
+              React.createElement('div', { style: { ...labelStyle, marginBottom: 8 } }, 'Weekend Days'),
+              React.createElement('div', { style: { display: 'flex', gap: 6 } },
+                [{ label: 'Fri', dow: 5 }, { label: 'Sat', dow: 6 }, { label: 'Sun', dow: 0 }].map(({ label, dow }) => {
+                  const active = weekendDays.includes(dow);
+                  return React.createElement('button', {
+                    key: dow,
+                    onClick: () => {
+                      setWeekendDays(prev => active ? prev.filter(d => d !== dow) : [...prev, dow]);
+                      setResults(null);
+                    },
+                    style: {
+                      padding: '6px 13px', borderRadius: 6,
+                      border: active ? `1.5px solid ${COLORS.amber}` : `1.5px solid ${COLORS.line}`,
+                      background: active ? COLORS.amberSoft : '#fff',
+                      color: active ? COLORS.amber : '#666',
+                      fontSize: 12, fontWeight: 700, cursor: 'pointer', transition: 'all 0.12s'
+                    }
+                  }, label);
+                })
+              )
+            ),
+
+            // Business hours window
+            React.createElement('div', null,
+              React.createElement('div', { style: { ...labelStyle, marginBottom: 8 } }, 'Business Hours Window'),
+              React.createElement('div', { style: { display: 'flex', gap: 8, alignItems: 'center' } },
+                React.createElement('select', {
+                  value: bizStartHour,
+                  onChange: e => { setBizStartHour(parseInt(e.target.value)); setResults(null); },
+                  style: { padding: '7px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#FBFAF7', height: 38 }
+                }, hourOptions().map(o => React.createElement('option', { key: o.value, value: o.value }, o.label))),
+                React.createElement('span', { style: { fontSize: 13, color: '#999' } }, 'to'),
+                React.createElement('select', {
+                  value: bizEndHour,
+                  onChange: e => { setBizEndHour(parseInt(e.target.value)); setResults(null); },
+                  style: { padding: '7px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#FBFAF7', height: 38 }
+                }, hourOptions().map(o => React.createElement('option', { key: o.value, value: o.value }, o.label)))
+              )
+            )
+          ),
+
+          // Divider
+          React.createElement('div', { style: { borderTop: `1px solid ${COLORS.line}`, margin: '20px 0' } }),
+
+          // Buttons
+          React.createElement('div', { style: { display: 'flex', gap: 10, alignItems: 'center' } },
+            React.createElement('button', {
+              onClick: handleCalculate,
+              style: {
+                background: COLORS.ink, color: COLORS.paper, border: 'none',
+                padding: '11px 32px', borderRadius: 8, fontSize: 14, fontWeight: 700,
+                cursor: 'pointer', letterSpacing: '0.01em', fontFamily: FONT_BODY
+              }
+            }, 'Calculate'),
+            results && React.createElement('button', {
+              onClick: handleReset,
+              style: {
+                background: 'none', color: '#555', border: `1px solid ${COLORS.line}`,
+                padding: '10px 20px', borderRadius: 8, fontSize: 13, cursor: 'pointer', fontFamily: FONT_BODY
+              }
+            }, 'Reset')
+          )
+        ),
+
+        // ---- Error ----
+        error && React.createElement('div', {
+          style: {
+            background: COLORS.dangerSoft, border: `1px solid #E8C2B8`, borderRadius: 8,
+            padding: '12px 16px', color: COLORS.danger, fontSize: 13, marginBottom: 20
+          }
+        }, error),
+
+        // ---- Results ----
+        results && React.createElement('div', null,
+
+          // Duration summary banner
+          React.createElement('div', {
+            style: {
+              background: COLORS.ink, borderRadius: 12, padding: '20px 24px', marginBottom: 16,
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12
+            }
+          },
+            React.createElement('div', null,
+              React.createElement('div', { style: { fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#9AA3AF', marginBottom: 4 } }, 'Total Timespan'),
+              React.createElement('div', { style: { fontFamily: FONT_MONO, fontSize: 22, fontWeight: 700, color: '#fff' } }, formatDuration(results.total))
+            ),
+            React.createElement('div', { style: { textAlign: 'right' } },
+              React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', marginBottom: 2 } },
+                `${startObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} `
+                + `${startObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+              ),
+              React.createElement('div', { style: { fontSize: 11, color: '#666' } }, '↓'),
+              React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', marginTop: 2 } },
+                `${endObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} `
+                + `${endObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+              )
+            )
+          ),
+
+          // Metric cards
+          React.createElement('div', {
+            style: { display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24 }
+          },
+            React.createElement(MetricCard, {
+              label: 'Total Hours',
+              description: 'All elapsed hours, no exclusions',
+              value: results.total,
+              color: COLORS.amber,
+              colorSoft: COLORS.amberSoft
+            }),
+            React.createElement(MetricCard, {
+              label: 'Business Hours',
+              description: `Weekday hours ${bizStartHour === 0 ? '12 AM' : bizStartHour < 12 ? `${bizStartHour} AM` : bizStartHour === 12 ? '12 PM' : `${bizStartHour - 12} PM`}–${bizEndHour === 0 ? '12 AM' : bizEndHour < 12 ? `${bizEndHour} AM` : bizEndHour === 12 ? '12 PM' : `${bizEndHour - 12} PM`} only`,
+              value: results.business,
+              color: COLORS.forest,
+              colorSoft: COLORS.forestSoft
+            }),
+            React.createElement(MetricCard, {
+              label: 'Weekend Hours',
+              description: `Hours on ${weekendDays.length === 0 ? 'no days' : weekendDays.map(d => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d]).join(', ')}`,
+              value: results.weekend,
+              color: COLORS.blue,
+              colorSoft: COLORS.blueSoft
+            }),
+            React.createElement(MetricCard, {
+              label: 'Weekday Hours',
+              description: 'Total minus weekend hours (full 24h)',
+              value: results.weekday,
+              color: '#5E4DB2',
+              colorSoft: '#F0EDF9'
+            })
+          ),
+
+          // Check math note
+          React.createElement('div', {
+            style: { fontSize: 12, color: COLORS.textMuted, textAlign: 'center', marginBottom: 20 }
+          }, 'Business Hours and Weekend Hours count exact minute-level overlap · Weekday Hours = Total − Weekend Hours')
+        ),
+
+        // ---- Footer note ----
+        React.createElement('div', {
+          style: { marginTop: 28, fontSize: 12, color: '#AEA89A', textAlign: 'center' }
+        }, 'All calculations run locally in your browser — nothing is sent to a server')
+      ),
+
+      // ---- Sidebar ads (desktop only) ----
+      isDesktop && React.createElement('div', { style: { width: 300, flexShrink: 0 } },
+        React.createElement('div', { style: { position: 'sticky', top: 24, display: 'flex', flexDirection: 'column', gap: 20 } },
+          React.createElement(AdSlot, { width: 300, height: 250, slot: '2620803796' }),
+          React.createElement(AdSlot, { width: 300, height: 600, slot: '5557958324' })
+        )
+      )
+    ),
+
+    // ---- Footer ----
+    React.createElement('div', {
+      style: { borderTop: `1px solid ${COLORS.line}`, padding: '24px 28px', textAlign: 'center' }
+    },
+      React.createElement('div', { style: { display: 'flex', justifyContent: 'center', marginBottom: 10 } },
+        React.createElement(WeekStrip, { size: 4, gap: 3 })
+      ),
+      React.createElement('div', { style: { fontSize: 12, color: COLORS.textMuted, marginBottom: 8 } }, '© 2026 Calculate My Hours. All rights reserved.'),
+      React.createElement('div', { style: { display: 'flex', justifyContent: 'center', gap: 20 } },
+        React.createElement('a', { href: 'index.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Spreadsheet Calculator'),
+        React.createElement('a', { href: 'calculator.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Date Calculator'),
+        React.createElement('a', { href: 'about.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'About'),
+        React.createElement('a', { href: 'contact.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Contact')
+      )
+    )
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(ManualCalculator, null));
+</script>
+</body>
+</html>
