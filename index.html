@@ -541,13 +541,22 @@ function HoursCalculator() {
       fontFamily: FONT_BODY,
       marginTop: 2
     }
-  }, "Free spreadsheet utility"))), /*#__PURE__*/React.createElement("nav", {
+  }, "Free timespan utility"))), /*#__PURE__*/React.createElement("nav", {
     style: {
       display: "flex",
       alignItems: "center",
       gap: 20
     }
   }, /*#__PURE__*/React.createElement("a", {
+    href: "calculator.html",
+    style: {
+      fontSize: 13,
+      color: "#9AA3AF",
+      textDecoration: "none",
+      fontFamily: FONT_BODY,
+      fontWeight: 500
+    }
+  }, "Date Calculator"), /*#__PURE__*/React.createElement("a", {
     href: "about.html",
     style: {
       fontSize: 13,
@@ -591,14 +600,14 @@ function HoursCalculator() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      marginBottom: 30
+      marginBottom: 20
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
       alignItems: "center",
       gap: 10,
-      marginBottom: 14
+      marginBottom: 8
     }
   }, /*#__PURE__*/React.createElement(WeekStrip, {
     size: 6,
@@ -617,18 +626,38 @@ function HoursCalculator() {
       fontSize: 34,
       fontWeight: 700,
       letterSpacing: "-0.01em",
-      margin: "0 0 12px 0",
+      margin: "0 0 8px 0",
       lineHeight: 1.15
     }
   }, "Free Easy Excel Timespan Calculator"), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 15,
       color: COLORS.inkSoft,
-      lineHeight: 1.65,
-      margin: 0,
-      maxWidth: 620
+      lineHeight: 1.5,
+      margin: "0 0 0px 0",
+      maxWidth: 800
     }
-  }, "Upload a spreadsheet of start and end timestamps with a header row included, choose one or more ways to measure the time between them, and download the result with new columns added \u2014 each calculated from exact timestamps down to the minute and reported to two decimal places. All processing happens locally in your browser; nothing is uploaded to a server.")), /*#__PURE__*/React.createElement("div", {
+  }, "Upload a spreadsheet of start and end timestamps with a header row included, choose one or more ways to measure the time between them, and download the result with new columns added \u2014 each calculated from exact timestamps down to the minute and reported to two decimal places. All processing happens locally in your browser; nothing is uploaded to a server.")), /*#__PURE__*/React.createElement("a", {
+    href: "calculator.html",
+    style: {
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 8,
+      marginTop: 0,
+      marginBottom: 20,
+      padding: "10px 16px",
+      background: COLORS.amberSoft,
+      border: "1.5px solid " + COLORS.amber + "44",
+      borderRadius: 8,
+      textDecoration: "none",
+      color: COLORS.amber,
+      fontSize: 13,
+      fontWeight: 600,
+      fontFamily: FONT_BODY
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Just have two dates?"), /*#__PURE__*/React.createElement("span", {
+    style: { fontWeight: 400, color: COLORS.inkSoft }
+  }, "Use the single-entry Date & Time Calculator \u2192")), /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.card,
       borderRadius: 12,
@@ -1280,7 +1309,15 @@ function HoursCalculator() {
       textDecoration: "none",
       fontFamily: FONT_BODY
     }
-  }, "Calculator"), /*#__PURE__*/React.createElement("a", {
+  }, "Spreadsheet Calculator"), /*#__PURE__*/React.createElement("a", {
+    href: "calculator.html",
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      textDecoration: "none",
+      fontFamily: FONT_BODY
+    }
+  }, "Date Calculator"), /*#__PURE__*/React.createElement("a", {
     href: "about.html",
     style: {
       fontSize: 12,

@@ -433,11 +433,11 @@ function ManualCalculator() {
         React.createElement(BrandIcon, null),
         React.createElement('div', null,
           React.createElement('div', { style: { fontFamily: FONT_DISPLAY, fontWeight: 600, fontSize: 17, color: COLORS.paper, letterSpacing: '-0.01em' } }, 'Calculate My Hours'),
-          React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', fontFamily: FONT_BODY, marginTop: 2 } }, 'Free spreadsheet utility')
+          React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', fontFamily: FONT_BODY, marginTop: 2 } }, 'Free timespan utility')
         )
       ),
       React.createElement('nav', { style: { display: 'flex', alignItems: 'center', gap: 20 } },
-        React.createElement('a', { href: 'index.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Spreadsheet'),
+        React.createElement('a', { href: 'index.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Spreadsheet Calculator'),
         React.createElement('a', { href: 'about.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'About'),
         React.createElement('a', { href: 'contact.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Contact')
       )
@@ -470,10 +470,25 @@ function ManualCalculator() {
           ),
           React.createElement('h1', {
             style: { fontFamily: FONT_DISPLAY, fontSize: 32, fontWeight: 700, letterSpacing: '-0.01em', margin: '0 0 12px 0', lineHeight: 1.15 }
-          }, 'Date & Time Calculator'),
+          }, 'Single Timespan Calculator'),
           React.createElement('p', {
             style: { fontSize: 15, color: COLORS.inkSoft, lineHeight: 1.65, margin: 0, maxWidth: 580 }
-          }, 'Enter a start and end date/time to instantly calculate total, business, weekend, and weekday hours. Time can be entered in any format — 9:30, 21:30, or 2130 all work. For bulk spreadsheet calculations, use the ', React.createElement('a', { href: 'index.html', style: { color: COLORS.amber } }, 'spreadsheet calculator'), '.')
+          }, 'Enter a start and end date/time to instantly calculate total, business, weekend, and weekday hours. Time can be entered in any format — 9:30, 21:30, or 2130 all work.'),
+          React.createElement('a', {
+            href: 'index.html',
+            style: {
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              marginTop: 8, marginBottom: 0,
+              padding: '10px 16px',
+              background: COLORS.amberSoft,
+              border: `1.5px solid ${COLORS.amber}44`,
+              borderRadius: 8, textDecoration: 'none',
+              color: COLORS.amber, fontSize: 13, fontWeight: 600, fontFamily: FONT_BODY
+            }
+          },
+            React.createElement('span', null, 'For bulk date calculations,'),
+            React.createElement('span', { style: { fontWeight: 400, color: COLORS.inkSoft } }, 'use our easy spreadsheet tool →')
+          )
         ),
 
         // ---- Form card ----
