@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site name="Calculate My Hours" domain="https://www.timespancalculator.com" generated="2026-06-20">
+
+  <page>
+    <url>https://www.timespancalculator.com/</url>
+    <title>Calculate My Hours — Compute Total, Business, Weekend &amp; Weekday Hours from a Spreadsheet</title>
+    <meta>
+      <description>Upload a spreadsheet with start/end timestamps and get total hours, business hours, weekend hours, and weekday hours calculated to the minute. Free, runs entirely in your browser.</description>
+      <keywords>hours calculator, business hours calculator, weekend hours calculator, weekday hours calculator, time between dates calculator, excel hours between two dates, timesheet calculator, payroll hours calculator, elapsed time calculator excel</keywords>
+      <og_title>Calculate My Hours — Compute Total, Business, Weekend &amp; Weekday Hours from a Spreadsheet</og_title>
+      <og_description>Upload a spreadsheet with start/end timestamps and get total, business, weekend, and weekday hours calculated to the minute and returned in an updated file. Free, runs entirely in your browser.</og_description>
+      <og_type>website</og_type>
+      <twitter_card>summary</twitter_card>
+      <canonical>https://www.timespancalculator.com/</canonical>
+      <last_modified>2026-06-18</last_modified>
+    </meta>
+    <content>
+      <headline>Easy Excel Timespan Calculator</headline>
+      <subheadline>A Better Solution to NETWORKDAYS and MOD Formulas</subheadline>
+      <description>Upload a spreadsheet of start and end timestamps with a header row included, choose one or more ways to measure the time between them, and download the result with new columns added — each calculated from exact timestamps down to the minute and reported to two decimal places. All processing happens locally in your browser; nothing is uploaded to a server.</description>
+      <metrics>
+        <metric id="1">
+          <name>Total Hours</name>
+          <description>Counts all elapsed hours between the start and end timestamp, with no exclusions.</description>
+        </metric>
+        <metric id="2">
+          <name>Business Hours</name>
+          <description>Counts hours on non-weekend days only, within the configurable time window.</description>
+        </metric>
+        <metric id="3">
+          <name>Weekend Hours</name>
+          <description>Counts hours that fall on days marked as weekend, from midnight to midnight.</description>
+        </metric>
+        <metric id="4">
+          <name>Weekday Hours</name>
+          <description>Total Hours minus Weekend Hours — all hours on non-weekend days, full 24-hour span.</description>
+        </metric>
+      </metrics>
+      <features>
+        <feature>Supports .xlsx, .xls, .ods, and .csv files</feature>
+        <feature>Configurable weekend days (Friday, Saturday, Sunday)</feature>
+        <feature>Configurable business hours time window</feature>
+        <feature>Results appended as new columns to original data</feature>
+        <feature>All processing runs locally in your browser — nothing uploaded to a server</feature>
+        <feature>Results accurate to the minute, reported to two decimal places</feature>
+      </features>
+      <cta>Drop your spreadsheet here or choose a file to get started.</cta>
+    </content>
+  </page>
+
+  <page>
+    <url>https://www.timespancalculator.com/about</url>
+    <title>About — Calculate My Hours | Easy Excel Timespan Calculator</title>
+    <meta>
+      <description>Learn how Calculate My Hours works — a free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps.</description>
+      <og_title>About — Calculate My Hours</og_title>
+      <og_description>A free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps. Nothing is uploaded to a server.</og_description>
+      <og_type>website</og_type>
+      <canonical>https://www.timespancalculator.com/about.html</canonical>
+    </meta>
+    <content>
+      <headline>Built for people who live in spreadsheets</headline>
+      <intro>Calculate My Hours solves a specific, frustrating problem: you have a spreadsheet full of start and end timestamps, and you need to know how many hours fall in between — broken down by total, business, weekend, and weekday. No formulas. No NETWORKDAYS headaches. Just upload, configure, and download.</intro>
+      <metrics>
+        <metric id="1">
+          <name>Total Hours</name>
+          <description>All elapsed hours between start and end, down to the minute. No exclusions.</description>
+        </metric>
+        <metric id="2">
+          <name>Business Hours</name>
+          <description>Hours on non-weekend days within a configurable daily window — e.g. 9 AM to 5 PM.</description>
+        </metric>
+        <metric id="3">
+          <name>Weekend Hours</name>
+          <description>Hours that fall on days you mark as weekend, midnight to midnight.</description>
+        </metric>
+        <metric id="4">
+          <name>Weekday Hours</name>
+          <description>Total hours minus weekend hours — the full 24-hour span on non-weekend days.</description>
+        </metric>
+      </metrics>
+      <section title="How it works">
+        <p>Upload a spreadsheet (.xlsx, .xls, .ods, or .csv) with at least one column of start timestamps and one of end timestamps, with a header row at the top. The tool reads your file, lets you map which columns to use, and computes each selected metric row by row — calculating exact minute-level overlap with the relevant time windows.</p>
+        <p>Results are appended as new columns to your original data and returned as a downloadable .xlsx file. Your existing data is untouched; only the new columns are added.</p>
+        <p>You can select any combination of the four metrics, configure which days count as the weekend (Friday, Saturday, and/or Sunday), and set the daily start and end time for business hours calculations.</p>
+      </section>
+      <section title="Your data stays on your computer">
+        <p>Everything runs locally in your browser using the SheetJS library. When you upload a file, it is read directly into memory on your device — it is never transmitted to a server, never stored in a database, and never leaves your machine. Closing the tab clears everything.</p>
+        <privacy_badge>100% client-side — nothing is uploaded</privacy_badge>
+      </section>
+      <section title="Why we built it">
+        <p>Spreadsheet formulas for time math — NETWORKDAYS, MOD, custom VBA — are brittle, hard to audit, and require rebuilding from scratch for every new file. We wanted a reusable tool you could hand to anyone on a team: upload your file, pick your columns, get your answer. No Excel expertise required.</p>
+        <p>The tool is free, supported by advertising, and will stay that way.</p>
+      </section>
+    </content>
+  </page>
+
+  <page>
+    <url>https://www.timespancalculator.com/contact</url>
+    <title>Contact — Calculate My Hours | Easy Excel Timespan Calculator</title>
+    <meta>
+      <description>Get in touch with the Calculate My Hours team. Report a bug, suggest a feature, or ask a question about the free spreadsheet hours calculator.</description>
+      <og_title>Contact — Calculate My Hours</og_title>
+      <og_description>Get in touch with the Calculate My Hours team. Report a bug, suggest a feature, or ask a question.</og_description>
+      <og_type>website</og_type>
+      <canonical>https://www.timespancalculator.com/contact.html</canonical>
+    </meta>
+    <content>
+      <headline>We&apos;d love to hear from you</headline>
+      <intro>Have a bug to report, a feature to suggest, or a question about how the calculator works? Send us a note — we read everything.</intro>
+      <contact_topics>
+        <topic>Bug report</topic>
+        <topic>Feature request</topic>
+        <topic>How-to question</topic>
+        <topic>File format issue</topic>
+        <topic>General feedback</topic>
+      </contact_topics>
+      <form>
+        <fields>
+          <field name="name" label="Your name" type="text" required="true"/>
+          <field name="email" label="Email address" type="email" required="true"/>
+          <field name="topic" label="Topic" type="select" required="true">
+            <option>Bug report</option>
+            <option>Feature request</option>
+            <option>How-to question</option>
+            <option>File format issue</option>
+            <option>General feedback / other</option>
+          </field>
+          <field name="message" label="Message" type="textarea" required="true"/>
+        </fields>
+        <help_text>The more detail, the faster we can help. For bugs, include the file type (.xlsx, .csv, etc.) and a description of the timestamps if you can.</help_text>
+        <submit_label>Send Message</submit_label>
+        <success_message>Message sent! Thanks for reaching out. We&apos;ll get back to you as soon as we can.</success_message>
+      </form>
+      <privacy_note>This tool runs entirely in your browser — your spreadsheet data is never sent to us or stored anywhere. Messages sent through this form contain only what you type here.</privacy_note>
+    </content>
+  </page>
+
+</site>
