@@ -1,402 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<title>Contact Us — Calculate My Hours</title>
-<meta name="description" content="Get in touch with the Calculate My Hours team. We welcome feedback, bug reports, and feature requests.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://www.splitshifttimesheet.com/contact.html">
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Calculate My Hours | Easy Excel Timespan Calculator</title>
+<meta name="description" content="Get in touch with the Calculate My Hours team. Report a bug, suggest a feature, or ask a question about the free spreadsheet hours calculator." />
+<link rel="canonical" href="https://www.timespancalculator.com/contact.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Contact — Calculate My Hours" />
+<meta property="og:description" content="Get in touch with the Calculate My Hours team. Report a bug, suggest a feature, or ask a question." />
+<meta property="og:url" content="https://www.timespancalculator.com/contact.html" />
+<meta property="og:site_name" content="Calculate My Hours - Easy Excel Timespan Calculator" />
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318" crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-4664800783455318">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
 <style>
-:root {
-  --bg:          #f7f5f0;
-  --surface:     #ffffff;
-  --border:      #e4e0d6;
-  --section-bg:  #efebe2;
-  --text:        #1b2430;
-  --text-2:      #3a4452;
-  --muted:       #8a8478;
-  --accent:      #c9622b;
-  --accent-bg:   #fbeae0;
-  --accent-bdr:  #e8b49a;
-  --accent-dark: #a84f22;
-  --nav-bg:      #1b2430;
-  --nav-text:    #f7f5f0;
-  --r-sm: 4px;
-  --r:    8px;
-  --r-lg: 12px;
-  --shadow: 0 1px 3px rgba(27,36,48,.08), 0 1px 2px rgba(27,36,48,.04);
-  --brand-h: 46px;
-}
-*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 14px; }
-body {
-  font-family: Inter, "Segoe UI", system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-}
+  * { box-sizing: border-box; }
 
-/* Brand bar */
-.brand-bar {
-  background: var(--nav-bg);
-  height: var(--brand-h);
-  display: flex;
-  align-items: center;
-  padding: 0 28px;
-  position: sticky;
-  top: 0;
-  z-index: 60;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.brand-bar-inner {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.brand-left {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  text-decoration: none;
-}
-.brand-name {
-  font-family: Fraunces, Georgia, serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--nav-text);
-  letter-spacing: -.2px;
-}
-@media (max-width: 500px) { .brand-tagline { display: none; } }
+  :root {
+    --ink: #1B2430;
+    --ink-soft: #3A4452;
+    --paper: #F7F5F0;
+    --card: #FFFFFF;
+    --amber: #C9622B;
+    --amber-soft: #FBEAE0;
+    --forest: #3D6B4F;
+    --forest-soft: #E7F0EA;
+    --line: #E4E0D6;
+    --muted: #8A8478;
+    --danger: #B3402C;
+    --danger-soft: #FBEAE6;
+  }
 
-.brand-nav { display: flex; gap: 20px; align-items: center; }
-.brand-nav a {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(247,245,240,.7);
-  text-decoration: none;
-  letter-spacing: .2px;
-  transition: color .15s;
-}
-.brand-nav a:hover, .brand-nav a.active { color: var(--nav-text); }
+  body {
+    margin: 0;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+  }
 
-/* Page content */
-.page-wrap {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 28px 60px;
-}
-@media (max-width: 600px) { .page-wrap { padding: 28px 16px 48px; } }
+  /* ---- Header ---- */
+  .site-header {
+    background: var(--ink);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-header a { text-decoration: none; }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .header-brand-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  .header-tagline {
+    font-size: 12px;
+    color: #9AA3AF;
+  }
 
-.page-header {
-  margin-bottom: 32px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-.page-header h1 {
-  font-family: Fraunces, Georgia, serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -.3px;
-  margin-bottom: 8px;
-}
-.page-header p {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.6;
-}
+  /* ---- WeekStrip ---- */
+  .week-strip {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .week-strip span {
+    display: inline-block;
+    width: 5px;
+    height: 12px;
+    border-radius: 2px;
+  }
+  .week-strip span.weekday { background: #3A4452; opacity: 0.35; }
+  .week-strip span.weekend { background: #C9622B; }
 
-.content-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 28px 32px;
-  box-shadow: var(--shadow);
-  margin-bottom: 20px;
-}
-@media (max-width: 600px) { .content-card { padding: 20px 18px; } }
+  /* ---- Top ad strip ---- */
+  .ad-strip-top {
+    padding: 16px 0;
+    background: #EFEBE2;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: center;
+  }
 
-.content-card h2 {
-  font-family: Fraunces, Georgia, serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 16px;
-}
+  /* ---- Three-column body layout ---- */
+  .body-columns {
+    display: flex;
+    align-items: flex-start;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 16px;
+  }
 
-/* Form */
-.form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 18px; }
-.form-group:last-of-type { margin-bottom: 0; }
-.form-group label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  color: var(--muted);
-}
-.form-group input,
-.form-group select,
-.form-group textarea {
-  font: inherit;
-  font-size: 14px;
-  padding: 10px 13px;
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  color: var(--text);
-  background: var(--surface);
-  transition: border-color .1s, box-shadow .1s;
-  width: 100%;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(201,98,43,.12);
-}
-.form-group textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+  /* Left sidebar */
+  .sidebar-left {
+    width: 180px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 16px;
+  }
 
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+  /* Main content */
+  .page-wrap {
+    flex: 1;
+    min-width: 0;
+    padding: 0 16px;
+  }
 
-.form-hint { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+  /* Right sidebar */
+  .sidebar-right {
+    width: 300px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 16px;
+  }
 
-.submit-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 22px;
-  padding: 11px 24px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--r);
-  color: #fff;
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background .1s, border-color .1s;
-}
-.submit-btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  /* ---- Bottom ad strip ---- */
+  .ad-strip-bottom {
+    padding: 20px 0;
+    background: #EFEBE2;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: center;
+  }
 
-/* Success state */
-.success-msg {
-  display: none;
-  background: #f0fdf4;
-  border: 1px solid #86efac;
-  border-radius: var(--r);
-  padding: 16px 20px;
-  font-size: 14px;
-  color: #166534;
-  line-height: 1.6;
-  margin-top: 20px;
-}
-.success-msg.visible { display: block; }
+  /* ---- Content styles ---- */
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    line-height: 1.15;
+  }
+  .lead {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0 0 32px;
+  }
 
-/* Privacy note */
-.privacy-note {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
-}
+  /* ---- Contact form card ---- */
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin-bottom: 20px;
+  }
+  .form-card h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
 
-/* Ad placeholders */
-.ad-placeholder {
-  background: #f0ece3;
-  border: 1px dashed #cdc7bb;
-  border-radius: var(--r-sm);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  color: #b0a898;
-}
-.ad-placeholder-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; }
-.ad-placeholder-size  { font-size: 9px; opacity: .6; }
+  .form-row {
+    margin-bottom: 18px;
+  }
+  .form-row label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 7px;
+    letter-spacing: 0.02em;
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    background: #FBFAF7;
+    color: var(--ink);
+    transition: border-color 0.12s;
+    outline: none;
+    resize: vertical;
+  }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    border-color: var(--forest);
+    background: #fff;
+  }
+  .form-row textarea {
+    min-height: 140px;
+  }
+  .form-row .hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
 
-/* Top / bottom ad bars */
-.ad-top-wrap, .ad-bottom-wrap {
-  overflow: hidden;
-  background: var(--bg);
-  text-align: center;
-  max-width: 100%;
-  height: 0;
-  padding: 0;
-}
-.ad-top-wrap:has(ins[data-ad-status="filled"])    { height: auto; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.ad-bottom-wrap:has(ins[data-ad-status="filled"]) { height: auto; padding: 10px 0; border-top:    1px solid var(--border); }
-ins.adsbygoogle { min-height: 0 !important; max-width: 100% !important; }
+  .form-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
 
-/* Outer layout — centers content and hosts side ads */
-.page-outer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-.page-outer .page-wrap { margin: 0; flex: 1; min-width: 0; }
+  .submit-btn {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.12s;
+  }
+  .submit-btn:hover { background: var(--ink-soft); }
 
-/* Side ad columns */
-.ad-sidebar-left,
-.ad-sidebar-right {
-  width: 160px;
-  flex-shrink: 0;
-  display: none;
-  position: sticky;
-  top: calc(var(--brand-h) + 16px);
-  padding-top: 40px;
-}
-@media (min-width: 1160px) {
-  .ad-sidebar-left,
-  .ad-sidebar-right { display: block; }
-}
+  /* ---- Topic badges ---- */
+  .topic-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .topic-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 600;
+    border: 1.5px solid var(--line);
+    color: var(--ink-soft);
+    background: var(--card);
+  }
 
-/* Hamburger + mobile nav */
-.hamburger-btn {
-  display: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 6px 8px;
-  color: rgba(247,245,240,.85);
-  line-height: 1;
-  flex-shrink: 0;
-}
-.hamburger-btn svg { display: block; }
-.mobile-nav {
-  display: none;
-  position: fixed;
-  top: var(--brand-h);
-  left: 0;
-  right: 0;
-  background: #131c27;
-  border-bottom: 1px solid rgba(255,255,255,.1);
-  z-index: 200;
-  flex-direction: column;
-  box-shadow: 0 8px 24px rgba(0,0,0,.35);
-}
-.mobile-nav.open { display: flex; }
-.mobile-nav a {
-  padding: 16px 20px;
-  font-size: 15px;
-  font-weight: 500;
-  color: rgba(247,245,240,.8);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  transition: background .1s, color .1s;
-}
-.mobile-nav a:last-child { border-bottom: none; }
-.mobile-nav a:hover, .mobile-nav a.active { color: #fff; background: rgba(255,255,255,.07); }
-@media (max-width: 640px) {
-  .hamburger-btn { display: block; }
-  .brand-nav { display: none; }
-}
+  /* ---- Info note ---- */
+  .note {
+    background: var(--forest-soft);
+    border: 1px solid #C2D9CA;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--forest);
+    line-height: 1.55;
+    margin-top: 20px;
+  }
 
-/* Footer */
-.site-footer {
-  background: var(--nav-bg);
-  padding: 20px 28px;
-  margin-top: 40px;
-}
-.footer-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.footer-copy { font-size: 12px; color: rgba(247,245,240,.4); }
-.footer-links { display: flex; gap: 16px; }
-.footer-links a {
-  font-size: 12px;
-  color: rgba(247,245,240,.55);
-  text-decoration: none;
-  transition: color .15s;
-}
-.footer-links a:hover { color: var(--nav-text); }
+  /* ---- Success state (hidden by default) ---- */
+  .success-state {
+    display: none;
+    background: var(--forest-soft);
+    border: 1px solid #C2D9CA;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+  }
+  .success-state .success-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+  .success-state h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--forest);
+    margin: 0 0 8px;
+  }
+  .success-state p {
+    font-size: 14px;
+    color: var(--forest);
+    margin: 0;
+  }
+
+  /* ---- Footer ---- */
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding: 24px 28px;
+    text-align: center;
+  }
+  .footer-strip {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .site-footer p {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+  }
+  .site-footer a { color: var(--muted); text-decoration: none; }
+  .site-footer a:hover { color: var(--ink); }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 900px) {
+    .sidebar-left, .sidebar-right { display: none; }
+    .body-columns { padding: 24px 16px; }
+    .form-two-col { grid-template-columns: 1fr; }
+  }
+
+  /* ---- Hamburger button ---- */
+  .ham-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 4px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+  .ham-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #9AA3AF;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.15s;
+  }
+  .ham-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .ham-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .ham-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---- Mobile nav dropdown ---- */
+  .mob-nav {
+    display: none;
+    background: var(--ink);
+    border-top: 1px solid #2C3540;
+  }
+  .mob-nav.open { display: block; }
+  .mob-nav a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 15px;
+    color: #9AA3AF;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #2C3540;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+  }
+  .mob-nav a:last-child { border-bottom: none; }
+  .mob-nav a:hover { color: var(--paper); background: rgba(255,255,255,0.04); }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 14px 16px; }
+    .site-header > nav { display: none; }
+    .ham-btn { display: flex; }
+    .ad-strip-top { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<div class="brand-bar">
-  <div class="brand-bar-inner">
-    <a class="brand-left" href="index.html">
-      <svg width="40" height="24" viewBox="0 0 40 24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="0"  y="6"  width="2" height="14" rx=".4" fill="#7090a8"/>
-        <rect x="4"  y="2"  width="3" height="20" rx=".4" fill="#8aa4bc"/>
-        <rect x="9"  y="8"  width="2" height="10" rx=".4" fill="#7090a8"/>
-        <rect x="13" y="0"  width="3" height="24" rx=".4" fill="#8aa4bc"/>
-        <rect x="18" y="5"  width="2" height="16" rx=".4" fill="#7090a8"/>
-        <rect x="22" y="3"  width="2" height="19" rx=".4" fill="#8aa4bc"/>
-        <rect x="26" y="1"  width="3" height="22" rx=".4" fill="#c9622b"/>
-        <rect x="31" y="4"  width="2" height="16" rx=".4" fill="#c9622b"/>
-        <rect x="35" y="0"  width="3" height="24" rx=".4" fill="#c9622b"/>
-      </svg>
-      <div style="display:flex;flex-direction:column;gap:2px">
-        <span class="brand-name">Calculate My Hours</span>
-        <span style="font-size:12px;font-weight:600;letter-spacing:.5px;color:rgba(247,245,240,.55)">Free Split-Shift Timesheet</span>
-      </div>
-    </a>
-    <nav class="brand-nav" aria-label="Site navigation">
-      <a href="index.html">Timesheet</a>
-      <a href="about.html">About</a>
-      <a href="contact.html" class="active">Contact</a>
-    </nav>
-    <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-      <svg width="22" height="18" viewBox="0 0 22 18" fill="none" aria-hidden="true">
-        <rect y="0" width="22" height="2" rx="1" fill="currentColor"/>
-        <rect y="8" width="22" height="2" rx="1" fill="currentColor"/>
-        <rect y="16" width="22" height="2" rx="1" fill="currentColor"/>
-      </svg>
-    </button>
-  </div>
-</div>
-<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-  <a href="index.html">Timesheet</a>
+<!-- Header -->
+<header class="site-header">
+  <a href="index.html" class="header-brand">
+    <svg class="brand-icon" width="40" height="24" viewBox="0 0 40 24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="0"  y="6"  width="2" height="14" rx=".4" fill="#7090a8"/>
+      <rect x="4"  y="2"  width="3" height="20" rx=".4" fill="#8aa4bc"/>
+      <rect x="9"  y="8"  width="2" height="10" rx=".4" fill="#7090a8"/>
+      <rect x="13" y="0"  width="3" height="24" rx=".4" fill="#8aa4bc"/>
+      <rect x="18" y="5"  width="2" height="16" rx=".4" fill="#7090a8"/>
+      <rect x="22" y="3"  width="2" height="19" rx=".4" fill="#8aa4bc"/>
+      <rect x="26" y="1"  width="3" height="22" rx=".4" fill="#c9622b"/>
+      <rect x="31" y="4"  width="2" height="16" rx=".4" fill="#c9622b"/>
+      <rect x="35" y="0"  width="3" height="24" rx=".4" fill="#c9622b"/>
+    </svg>
+    <div>
+      <div class="header-brand-name">Calculate My Hours</div>
+      <div class="header-tagline">Free spreadsheet utility</div>
+    </div>
+  </a>
+  <nav style="display:flex;align-items:center;gap:20px;">
+    <a href="index.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Bulk Spreadsheet Calculator</a>
+    <a href="calculator.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Single Timespan Calculator</a>
+    <a href="about.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">About</a>
+    <a href="contact.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Contact</a>
+  </nav>
+  <button class="ham-btn" id="hamBtn" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mob-nav" id="mobNav">
+  <a href="index.html">Bulk Spreadsheet Calculator</a>
+  <a href="calculator.html">Single Timespan Calculator</a>
   <a href="about.html">About</a>
-  <a href="contact.html" class="active">Contact</a>
-</nav>
+  <a href="contact.html">Contact</a>
+</div>
 
-<!-- Top ad — replace placeholder with AdSense <ins> tag when slot is ready -->
-<div class="ad-top-wrap">
-<!-- ContactTop_SplitShift -->
+<!-- Top ad (728×90 leaderboard) -->
+<div class="ad-strip-top">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
+     crossorigin="anonymous"></script>
+<!-- ContactTop_Timespan -->
 <ins class="adsbygoogle"
      style="display:inline-block;width:728px;height:90px"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="9752297703"></ins>
+     data-ad-slot="4021458876"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 </div>
 
-<div class="page-outer">
+<!-- Three-column body -->
+<div class="body-columns">
 
-  <!-- Left sidebar ad — replace placeholder with AdSense <ins> tag when slot is ready -->
-  <aside class="ad-sidebar-left" aria-label="Advertisement">
-<!-- ContactLeft_SplitShift -->
+  <!-- Left sidebar ads -->
+  <aside class="sidebar-left">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
+     crossorigin="anonymous"></script>
+<!-- ContactLeft_Timespan -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="8439216039"
+     data-ad-slot="6456050523"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </aside>
+
+  <!-- Main content -->
+  <main class="page-wrap">
+
+    <div class="eyebrow">
+      <div class="week-strip">
+        <span class="weekday"></span>
+        <span class="weekday"></span>
+        <span class="weekday"></span>
+        <span class="weekday"></span>
+        <span class="weekday"></span>
+        <span class="weekend"></span>
+        <span class="weekend"></span>
+      </div>
+      Get in touch
+    </div>
+
+    <h1>We'd love to hear from you</h1>
+    <p class="lead">Have a bug to report, a feature to suggest, or a question about how the calculator works? Send us a note — we read everything.</p>
+
+    <div class="topic-grid">
+      <span class="topic-badge">🐛 Bug report</span>
+      <span class="topic-badge">💡 Feature request</span>
+      <span class="topic-badge">❓ How-to question</span>
+      <span class="topic-badge">📁 File format issue</span>
+      <span class="topic-badge">💬 General feedback</span>
+    </div>
+
+    <!-- Contact form -->
+    <div class="form-card" id="formCard">
+      <h2>Send a message</h2>
+      <form id="contactForm" onsubmit="handleSubmit(event)" action="https://formspree.io/f/mwvdelab" method="POST">
+
+        <div class="form-two-col">
+          <div class="form-row">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-row">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="topic">Topic</label>
+          <select id="topic" name="topic" required>
+            <option value="" disabled selected>— Select a topic —</option>
+            <option value="bug">Bug report</option>
+            <option value="feature">Feature request</option>
+            <option value="howto">How-to question</option>
+            <option value="file">File format issue</option>
+            <option value="other">General feedback / other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Describe what you saw, what you expected, or what you'd like to see added…" required></textarea>
+          <div class="hint">The more detail, the faster we can help. For bugs, include the file type (.xlsx, .csv, etc.) and a description of the timestamps if you can.</div>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+
+      <!-- Success message (shown after submission) -->
+      <div class="success-state" id="successState">
+        <div class="success-icon">✓</div>
+        <h3>Message sent!</h3>
+        <p>Thanks for reaching out. We'll get back to you as soon as we can.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      This tool runs entirely in your browser — your spreadsheet data is never sent to us or stored anywhere. Messages sent through this form contain only what you type here.
+    </div>
+
+    
+
+  </main>
+
+  <!-- Right sidebar ads -->
+  <aside class="sidebar-right">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
+     crossorigin="anonymous"></script>
+<!-- ContactRight_Timespan -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4664800783455318"
+     data-ad-slot="1754388187"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -404,89 +552,17 @@ ins.adsbygoogle { min-height: 0 !important; max-width: 100% !important; }
 </script>
   </aside>
 
-<div class="page-wrap">
-  <div class="page-header">
-    <h1>Contact Us</h1>
-    <p>Bug report, feature request, or just a question — we read every message.</p>
-  </div>
-
-  <div class="content-card">
-    <h2>Send Us a Message</h2>
-
- 
-    <form id="contact-form" action="https://formspree.io/f/mqevzaqg" method="POST">
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email">
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top:18px">
-        <label for="subject">Subject</label>
-        <select id="subject" name="subject" required>
-          <option value="" disabled selected>Select a topic…</option>
-          <option value="Bug report">Bug report</option>
-          <option value="Feature request">Feature request</option>
-          <option value="General question">General question</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div class="form-group" style="margin-top:18px">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
-      </div>
-
-      <!-- Honeypot field to reduce spam -->
-      <input type="text" name="_gotcha" style="display:none">
-
-      <button type="submit" class="submit-btn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        Send Message
-      </button>
-
-      <div class="success-msg" id="success-msg">
-        &#10003;&nbsp; Thanks — your message was sent. We'll get back to you at the email address you provided.
-      </div>
-
-      <p class="privacy-note">
-        Your message is sent securely via Formspree. We use the information you provide only to respond to your
-        inquiry and will never share it with third parties. See our <a href="about.html" style="color:var(--accent);text-decoration:none">About page</a> for more on how we handle your data.
-      </p>
-
-    </form>
-  </div>
 </div>
 
-  <!-- Right sidebar ad — replace placeholder with AdSense <ins> tag when slot is ready -->
-  <aside class="ad-sidebar-right" aria-label="Advertisement">
-<!-- ContactRight_SplitShift -->
+<!-- Bottom leaderboard ad -->
+<div class="ad-strip-bottom">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
+     crossorigin="anonymous"></script>
+<!-- ContactBottom_Timespan -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="4539499472"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-  </aside>
-
-</div><!-- /.page-outer -->
-
-<!-- Bottom ad — replace placeholder with AdSense <ins> tag when slot is ready -->
-<div class="ad-bottom-wrap">
-<!-- ContactBottom_SplitShift -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="1913336134"
+     data-ad-slot="5730547827"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -494,76 +570,49 @@ ins.adsbygoogle { min-height: 0 !important; max-width: 100% !important; }
 </script>
 </div>
 
+<!-- Footer -->
 <footer class="site-footer">
-  <div class="footer-inner">
-    <span class="footer-copy">&copy; 2026	Calculate My Hours. All rights reserved.</span>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="index.html">Timesheet</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <div class="footer-strip">
+    <div class="week-strip">
+      <span class="weekday"></span>
+      <span class="weekday"></span>
+      <span class="weekday"></span>
+      <span class="weekday"></span>
+      <span class="weekday"></span>
+      <span class="weekend"></span>
+      <span class="weekend"></span>
+    </div>
   </div>
+  <p>© 2026 Calculate My Hours. All rights reserved.</p>
+  <p style="margin-top:8px;display:flex;justify-content:center;gap:20px;"><a href="index.html">Bulk Spreadsheet Calculator</a> <a href="calculator.html">Single Timespan Calculator</a> <a href="about.html">About</a> <a href="contact.html">Contact</a></p>
 </footer>
 
 <script>
-(function() {
-  var hBtn = document.getElementById('hamburger-btn');
-  var mNav = document.getElementById('mobile-nav');
-  if (!hBtn || !mNav) return;
-  hBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    var open = mNav.classList.toggle('open');
-    hBtn.setAttribute('aria-expanded', open);
-  });
-  mNav.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      mNav.classList.remove('open');
-      hBtn.setAttribute('aria-expanded', 'false');
-    });
-  });
-  document.addEventListener('click', function(e) {
-    if (!mNav.contains(e.target) && e.target !== hBtn && !hBtn.contains(e.target)) {
-      mNav.classList.remove('open');
-      hBtn.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  // Ad wrappers start at height:0 and only expand via CSS :has([data-ad-status="filled"])
-})();
-
-(function() {
-  var form = document.getElementById('contact-form');
-  var successMsg = document.getElementById('success-msg');
-  if (!form) return;
-
-  form.addEventListener('submit', async function(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    var btn = form.querySelector('.submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-
-    try {
-      var res = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+  }
+  (function() {
+    var btn = document.getElementById('hamBtn');
+    var nav = document.getElementById('mobNav');
+    btn.addEventListener('click', function() {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
       });
-      if (res.ok) {
-        form.reset();
-        successMsg.classList.add('visible');
-        btn.style.display = 'none';
-      } else {
-        btn.disabled = false;
-        btn.innerHTML = 'Send Message';
-        alert('Something went wrong. Please try again or email us directly at support@splitshifttimesheet.com');
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.site-header') && !e.target.closest('.mob-nav')) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
       }
-    } catch(err) {
-      btn.disabled = false;
-      btn.innerHTML = 'Send Message';
-      alert('Something went wrong. Please check your connection and try again.');
-    }
-  });
-})();
+    });
+  })();
 </script>
 
 </body>

@@ -1,377 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<title>About Us — Calculate My Hours</title>
-<meta name="description" content="Learn about Calculate My Hours, a free split-shift timesheet tool built for gig workers, healthcare workers, home health aides, and restaurant staff.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://www.splitshifttimesheet.com/about.html">
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Calculate My Hours | Easy Excel Timespan Calculator</title>
+<meta name="description" content="Learn how Calculate My Hours works — a free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps." />
+<link rel="canonical" href="https://www.timespancalculator.com/about.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="About — Calculate My Hours" />
+<meta property="og:description" content="A free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps. Nothing is uploaded to a server." />
+<meta property="og:url" content="https://www.timespancalculator.com/about.html" />
+<meta property="og:site_name" content="Calculate My Hours - Easy Excel Timespan Calculator" />
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318" crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-4664800783455318">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
 <style>
-:root {
-  --bg:          #f7f5f0;
-  --surface:     #ffffff;
-  --border:      #e4e0d6;
-  --section-bg:  #efebe2;
-  --text:        #1b2430;
-  --text-2:      #3a4452;
-  --muted:       #8a8478;
-  --accent:      #c9622b;
-  --accent-bg:   #fbeae0;
-  --accent-bdr:  #e8b49a;
-  --accent-dark: #a84f22;
-  --nav-bg:      #1b2430;
-  --nav-text:    #f7f5f0;
-  --r-sm: 4px;
-  --r:    8px;
-  --r-lg: 12px;
-  --shadow: 0 1px 3px rgba(27,36,48,.08), 0 1px 2px rgba(27,36,48,.04);
-  --brand-h: 46px;
-}
-*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 14px; }
-body {
-  font-family: Inter, "Segoe UI", system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-}
+  * { box-sizing: border-box; }
 
-/* Brand bar */
-.brand-bar {
-  background: var(--nav-bg);
-  height: var(--brand-h);
-  display: flex;
-  align-items: center;
-  padding: 0 28px;
-  position: sticky;
-  top: 0;
-  z-index: 60;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.brand-bar-inner {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.brand-left {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  text-decoration: none;
-}
-.brand-name {
-  font-family: Fraunces, Georgia, serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--nav-text);
-  letter-spacing: -.2px;
-}
-.brand-tagline {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .7px;
-  color: rgba(247,245,240,.68);
-  white-space: nowrap;
-}
-@media (max-width: 500px) { .brand-tagline { display: none; } }
+  :root {
+    --ink: #1B2430;
+    --ink-soft: #3A4452;
+    --paper: #F7F5F0;
+    --card: #FFFFFF;
+    --amber: #C9622B;
+    --amber-soft: #FBEAE0;
+    --forest: #3D6B4F;
+    --forest-soft: #E7F0EA;
+    --line: #E4E0D6;
+    --muted: #8A8478;
+  }
 
-/* Nav links in brand bar */
-.brand-nav { display: flex; gap: 20px; align-items: center; }
-.brand-nav a {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(247,245,240,.7);
-  text-decoration: none;
-  letter-spacing: .2px;
-  transition: color .15s;
-}
-.brand-nav a:hover, .brand-nav a.active { color: var(--nav-text); }
+  body {
+    margin: 0;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+  }
 
-/* Page content */
-.page-wrap {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 28px 60px;
-}
-@media (max-width: 600px) { .page-wrap { padding: 28px 16px 48px; } }
+  /* ---- Header ---- */
+  .site-header {
+    background: var(--ink);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-header a { text-decoration: none; }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .header-brand-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  .header-tagline {
+    font-size: 12px;
+    color: #9AA3AF;
+  }
 
-.page-header {
-  margin-bottom: 32px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-.page-header h1 {
-  font-family: Fraunces, Georgia, serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -.3px;
-  margin-bottom: 8px;
-}
-.page-header p {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.6;
-}
+  /* ---- WeekStrip ---- */
+  .week-strip {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .week-strip span {
+    display: inline-block;
+    width: 5px;
+    height: 12px;
+    border-radius: 2px;
+  }
+  .week-strip span.weekday { background: #3A4452; opacity: 0.35; }
+  .week-strip span.weekend { background: #C9622B; }
 
-.content-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 28px 32px;
-  box-shadow: var(--shadow);
-  margin-bottom: 20px;
-}
-@media (max-width: 600px) { .content-card { padding: 20px 18px; } }
+  /* ---- Top ad strip ---- */
+  .ad-strip-top {
+    padding: 16px 0;
+    background: #EFEBE2;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: center;
+  }
 
-.content-card h2 {
-  font-family: Fraunces, Georgia, serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 12px;
-}
-.content-card p {
-  font-size: 14px;
-  color: var(--text-2);
-  line-height: 1.75;
-  margin-bottom: 12px;
-}
-.content-card p:last-child { margin-bottom: 0; }
+  /* ---- Three-column body layout ---- */
+  .body-columns {
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 16px;
+  }
 
-.highlight-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 14px 0;
-}
-.highlight-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--text-2);
-  line-height: 1.6;
-}
-.highlight-list li::before {
-  content: '';
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-  margin-top: 7px;
-}
+  /* Left sidebar */
+  .sidebar-left {
+    width: 180px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 16px;
+  }
 
-.ad-note {
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-bdr);
-  border-radius: var(--r);
-  padding: 14px 18px;
-  font-size: 13px;
-  color: var(--accent-dark);
-  line-height: 1.65;
-}
+  /* Main content */
+  .page-wrap {
+    flex: 1;
+    min-width: 0;
+    padding: 0 16px;
+  }
 
-/* Ad placeholders */
-.ad-placeholder {
-  background: #f0ece3;
-  border: 1px dashed #cdc7bb;
-  border-radius: var(--r-sm);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  color: #b0a898;
-}
-.ad-placeholder-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; }
-.ad-placeholder-size  { font-size: 9px; opacity: .6; }
+  /* Right sidebar */
+  .sidebar-right {
+    width: 300px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 16px;
+  }
 
-/* Top / bottom ad bars */
-.ad-top-wrap, .ad-bottom-wrap {
-  overflow: hidden;
-  background: var(--bg);
-  text-align: center;
-  max-width: 100%;
-  height: 0;
-  padding: 0;
-}
-.ad-top-wrap:has(ins[data-ad-status="filled"])    { height: auto; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.ad-bottom-wrap:has(ins[data-ad-status="filled"]) { height: auto; padding: 10px 0; border-top:    1px solid var(--border); }
-ins.adsbygoogle { min-height: 0 !important; max-width: 100% !important; }
+  /* ---- Ad placeholders ---- */
+  .ad-placeholder {
+    background: #EFEBE2;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+  }
+  .ad-placeholder .ad-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ad-placeholder .ad-size {
+    font-size: 11px;
+    color: #B8B2A4;
+  }
 
-/* Outer layout — centers content and hosts side ads */
-.page-outer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-.page-outer .page-wrap { margin: 0; flex: 1; min-width: 0; }
+  /* ---- Bottom ad strip ---- */
+  .ad-strip-bottom {
+    padding: 20px 0;
+    background: #EFEBE2;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: center;
+  }
 
-/* Side ad columns */
-.ad-sidebar-left,
-.ad-sidebar-right {
-  width: 160px;
-  flex-shrink: 0;
-  display: none;
-  position: sticky;
-  top: calc(var(--brand-h) + 16px);
-  padding-top: 40px; /* aligns with content top padding */
-}
-@media (min-width: 1160px) {
-  .ad-sidebar-left,
-  .ad-sidebar-right { display: block; }
-}
+  /* ---- Content styles ---- */
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    line-height: 1.15;
+  }
+  .lead {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0 0 32px;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .card-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 5px;
+  }
+  .card-desc {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 26px;
+    margin-bottom: 18px;
+  }
+  .section h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .section p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0 0 10px;
+  }
+  .section p:last-child { margin-bottom: 0; }
+  .privacy-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--forest-soft);
+    border: 1px solid #C2D9CA;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--forest);
+    margin-top: 14px;
+  }
+  .cta-wrap {
+    margin-top: 32px;
+    text-align: center;
+  }
+  .cta-wrap a {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .cta-wrap a:hover { background: var(--ink-soft); }
 
-/* Hamburger + mobile nav */
-.hamburger-btn {
-  display: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 6px 8px;
-  color: rgba(247,245,240,.85);
-  line-height: 1;
-  flex-shrink: 0;
-}
-.hamburger-btn svg { display: block; }
-.mobile-nav {
-  display: none;
-  position: fixed;
-  top: var(--brand-h);
-  left: 0;
-  right: 0;
-  background: #131c27;
-  border-bottom: 1px solid rgba(255,255,255,.1);
-  z-index: 200;
-  flex-direction: column;
-  box-shadow: 0 8px 24px rgba(0,0,0,.35);
-}
-.mobile-nav.open { display: flex; }
-.mobile-nav a {
-  padding: 16px 20px;
-  font-size: 15px;
-  font-weight: 500;
-  color: rgba(247,245,240,.8);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  transition: background .1s, color .1s;
-}
-.mobile-nav a:last-child { border-bottom: none; }
-.mobile-nav a:hover, .mobile-nav a.active { color: #fff; background: rgba(255,255,255,.07); }
-@media (max-width: 640px) {
-  .hamburger-btn { display: block; }
-  .brand-nav { display: none; }
-}
+  /* ---- Footer ---- */
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding: 24px 28px;
+    text-align: center;
+  }
+  .footer-strip {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .site-footer p {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+  }
+  .site-footer a { color: var(--muted); text-decoration: none; }
+  .site-footer a:hover { color: var(--ink); }
 
-/* Footer */
-.site-footer {
-  background: var(--nav-bg);
-  padding: 20px 28px;
-  margin-top: 40px;
-}
-.footer-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.footer-copy {
-  font-size: 12px;
-  color: rgba(247,245,240,.4);
-}
-.footer-links { display: flex; gap: 16px; }
-.footer-links a {
-  font-size: 12px;
-  color: rgba(247,245,240,.55);
-  text-decoration: none;
-  transition: color .15s;
-}
-.footer-links a:hover { color: var(--nav-text); }
+  /* ---- Responsive: hide sidebars on small screens ---- */
+  @media (max-width: 900px) {
+    .sidebar-left, .sidebar-right { display: none; }
+    .body-columns { padding: 24px 16px; }
+  }
+
+  /* ---- Hamburger button ---- */
+  .ham-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 4px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+  .ham-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #9AA3AF;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.15s;
+  }
+  .ham-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .ham-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .ham-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---- Mobile nav dropdown ---- */
+  .mob-nav {
+    display: none;
+    background: var(--ink);
+    border-top: 1px solid #2C3540;
+  }
+  .mob-nav.open { display: block; }
+  .mob-nav a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 15px;
+    color: #9AA3AF;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #2C3540;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+  }
+  .mob-nav a:last-child { border-bottom: none; }
+  .mob-nav a:hover { color: var(--paper); background: rgba(255,255,255,0.04); }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 14px 16px; }
+    .site-header > nav { display: none; }
+    .ham-btn { display: flex; }
+    .ad-strip-top { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<div class="brand-bar">
-  <div class="brand-bar-inner">
-    <a class="brand-left" href="index.html">
-      <svg width="40" height="24" viewBox="0 0 40 24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="0"  y="6"  width="2" height="14" rx=".4" fill="#7090a8"/>
-        <rect x="4"  y="2"  width="3" height="20" rx=".4" fill="#8aa4bc"/>
-        <rect x="9"  y="8"  width="2" height="10" rx=".4" fill="#7090a8"/>
-        <rect x="13" y="0"  width="3" height="24" rx=".4" fill="#8aa4bc"/>
-        <rect x="18" y="5"  width="2" height="16" rx=".4" fill="#7090a8"/>
-        <rect x="22" y="3"  width="2" height="19" rx=".4" fill="#8aa4bc"/>
-        <rect x="26" y="1"  width="3" height="22" rx=".4" fill="#c9622b"/>
-        <rect x="31" y="4"  width="2" height="16" rx=".4" fill="#c9622b"/>
-        <rect x="35" y="0"  width="3" height="24" rx=".4" fill="#c9622b"/>
-      </svg>
-      <div style="display:flex;flex-direction:column;gap:2px">
-        <span class="brand-name">Calculate My Hours</span>
-        <span style="font-size:12px;font-weight:600;letter-spacing:.5px;color:rgba(247,245,240,.55)">Free Split-Shift Timesheet</span>
-      </div>
-    </a>
-    <nav class="brand-nav" aria-label="Site navigation">
-      <a href="index.html">Timesheet</a>
-      <a href="about.html" class="active">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-      <svg width="22" height="18" viewBox="0 0 22 18" fill="none" aria-hidden="true">
-        <rect y="0" width="22" height="2" rx="1" fill="currentColor"/>
-        <rect y="8" width="22" height="2" rx="1" fill="currentColor"/>
-        <rect y="16" width="22" height="2" rx="1" fill="currentColor"/>
-      </svg>
-    </button>
-  </div>
-</div>
-<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-  <a href="index.html">Timesheet</a>
-  <a href="about.html" class="active">About</a>
+<!-- Header -->
+<header class="site-header">
+  <a href="index.html" class="header-brand">
+    <svg class="brand-icon" width="40" height="24" viewBox="0 0 40 24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="0"  y="6"  width="2" height="14" rx=".4" fill="#7090a8"/>
+      <rect x="4"  y="2"  width="3" height="20" rx=".4" fill="#8aa4bc"/>
+      <rect x="9"  y="8"  width="2" height="10" rx=".4" fill="#7090a8"/>
+      <rect x="13" y="0"  width="3" height="24" rx=".4" fill="#8aa4bc"/>
+      <rect x="18" y="5"  width="2" height="16" rx=".4" fill="#7090a8"/>
+      <rect x="22" y="3"  width="2" height="19" rx=".4" fill="#8aa4bc"/>
+      <rect x="26" y="1"  width="3" height="22" rx=".4" fill="#c9622b"/>
+      <rect x="31" y="4"  width="2" height="16" rx=".4" fill="#c9622b"/>
+      <rect x="35" y="0"  width="3" height="24" rx=".4" fill="#c9622b"/>
+    </svg>
+    <div>
+      <div class="header-brand-name">Calculate My Hours</div>
+      <div class="header-tagline">Free spreadsheet utility</div>
+    </div>
+  </a>
+  <nav style="display:flex;align-items:center;gap:20px;">
+    <a href="index.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Bulk Spreadsheet Calculator</a>
+    <a href="calculator.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Single Timespan Calculator</a>
+    <a href="about.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">About</a>
+    <a href="contact.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Contact</a>
+  </nav>
+  <button class="ham-btn" id="hamBtn" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mob-nav" id="mobNav">
+  <a href="index.html">Bulk Spreadsheet Calculator</a>
+  <a href="calculator.html">Single Timespan Calculator</a>
+  <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
-</nav>
+</div>
 
-<!-- Top ad — replace placeholder with AdSense <ins> tag when slot is ready -->
-<div class="ad-top-wrap">
-<!-- AboutTop_SplitShift -->
+<!-- Top ad (728×90 leaderboard) -->
+<div class="ad-strip-top">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
+     crossorigin="anonymous"></script>
+<!-- AboutTop_Timespan -->
 <ins class="adsbygoogle"
      style="display:inline-block;width:728px;height:90px"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="3378461043"></ins>
+     data-ad-slot="8619445362"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 </div>
 
-<div class="page-outer">
+<!-- Three-column body -->
+<div class="body-columns">
 
-  <!-- Left sidebar ad — replace placeholder with AdSense <ins> tag when slot is ready -->
-  <aside class="ad-sidebar-left" aria-label="Advertisement">
-<!-- AboutLeft_SplitShift -->
+  <!-- Left sidebar ads -->
+  <aside class="sidebar-left">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
+     crossorigin="anonymous"></script>
+<!-- AboutLeft_TimeSpan -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="9226939705"
+     data-ad-slot="5031554144"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -379,136 +421,157 @@ ins.adsbygoogle { min-height: 0 !important; max-width: 100% !important; }
 </script>
   </aside>
 
-<div class="page-wrap">
-  <div class="page-header">
-    <h1>About Calculate My Hours</h1>
-    <p>Providing free browser-based tools that make people's lives easier.</p>
-  </div>
+  <!-- Main content -->
+  <main class="page-wrap">
 
-  <div class="content-card">
-    <h2>What We Do</h2>
-    <p>
-      Calculate My Hours is working to create tools for people that want easy ways to do repetitive tasks. We're focused on making easy to use webapps that can be used use over and over again.
-	  This free split-shift timesheet runs entirely in your browser. There's no account
-      to create, no app to install, and no data sent to any server. You enter your hours, the tool does the math,
-      and everything stays on your device.
-    </p>
-    <p>
-      It's designed for workers who clock in and out more than once a day — up to three separate shifts per
-      day — and need an accurate, printable record of their time for payroll or tax purposes.
-    </p>
-  </div>
+    <div class="eyebrow">
+      <div class="week-strip">
+        <span class="weekday"></span>
+        <span class="weekday"></span>
+        <span class="weekday"></span>
+        <span class="weekday"></span>
+        <span class="weekday"></span>
+        <span class="weekend"></span>
+        <span class="weekend"></span>
+      </div>
+      About this tool
+    </div>
 
-  <div class="content-card">
-    <h2>Who It's Built For</h2>
-    <p>Split shifts are common across a wide range of jobs. Calculate My Hours is a good fit for:</p>
-    <ul class="highlight-list">
-      <li>Home health aides and personal care workers</li>
-      <li>Nurses, CNAs, and other healthcare staff</li>
-      <li>Restaurant, hospitality, and food service workers</li>
-      <li>Gig workers and independent contractors (Uber, DoorDash, Instacart, etc.)</li>
-      <li>Freelancers and hourly employees juggling multiple clients or shifts</li>
-    </ul>
-    <p>
-      If your schedule doesn't fit neatly into a single clock-in and clock-out, this tool was made for you.
-    </p>
-  </div>
+    <h1>Built for people who live in spreadsheets</h1>
+    <p class="lead">Calculate My Hours offers two free tools for computing hours between timestamps — a spreadsheet calculator for bulk rows of data, and a single-entry date calculator for quick one-off lookups. Both run entirely in your browser and calculate total, business, weekend, and weekday hours down to the minute.</p>
 
-  <div class="content-card">
-    <h2>Your Privacy</h2>
-    <p>
-      All timesheet data is saved in your browser's local storage. Nothing you enter is ever transmitted to
-      a server, stored in a database, or shared with any third party. Clearing your browser's local storage
-      will erase your data — it exists only on your device.
-    </p>
-  </div>
+    <!-- Four metric cards -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Metric 1</div>
+        <div class="card-title">Total Hours</div>
+        <div class="card-desc">All elapsed hours between start and end, down to the minute. No exclusions.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Metric 2</div>
+        <div class="card-title">Business Hours</div>
+        <div class="card-desc">Hours on non-weekend days within a configurable daily window — e.g. 9 AM to 5 PM.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Metric 3</div>
+        <div class="card-title">Weekend Hours</div>
+        <div class="card-desc">Hours that fall on days you mark as weekend, midnight to midnight.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Metric 4</div>
+        <div class="card-title">Weekday Hours</div>
+        <div class="card-desc">Total hours minus weekend hours — the full 24-hour span on non-weekend days.</div>
+      </div>
+    </div>
 
-  <div class="content-card">
-    <h2>How We Keep It Free</h2>
-    <div class="ad-note">
-      Calculate My Hours is supported by Google AdSense advertising. Ads are served automatically by Google
-      based on general context and your browsing preferences — we do not control which ads appear, and we
-      do not receive any personal information about you from ad impressions. If you find the ads intrusive,
-      most modern browsers support ad-free browsing via extensions.
+    <!-- Two tools -->
+    <div class="section">
+      <h2>Two tools, one job</h2>
+      <p><strong><a href="index.html" style="color:var(--forest);text-decoration:none;">Bulk Spreadsheet Calculator</a></strong> — Upload a .xlsx, .xls, .ods, or .csv file with start and end timestamp columns. The tool processes every row, appends your chosen metrics as new columns, and returns the updated file as a download. Built for payroll runs, project audits, support ticket reports, and anywhere you have a list of time ranges to measure at once.</p>
+      <p><strong><a href="calculator.html" style="color:var(--forest);text-decoration:none;">Single Timespan Calculator</a></strong> — Enter a single start and end date/time directly on the page and get all four metrics instantly. Accepts time in any format — 9:30, 21:30, or 2130 — with an AM/PM toggle that auto-updates when military time is detected. No file needed.</p>
+    </div>
+
+    <!-- How it works -->
+    <div class="section">
+      <h2>How it works</h2>
+      <p>Upload a spreadsheet (.xlsx, .xls, .ods, or .csv) with at least one column of start timestamps and one of end timestamps, with a header row at the top. The tool reads your file, lets you map which columns to use, and computes each selected metric row by row — calculating exact minute-level overlap with the relevant time windows.</p>
+      <p>Results are appended as new columns to your original data and returned as a downloadable .xlsx file. Your existing data is untouched; only the new columns are added.</p>
+      <p>You can select any combination of the four metrics, configure which days count as the weekend (Friday, Saturday, and/or Sunday), and set the daily start and end time for business hours calculations.</p>
+    </div>
+
+    <!-- Privacy -->
+    <div class="section">
+      <h2>Your data stays on your computer</h2>
+      <p>Everything runs locally in your browser using the <a href="https://sheetjs.com/" style="color: var(--forest);">SheetJS</a> library. When you upload a file, it is read directly into memory on your device — it is never transmitted to a server, never stored in a database, and never leaves your machine. Closing the tab clears everything.</p>
+      <div class="privacy-badge">🔒 100% client-side — nothing is uploaded</div>
+    </div>
+
+    <!-- Why -->
+    <div class="section">
+      <h2>Why we built it</h2>
+      <p>Spreadsheet formulas for time math — NETWORKDAYS, MOD, custom VBA — are brittle, hard to audit, and require rebuilding from scratch for every new file. We wanted a reusable tool you could hand to anyone on a team: upload your file, pick your columns, get your answer. No Excel expertise required.</p>
+      <p>The tool is free, supported by advertising, and will stay that way.</p>
+    </div>
+
+    <div class="cta-wrap" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html">Bulk Spreadsheet Calculator →</a>
+      <a href="calculator.html" style="background:var(--amber);">Single Timespan Calculator →</a>
+    </div>
+
+  </main>
+
+  <!-- Right sidebar ads -->
+  <aside class="sidebar-right">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
+     crossorigin="anonymous"></script>
+<!-- AboutRight_Timespan -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4664800783455318"
+     data-ad-slot="4680200354"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  </aside>
+
+</div>
+
+<!-- Bottom leaderboard ad -->
+<div class="ad-strip-bottom">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
+     crossorigin="anonymous"></script>
+<!-- AboutBottom_Timespan -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4664800783455318"
+     data-ad-slot="4904551311"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-strip">
+    <div class="week-strip">
+      <span class="weekday"></span>
+      <span class="weekday"></span>
+      <span class="weekday"></span>
+      <span class="weekday"></span>
+      <span class="weekday"></span>
+      <span class="weekend"></span>
+      <span class="weekend"></span>
     </div>
   </div>
-
-  <div class="content-card">
-    <h2>Questions or Feedback?</h2>
-    <p>
-      We're a small independent project and we read every message. If something isn't working,
-      you have a feature request, or you just want to say hello — <a href="contact.html" style="color:var(--accent);text-decoration:none;font-weight:500;">reach out via our contact page</a>.
-    </p>
-  </div>
-</div>
-
-  <!-- Right sidebar ad — replace placeholder with AdSense <ins> tag when slot is ready -->
-  <aside class="ad-sidebar-right" aria-label="Advertisement">
-<!-- AboutRight_SplitShift -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="5223125833"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-  </aside>
-
-</div><!-- /.page-outer -->
-
-<!-- Bottom ad — replace placeholder with AdSense <ins> tag when slot is ready -->
-<div class="ad-bottom-wrap">
-<!-- AboutBottom_SplitShift -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="3639571101"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span class="footer-copy">&copy; 2026 Calculate My Hours. All rights reserved.</span>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="index.html">Timesheet</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
+  <p>© 2026 Calculate My Hours. All rights reserved.</p>
+  <p style="margin-top:8px;display:flex;justify-content:center;gap:20px;"><a href="index.html">Bulk Spreadsheet Calculator</a> <a href="calculator.html">Single Timespan Calculator</a> <a href="about.html">About</a> <a href="contact.html">Contact</a></p>
 </footer>
 
 <script>
 (function() {
-  var hBtn = document.getElementById('hamburger-btn');
-  var mNav = document.getElementById('mobile-nav');
-  if (!hBtn || !mNav) return;
-  hBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    var open = mNav.classList.toggle('open');
-    hBtn.setAttribute('aria-expanded', open);
+  var btn = document.getElementById('hamBtn');
+  var nav = document.getElementById('mobNav');
+  btn.addEventListener('click', function() {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
   });
-  mNav.querySelectorAll('a').forEach(function(a) {
+  nav.querySelectorAll('a').forEach(function(a) {
     a.addEventListener('click', function() {
-      mNav.classList.remove('open');
-      hBtn.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
     });
   });
   document.addEventListener('click', function(e) {
-    if (!mNav.contains(e.target) && e.target !== hBtn && !hBtn.contains(e.target)) {
-      mNav.classList.remove('open');
-      hBtn.setAttribute('aria-expanded', 'false');
+    if (!e.target.closest('.site-header') && !e.target.closest('.mob-nav')) {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
     }
   });
-
-  // Ad wrappers start at height:0 and only expand via CSS :has([data-ad-status="filled"])
 })();
 </script>
-
 </body>
 </html>
