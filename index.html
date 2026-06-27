@@ -364,6 +364,7 @@ function HoursCalculator() {
   const [error, setError] = useState("");
   const [rawWorkbook, setRawWorkbook] = useState(null);
   const isDesktop = useMinViewportWidth(980);
+  const isMobile = !useMinViewportWidth(640);
   const handleFile = useCallback(f => {
     setError("");
     setProcessed(false);
@@ -515,7 +516,7 @@ function HoursCalculator() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       background: COLORS.ink,
-      padding: "16px 28px",
+      padding: isMobile ? "14px 16px" : "16px 28px",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between"
@@ -543,7 +544,7 @@ function HoursCalculator() {
       fontFamily: FONT_BODY,
       marginTop: 2
     }
-  }, "Free timespan utility"))), /*#__PURE__*/React.createElement("nav", {
+  }, "Free timespan utility"))), !isMobile && /*#__PURE__*/React.createElement("nav", {
     style: {
       display: "flex",
       alignItems: "center",
@@ -576,7 +577,7 @@ function HoursCalculator() {
       fontFamily: FONT_BODY,
       fontWeight: 500
     }
-  }, "Contact"))), /*#__PURE__*/React.createElement("div", {
+  }, "Contact"))), !isMobile && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "16px 0",
       background: "#EFEBE2",
@@ -590,7 +591,7 @@ function HoursCalculator() {
     style: {
       maxWidth: 1180,
       margin: "0 auto",
-      padding: "36px 24px",
+      padding: isMobile ? "24px 16px" : "36px 24px",
       display: "flex",
       gap: 32,
       alignItems: "flex-start"
@@ -992,7 +993,7 @@ function HoursCalculator() {
   }, "Column Mapping"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "grid",
-      gridTemplateColumns: "1fr 1fr",
+      gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
       gap: 16
     }
   }, [{
@@ -1279,7 +1280,7 @@ function HoursCalculator() {
   })))), /*#__PURE__*/React.createElement("div", {
     style: {
       borderTop: `1px solid ${COLORS.line}`,
-      padding: "24px 28px",
+      padding: isMobile ? "24px 16px" : "24px 28px",
       textAlign: "center"
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -1301,7 +1302,8 @@ function HoursCalculator() {
     style: {
       display: "flex",
       justifyContent: "center",
-      gap: 20
+      gap: 16,
+      flexWrap: "wrap"
     }
   }, /*#__PURE__*/React.createElement("a", {
     href: "index.html",
