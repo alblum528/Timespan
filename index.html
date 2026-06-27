@@ -138,16 +138,15 @@
       btn.setAttribute('aria-expanded', 'false');
     }
   });
-  var tries = 0;
-  function positionNav() {
+  new MutationObserver(function(_, mo) {
     var r = document.getElementById('root');
-    if (r && r.firstChild && r.firstChild.firstChild) {
-      nav.style.top = r.firstChild.firstChild.offsetHeight + 'px';
-      return;
-    }
-    if (++tries < 60) requestAnimationFrame(positionNav);
-  }
-  positionNav();
+    var header = r && r.firstChild && r.firstChild.firstChild;
+    if (!header) return;
+    mo.disconnect();
+    new ResizeObserver(function(entries) {
+      nav.style.top = entries[0].contentRect.height + 'px';
+    }).observe(header);
+  }).observe(document.getElementById('root'), { childList: true });
 })();
 </script>
 </body>
