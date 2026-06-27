@@ -663,18 +663,32 @@ function ManualCalculator() {
             // Business hours window
             React.createElement('div', null,
               React.createElement('div', { style: { ...labelStyle, marginBottom: 8 } }, 'Business Hours Window'),
-              React.createElement('div', { style: { display: 'flex', gap: 8, alignItems: 'center' } },
-                React.createElement('select', {
-                  value: bizStartHour,
-                  onChange: e => { setBizStartHour(parseInt(e.target.value)); setResults(null); },
-                  style: { padding: '7px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#FBFAF7', height: 38 }
-                }, hourOptions().map(o => React.createElement('option', { key: o.value, value: o.value }, o.label))),
-                React.createElement('span', { style: { fontSize: 13, color: '#999' } }, 'to'),
-                React.createElement('select', {
-                  value: bizEndHour,
-                  onChange: e => { setBizEndHour(parseInt(e.target.value)); setResults(null); },
-                  style: { padding: '7px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#FBFAF7', height: 38 }
-                }, hourOptions().map(o => React.createElement('option', { key: o.value, value: o.value }, o.label)))
+              React.createElement('div', { style: { display: 'flex', gap: 8, alignItems: 'flex-end' } },
+                React.createElement('div', null,
+                  React.createElement('label', {
+                    htmlFor: 'biz-start-hour',
+                    style: { fontSize: 11, fontWeight: 600, display: 'block', marginBottom: 4, color: '#777', letterSpacing: '0.03em' }
+                  }, 'Start'),
+                  React.createElement('select', {
+                    id: 'biz-start-hour',
+                    value: bizStartHour,
+                    onChange: e => { setBizStartHour(parseInt(e.target.value)); setResults(null); },
+                    style: { padding: '7px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#FBFAF7', height: 38 }
+                  }, hourOptions().map(o => React.createElement('option', { key: o.value, value: o.value }, o.label)))
+                ),
+                React.createElement('span', { style: { fontSize: 13, color: '#999', paddingBottom: 9 } }, 'to'),
+                React.createElement('div', null,
+                  React.createElement('label', {
+                    htmlFor: 'biz-end-hour',
+                    style: { fontSize: 11, fontWeight: 600, display: 'block', marginBottom: 4, color: '#777', letterSpacing: '0.03em' }
+                  }, 'End'),
+                  React.createElement('select', {
+                    id: 'biz-end-hour',
+                    value: bizEndHour,
+                    onChange: e => { setBizEndHour(parseInt(e.target.value)); setResults(null); },
+                    style: { padding: '7px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#FBFAF7', height: 38 }
+                  }, hourOptions().map(o => React.createElement('option', { key: o.value, value: o.value }, o.label)))
+                )
               )
             )
           ),
