@@ -332,6 +332,56 @@
     .body-columns { padding: 24px 16px; }
     .form-two-col { grid-template-columns: 1fr; }
   }
+
+  /* ---- Hamburger button ---- */
+  .ham-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 4px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+  .ham-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #9AA3AF;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.15s;
+  }
+  .ham-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .ham-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .ham-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---- Mobile nav dropdown ---- */
+  .mob-nav {
+    display: none;
+    background: var(--ink);
+    border-top: 1px solid #2C3540;
+  }
+  .mob-nav.open { display: block; }
+  .mob-nav a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 15px;
+    color: #9AA3AF;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #2C3540;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+  }
+  .mob-nav a:last-child { border-bottom: none; }
+  .mob-nav a:hover { color: var(--paper); background: rgba(255,255,255,0.04); }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 14px 16px; }
+    .site-header > nav { display: none; }
+    .ham-btn { display: flex; }
+    .ad-strip-top { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -361,7 +411,16 @@
     <a href="about.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">About</a>
     <a href="contact.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Contact</a>
   </nav>
+  <button class="ham-btn" id="hamBtn" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+<div class="mob-nav" id="mobNav">
+  <a href="index.html">Bulk Spreadsheet Calculator</a>
+  <a href="calculator.html">Single Timespan Calculator</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</div>
 
 <!-- Top ad (728×90 leaderboard) -->
 <div class="ad-strip-top">
@@ -530,12 +589,30 @@
 
 <script>
   function handleSubmit(e) {
-    // If you're using Formspree or a real backend, remove this preventDefault
-    // and let the form POST normally. This JS just shows the success state for demo/preview.
     e.preventDefault();
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('successState').style.display = 'block';
   }
+  (function() {
+    var btn = document.getElementById('hamBtn');
+    var nav = document.getElementById('mobNav');
+    btn.addEventListener('click', function() {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.site-header') && !e.target.closest('.mob-nav')) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 </script>
 
 </body>

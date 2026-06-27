@@ -50,9 +50,67 @@
   body { margin: 0; font-family: 'Inter', 'Segoe UI', sans-serif; }
   input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; }
   input[type="date"] { cursor: pointer; }
+
+  /* ---- Mobile hamburger ---- */
+  #cmh-ham {
+    display: none;
+    position: fixed;
+    top: 0; right: 0;
+    z-index: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 16px;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+  #cmh-ham span {
+    display: block;
+    width: 22px; height: 2px;
+    background: #9AA3AF;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.15s;
+  }
+  #cmh-ham[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #cmh-ham[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  #cmh-ham[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  #cmh-mob-nav {
+    display: none;
+    position: fixed;
+    left: 0; right: 0;
+    background: #1B2430;
+    border-top: 1px solid #2C3540;
+    z-index: 499;
+  }
+  #cmh-mob-nav.open { display: block; }
+  #cmh-mob-nav a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 15px;
+    color: #9AA3AF;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #2C3540;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+  }
+  #cmh-mob-nav a:last-child { border-bottom: none; }
+  #cmh-mob-nav a:hover { color: #F7F5F0; background: rgba(255,255,255,0.04); }
+  @media (max-width: 640px) {
+    #cmh-ham { display: flex; }
+  }
 </style>
 </head>
 <body>
+<button id="cmh-ham" aria-label="Open navigation" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+<nav id="cmh-mob-nav">
+  <a href="index.html">Bulk Spreadsheet Calculator</a>
+  <a href="calculator.html">Single Timespan Calculator</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
 <div id="root"></div>
 
 <script>
@@ -740,6 +798,39 @@ function ManualCalculator() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(ManualCalculator, null));
+</script>
+
+<script>
+(function() {
+  var btn = document.getElementById('cmh-ham');
+  var nav = document.getElementById('cmh-mob-nav');
+  btn.addEventListener('click', function() {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#cmh-ham') && !e.target.closest('#cmh-mob-nav')) {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  var tries = 0;
+  function positionNav() {
+    var r = document.getElementById('root');
+    if (r && r.firstChild && r.firstChild.firstChild) {
+      nav.style.top = r.firstChild.firstChild.offsetHeight + 'px';
+      return;
+    }
+    if (++tries < 60) requestAnimationFrame(positionNav);
+  }
+  positionNav();
+})();
 </script>
 </body>
 </html>
