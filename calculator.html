@@ -36,7 +36,6 @@
 }
 </script>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-4664800783455318">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -826,6 +825,23 @@ function ManualCalculator() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(ManualCalculator, null));
+</script>
+
+<script>
+(function() {
+  function loadAds() {
+    var s = document.createElement('script');
+    s.async = true;
+    s.crossOrigin = 'anonymous';
+    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318';
+    document.head.appendChild(s);
+  }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadAds, { timeout: 3000 });
+  } else {
+    setTimeout(loadAds, 1500);
+  }
+})();
 </script>
 
 <script>
