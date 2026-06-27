@@ -397,6 +397,7 @@ function ManualCalculator() {
   const [error, setError] = useState('');
 
   const isDesktop = useMinViewportWidth(980);
+  const isMobile = !useMinViewportWidth(640);
 
   function handleTimeBlur(which) {
     const raw = which === 'start' ? startTime : endTime;
@@ -455,7 +456,7 @@ function ManualCalculator() {
 
     // ---- Nav ----
     React.createElement('div', {
-      style: { background: COLORS.ink, padding: '16px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }
+      style: { background: COLORS.ink, padding: isMobile ? '14px 16px' : '16px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }
     },
       React.createElement('a', { href: 'index.html', style: { display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' } },
         React.createElement(BrandIcon, null),
@@ -464,7 +465,7 @@ function ManualCalculator() {
           React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', fontFamily: FONT_BODY, marginTop: 2 } }, 'Free timespan utility')
         )
       ),
-      React.createElement('nav', { style: { display: 'flex', alignItems: 'center', gap: 20 } },
+      !isMobile && React.createElement('nav', { style: { display: 'flex', alignItems: 'center', gap: 20 } },
         React.createElement('a', { href: 'index.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Bulk Spreadsheet Calculator'),
         React.createElement('a', { href: 'about.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'About'),
         React.createElement('a', { href: 'contact.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Contact')
@@ -472,7 +473,7 @@ function ManualCalculator() {
     ),
 
     // ---- Leaderboard ad ----
-    React.createElement('div', {
+    !isMobile && React.createElement('div', {
       style: { padding: '16px 0', background: '#EFEBE2', borderBottom: `1px solid ${COLORS.line}` }
     },
       React.createElement(AdSlot, { width: 728, height: 90, slot: '1401238815' })
@@ -480,7 +481,7 @@ function ManualCalculator() {
 
     // ---- Main layout ----
     React.createElement('div', {
-      style: { maxWidth: 1180, margin: '0 auto', padding: '36px 24px', display: 'flex', gap: 32, alignItems: 'flex-start' }
+      style: { maxWidth: 1180, margin: '0 auto', padding: isMobile ? '24px 16px' : '36px 24px', display: 'flex', gap: 32, alignItems: 'flex-start' }
     },
 
       // ---- Content column ----
@@ -526,7 +527,7 @@ function ManualCalculator() {
 
           // Date/time row
           React.createElement('div', {
-            style: { display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: 24 }
+            style: { display: 'flex', gap: 20, flexDirection: isMobile ? 'column' : 'row', marginBottom: 24 }
           },
             React.createElement(DateTimeField, {
               label: 'Start Date & Time',
@@ -727,7 +728,7 @@ function ManualCalculator() {
         React.createElement(WeekStrip, { size: 4, gap: 3 })
       ),
       React.createElement('div', { style: { fontSize: 12, color: COLORS.textMuted, marginBottom: 8 } }, '© 2026 Calculate My Hours. All rights reserved.'),
-      React.createElement('div', { style: { display: 'flex', justifyContent: 'center', gap: 20 } },
+      React.createElement('div', { style: { display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' } },
         React.createElement('a', { href: 'index.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Bulk Spreadsheet Calculator'),
         React.createElement('a', { href: 'calculator.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Single Timespan Calculator'),
         React.createElement('a', { href: 'about.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'About'),
