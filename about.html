@@ -19,22 +19,22 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
   * { box-sizing: border-box; }
 
   :root {
-    --ink: #1B2430;
-    --ink-soft: #3A4452;
-    --paper: #F7F5F0;
+    --ink: #0F172A;
+    --ink-soft: #334155;
+    --paper: #F8FAFC;
     --card: #FFFFFF;
-    --amber: #C9622B;
-    --amber-soft: #FBEAE0;
-    --forest: #3D6B4F;
-    --forest-soft: #E7F0EA;
-    --line: #E4E0D6;
-    --muted: #8A8478;
+    --amber: #2563EB;
+    --amber-soft: #EFF6FF;
+    --forest: #1D4ED8;
+    --forest-soft: #DBEAFE;
+    --line: #E2E8F0;
+    --muted: #94A3B8;
   }
 
   body {
@@ -59,7 +59,7 @@
     gap: 12px;
   }
   .header-brand-name {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
     font-weight: 600;
     font-size: 17px;
     color: var(--paper);
@@ -67,7 +67,7 @@
   }
   .header-tagline {
     font-size: 12px;
-    color: #9AA3AF;
+    color: #94A3B8;
   }
 
   /* ---- WeekStrip ---- */
@@ -82,13 +82,13 @@
     height: 12px;
     border-radius: 2px;
   }
-  .week-strip span.weekday { background: #3A4452; opacity: 0.35; }
-  .week-strip span.weekend { background: #C9622B; }
+  .week-strip span.weekday { background: #334155; opacity: 0.35; }
+  .week-strip span.weekend { background: #2563EB; }
 
   /* ---- Top ad strip ---- */
   .ad-strip-top {
     padding: 16px 0;
-    background: #EFEBE2;
+    background: #F1F5F9;
     border-bottom: 1px solid var(--line);
     display: flex;
     justify-content: center;
@@ -137,9 +137,9 @@
 
   /* ---- Ad placeholders ---- */
   .ad-placeholder {
-    background: #EFEBE2;
+    background: #F1F5F9;
     border: 1px dashed var(--line);
-    border-radius: 8px;
+    border-radius: 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -161,7 +161,7 @@
   /* ---- Bottom ad strip ---- */
   .ad-strip-bottom {
     padding: 20px 0;
-    background: #EFEBE2;
+    background: #F1F5F9;
     border-top: 1px solid var(--line);
     display: flex;
     justify-content: center;
@@ -180,7 +180,7 @@
     gap: 10px;
   }
   h1 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
     font-size: 34px;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -202,7 +202,7 @@
   .card {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: 2px;
     padding: 18px 20px;
   }
   .card-label {
@@ -227,12 +227,12 @@
   .section {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: 2px;
     padding: 24px 26px;
     margin-bottom: 18px;
   }
   .section h2 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
     font-size: 20px;
     font-weight: 600;
     margin: 0 0 10px;
@@ -250,8 +250,8 @@
     align-items: center;
     gap: 8px;
     background: var(--forest-soft);
-    border: 1px solid #C2D9CA;
-    border-radius: 8px;
+    border: 1px solid #BFDBFE;
+    border-radius: 2px;
     padding: 10px 16px;
     font-size: 13px;
     font-weight: 600;
@@ -268,7 +268,7 @@
     color: var(--paper);
     text-decoration: none;
     padding: 12px 32px;
-    border-radius: 8px;
+    border-radius: 2px;
     font-size: 15px;
     font-weight: 600;
   }
@@ -314,7 +314,7 @@
     display: block;
     width: 22px;
     height: 2px;
-    background: #9AA3AF;
+    background: #94A3B8;
     border-radius: 2px;
     transition: transform 0.2s, opacity 0.15s;
   }
@@ -326,17 +326,17 @@
   .mob-nav {
     display: none;
     background: var(--ink);
-    border-top: 1px solid #2C3540;
+    border-top: 1px solid #1E293B;
   }
   .mob-nav.open { display: block; }
   .mob-nav a {
     display: block;
     padding: 14px 20px;
     font-size: 15px;
-    color: #9AA3AF;
+    color: #94A3B8;
     text-decoration: none;
     font-weight: 500;
-    border-bottom: 1px solid #2C3540;
+    border-bottom: 1px solid #1E293B;
     font-family: 'Inter', 'Segoe UI', sans-serif;
   }
   .mob-nav a:last-child { border-bottom: none; }
@@ -356,15 +356,15 @@
 <header class="site-header">
   <a href="index.html" class="header-brand">
     <svg class="brand-icon" width="40" height="24" viewBox="0 0 40 24" xmlns="https://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="0"  y="6"  width="2" height="14" rx=".4" fill="#7090a8"/>
-      <rect x="4"  y="2"  width="3" height="20" rx=".4" fill="#8aa4bc"/>
-      <rect x="9"  y="8"  width="2" height="10" rx=".4" fill="#7090a8"/>
-      <rect x="13" y="0"  width="3" height="24" rx=".4" fill="#8aa4bc"/>
-      <rect x="18" y="5"  width="2" height="16" rx=".4" fill="#7090a8"/>
-      <rect x="22" y="3"  width="2" height="19" rx=".4" fill="#8aa4bc"/>
-      <rect x="26" y="1"  width="3" height="22" rx=".4" fill="#c9622b"/>
-      <rect x="31" y="4"  width="2" height="16" rx=".4" fill="#c9622b"/>
-      <rect x="35" y="0"  width="3" height="24" rx=".4" fill="#c9622b"/>
+      <rect x="0"  y="6"  width="2" height="14" rx=".4" fill="#64748B"/>
+      <rect x="4"  y="2"  width="3" height="20" rx=".4" fill="#94A3B8"/>
+      <rect x="9"  y="8"  width="2" height="10" rx=".4" fill="#64748B"/>
+      <rect x="13" y="0"  width="3" height="24" rx=".4" fill="#94A3B8"/>
+      <rect x="18" y="5"  width="2" height="16" rx=".4" fill="#64748B"/>
+      <rect x="22" y="3"  width="2" height="19" rx=".4" fill="#94A3B8"/>
+      <rect x="26" y="1"  width="3" height="22" rx=".4" fill="#2563EB"/>
+      <rect x="31" y="4"  width="2" height="16" rx=".4" fill="#2563EB"/>
+      <rect x="35" y="0"  width="3" height="24" rx=".4" fill="#2563EB"/>
     </svg>
     <div>
       <div class="header-brand-name">Calculate My Hours</div>
@@ -372,10 +372,10 @@
     </div>
   </a>
   <nav style="display:flex;align-items:center;gap:20px;">
-    <a href="index.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Bulk Spreadsheet Calculator</a>
-    <a href="calculator.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Single Timespan Calculator</a>
-    <a href="about.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">About</a>
-    <a href="contact.html" style="font-size:13px;color:#9AA3AF;text-decoration:none;font-weight:500;">Contact</a>
+    <a href="index.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Bulk Spreadsheet Calculator</a>
+    <a href="calculator.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Single Timespan Calculator</a>
+    <a href="about.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">About</a>
+    <a href="contact.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Contact</a>
   </nav>
   <button class="ham-btn" id="hamBtn" aria-label="Open navigation" aria-expanded="false">
     <span></span><span></span><span></span>

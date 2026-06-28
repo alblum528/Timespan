@@ -39,8 +39,8 @@
 <meta name="google-adsense-account" content="ca-pub-4664800783455318">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet"></noscript>
 
 <style>
   * { box-sizing: border-box; }
@@ -65,7 +65,7 @@
   #cmh-ham span {
     display: block;
     width: 22px; height: 2px;
-    background: #9AA3AF;
+    background: #94A3B8;
     border-radius: 2px;
     transition: transform 0.2s, opacity 0.15s;
   }
@@ -76,8 +76,8 @@
     display: none;
     position: fixed;
     left: 0; right: 0;
-    background: #1B2430;
-    border-top: 1px solid #2C3540;
+    background: #0F172A;
+    border-top: 1px solid #1E293B;
     z-index: 499;
   }
   #cmh-mob-nav.open { display: block; }
@@ -85,14 +85,14 @@
     display: block;
     padding: 14px 20px;
     font-size: 15px;
-    color: #9AA3AF;
+    color: #94A3B8;
     text-decoration: none;
     font-weight: 500;
-    border-bottom: 1px solid #2C3540;
+    border-bottom: 1px solid #1E293B;
     font-family: 'Inter', 'Segoe UI', sans-serif;
   }
   #cmh-mob-nav a:last-child { border-bottom: none; }
-  #cmh-mob-nav a:hover { color: #F7F5F0; background: rgba(255,255,255,0.04); }
+  #cmh-mob-nav a:hover { color: #F8FAFC; background: rgba(255,255,255,0.04); }
   @media (max-width: 640px) {
     #cmh-ham { display: flex; }
   }
@@ -119,22 +119,22 @@ const MS_PER_HOUR = 3600000;
 
 // ---- Design tokens (matches index.html) ----
 const COLORS = {
-  ink: "#1B2430",
-  inkSoft: "#3A4452",
-  paper: "#F7F5F0",
+  ink: "#0F172A",
+  inkSoft: "#334155",
+  paper: "#F8FAFC",
   card: "#FFFFFF",
-  amber: "#C9622B",
-  amberSoft: "#FBEAE0",
-  forest: "#3D6B4F",
-  forestSoft: "#E7F0EA",
-  line: "#E4E0D6",
-  textMuted: "#8A8478",
-  danger: "#B3402C",
-  dangerSoft: "#FBEAE6",
+  amber: "#2563EB",
+  amberSoft: "#EFF6FF",
+  forest: "#1D4ED8",
+  forestSoft: "#DBEAFE",
+  line: "#E2E8F0",
+  textMuted: "#94A3B8",
+  danger: "#DC2626",
+  dangerSoft: "#FEF2F2",
   blue: "#2C5F8A",
   blueSoft: "#E3EDF5"
 };
-const FONT_DISPLAY = "'Fraunces', 'Georgia', serif";
+const FONT_DISPLAY = "'Space Grotesk', 'Inter', sans-serif";
 const FONT_BODY = "'Inter', 'Segoe UI', sans-serif";
 const FONT_MONO = "'JetBrains Mono', 'Courier New', monospace";
 const ADSENSE_CLIENT = "ca-pub-4664800783455318";
@@ -332,15 +332,15 @@ function hourOptions() {
 // ---- Shared UI pieces ----
 function BrandIcon() {
   return React.createElement('svg', { width: 40, height: 24, viewBox: '0 0 40 24', xmlns: 'https://www.w3.org/2000/svg', 'aria-hidden': true },
-    React.createElement('rect', { x: 0,  y: 6,  width: 2, height: 14, rx: .4, fill: '#7090a8' }),
-    React.createElement('rect', { x: 4,  y: 2,  width: 3, height: 20, rx: .4, fill: '#8aa4bc' }),
-    React.createElement('rect', { x: 9,  y: 8,  width: 2, height: 10, rx: .4, fill: '#7090a8' }),
-    React.createElement('rect', { x: 13, y: 0,  width: 3, height: 24, rx: .4, fill: '#8aa4bc' }),
-    React.createElement('rect', { x: 18, y: 5,  width: 2, height: 16, rx: .4, fill: '#7090a8' }),
-    React.createElement('rect', { x: 22, y: 3,  width: 2, height: 19, rx: .4, fill: '#8aa4bc' }),
-    React.createElement('rect', { x: 26, y: 1,  width: 3, height: 22, rx: .4, fill: '#c9622b' }),
-    React.createElement('rect', { x: 31, y: 4,  width: 2, height: 16, rx: .4, fill: '#c9622b' }),
-    React.createElement('rect', { x: 35, y: 0,  width: 3, height: 24, rx: .4, fill: '#c9622b' })
+    React.createElement('rect', { x: 0,  y: 6,  width: 2, height: 14, rx: .4, fill: '#64748B' }),
+    React.createElement('rect', { x: 4,  y: 2,  width: 3, height: 20, rx: .4, fill: '#94A3B8' }),
+    React.createElement('rect', { x: 9,  y: 8,  width: 2, height: 10, rx: .4, fill: '#64748B' }),
+    React.createElement('rect', { x: 13, y: 0,  width: 3, height: 24, rx: .4, fill: '#94A3B8' }),
+    React.createElement('rect', { x: 18, y: 5,  width: 2, height: 16, rx: .4, fill: '#64748B' }),
+    React.createElement('rect', { x: 22, y: 3,  width: 2, height: 19, rx: .4, fill: '#94A3B8' }),
+    React.createElement('rect', { x: 26, y: 1,  width: 3, height: 22, rx: .4, fill: '#2563EB' }),
+    React.createElement('rect', { x: 31, y: 4,  width: 2, height: 16, rx: .4, fill: '#2563EB' }),
+    React.createElement('rect', { x: 35, y: 0,  width: 3, height: 24, rx: .4, fill: '#2563EB' })
   );
 }
 
@@ -368,7 +368,7 @@ function AdSlot({ width, height, slot = '', style = {} }) {
     return React.createElement('div', {
       style: {
         width: width || '100%', height, maxWidth: width, margin: '0 auto',
-        background: '#EFEBE2', border: `1px dashed ${COLORS.line}`, borderRadius: 8,
+        background: '#F1F5F9', border: `1px dashed ${COLORS.line}`, borderRadius: 2,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         flexDirection: 'column', gap: 4, ...style
       }
@@ -401,7 +401,7 @@ function useMinViewportWidth(px) {
 // ---- AM/PM Toggle ----
 function AmPmToggle({ value, onChange }) {
   return React.createElement('div', {
-    style: { display: 'flex', borderRadius: 7, overflow: 'hidden', border: `1.5px solid ${COLORS.line}`, flexShrink: 0 }
+    style: { display: 'flex', borderRadius: 2, overflow: 'hidden', border: `1.5px solid ${COLORS.line}`, flexShrink: 0 }
   },
     ['AM', 'PM'].map(v =>
       React.createElement('button', {
@@ -438,8 +438,8 @@ function DateTimeField({ label, dateValue, onDateChange, timeValue, onTimeChange
           value: dateValue,
           onChange: e => onDateChange(e.target.value),
           style: {
-            padding: '8px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`,
-            fontSize: 13, fontFamily: FONT_BODY, background: '#FBFAF7', color: COLORS.ink,
+            padding: '8px 10px', borderRadius: 2, border: `1.5px solid ${COLORS.line}`,
+            fontSize: 13, fontFamily: FONT_BODY, background: '#F8FAFC', color: COLORS.ink,
             height: 38, outline: 'none', minWidth: 150
           }
         })
@@ -458,8 +458,8 @@ function DateTimeField({ label, dateValue, onDateChange, timeValue, onTimeChange
             onBlur: onTimeBlur,
             placeholder: '9:30',
             style: {
-              padding: '8px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`,
-              fontSize: 13, fontFamily: FONT_MONO, background: '#FBFAF7', color: COLORS.ink,
+              padding: '8px 10px', borderRadius: 2, border: `1.5px solid ${COLORS.line}`,
+              fontSize: 13, fontFamily: FONT_MONO, background: '#F8FAFC', color: COLORS.ink,
               height: 38, width: 80, outline: 'none'
             }
           }),
@@ -475,7 +475,7 @@ function MetricCard({ label, description, value, color, colorSoft }) {
   return React.createElement('div', {
     style: {
       flex: 1, minWidth: 160,
-      background: colorSoft, borderRadius: 10,
+      background: colorSoft, borderRadius: 2,
       border: `1.5px solid ${color}22`,
       padding: '18px 20px'
     }
@@ -581,19 +581,19 @@ function ManualCalculator() {
         React.createElement(BrandIcon, null),
         React.createElement('div', null,
           React.createElement('div', { style: { fontFamily: FONT_DISPLAY, fontWeight: 600, fontSize: 17, color: COLORS.paper, letterSpacing: '-0.01em' } }, 'Calculate My Hours'),
-          React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', fontFamily: FONT_BODY, marginTop: 2 } }, 'Free timespan utility')
+          React.createElement('div', { style: { fontSize: 11, color: '#94A3B8', fontFamily: FONT_BODY, marginTop: 2 } }, 'Free timespan utility')
         )
       ),
       !isMobile && React.createElement('nav', { style: { display: 'flex', alignItems: 'center', gap: 20 } },
-        React.createElement('a', { href: 'index.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Bulk Spreadsheet Calculator'),
-        React.createElement('a', { href: 'about.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'About'),
-        React.createElement('a', { href: 'contact.html', style: { fontSize: 13, color: '#9AA3AF', textDecoration: 'none', fontWeight: 500 } }, 'Contact')
+        React.createElement('a', { href: 'index.html', style: { fontSize: 13, color: '#94A3B8', textDecoration: 'none', fontWeight: 500 } }, 'Bulk Spreadsheet Calculator'),
+        React.createElement('a', { href: 'about.html', style: { fontSize: 13, color: '#94A3B8', textDecoration: 'none', fontWeight: 500 } }, 'About'),
+        React.createElement('a', { href: 'contact.html', style: { fontSize: 13, color: '#94A3B8', textDecoration: 'none', fontWeight: 500 } }, 'Contact')
       )
     ),
 
     // ---- Leaderboard ad ----
     !isMobile && React.createElement('div', {
-      style: { padding: '16px 0', background: '#EFEBE2', borderBottom: `1px solid ${COLORS.line}` }
+      style: { padding: '16px 0', background: '#F1F5F9', borderBottom: `1px solid ${COLORS.line}` }
     },
       React.createElement(AdSlot, { width: 728, height: 90, slot: '1401238815' })
     ),
@@ -630,7 +630,7 @@ function ManualCalculator() {
               padding: '10px 16px',
               background: COLORS.amberSoft,
               border: `1.5px solid ${COLORS.amber}44`,
-              borderRadius: 8, textDecoration: 'none',
+              borderRadius: 2, textDecoration: 'none',
               color: COLORS.amber, fontSize: 13, fontWeight: 600, fontFamily: FONT_BODY
             }
           },
@@ -641,7 +641,7 @@ function ManualCalculator() {
 
         // ---- Form card ----
         React.createElement('div', {
-          style: { background: COLORS.card, borderRadius: 12, border: `1px solid ${COLORS.line}`, padding: '24px', marginBottom: 20 }
+          style: { background: COLORS.card, borderRadius: 2, border: `1px solid ${COLORS.line}`, padding: '24px', marginBottom: 20 }
         },
 
           // Date/time row
@@ -674,7 +674,7 @@ function ManualCalculator() {
 
           // Time input hint
           React.createElement('div', {
-            style: { fontSize: 12, color: COLORS.textMuted, marginBottom: 20, padding: '8px 12px', background: '#F7F5F0', borderRadius: 6 }
+            style: { fontSize: 12, color: COLORS.textMuted, marginBottom: 20, padding: '8px 12px', background: '#F8FAFC', borderRadius: 2 }
           }, '⏱ Time formats accepted: 9:30 · 930 · 0930 · 21:30 · 2130 · 9:30 AM · 9:30PM — military time auto-sets to PM'),
 
           // Divider
@@ -696,7 +696,7 @@ function ManualCalculator() {
                       setResults(null);
                     },
                     style: {
-                      padding: '6px 13px', borderRadius: 6,
+                      padding: '6px 13px', borderRadius: 2,
                       border: active ? `1.5px solid ${COLORS.amber}` : `1.5px solid ${COLORS.line}`,
                       background: active ? COLORS.amberSoft : '#fff',
                       color: active ? COLORS.amber : '#666',
@@ -720,7 +720,7 @@ function ManualCalculator() {
                     id: 'biz-start-hour',
                     value: bizStartHour,
                     onChange: e => { setBizStartHour(parseInt(e.target.value)); setResults(null); },
-                    style: { padding: '7px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#FBFAF7', height: 38 }
+                    style: { padding: '7px 10px', borderRadius: 2, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#F8FAFC', height: 38 }
                   }, hourOptions().map(o => React.createElement('option', { key: o.value, value: o.value }, o.label)))
                 ),
                 React.createElement('span', { style: { fontSize: 13, color: '#999', paddingBottom: 9 } }, 'to'),
@@ -733,7 +733,7 @@ function ManualCalculator() {
                     id: 'biz-end-hour',
                     value: bizEndHour,
                     onChange: e => { setBizEndHour(parseInt(e.target.value)); setResults(null); },
-                    style: { padding: '7px 10px', borderRadius: 7, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#FBFAF7', height: 38 }
+                    style: { padding: '7px 10px', borderRadius: 2, border: `1.5px solid ${COLORS.line}`, fontSize: 13, background: '#F8FAFC', height: 38 }
                   }, hourOptions().map(o => React.createElement('option', { key: o.value, value: o.value }, o.label)))
                 )
               )
@@ -765,7 +765,7 @@ function ManualCalculator() {
               onClick: handleCalculate,
               style: {
                 background: COLORS.ink, color: COLORS.paper, border: 'none',
-                padding: '11px 32px', borderRadius: 8, fontSize: 14, fontWeight: 700,
+                padding: '11px 32px', borderRadius: 2, fontSize: 14, fontWeight: 700,
                 cursor: 'pointer', letterSpacing: '0.01em', fontFamily: FONT_BODY
               }
             }, 'Calculate'),
@@ -773,7 +773,7 @@ function ManualCalculator() {
               onClick: handleReset,
               style: {
                 background: 'none', color: '#555', border: `1px solid ${COLORS.line}`,
-                padding: '10px 20px', borderRadius: 8, fontSize: 13, cursor: 'pointer', fontFamily: FONT_BODY
+                padding: '10px 20px', borderRadius: 2, fontSize: 13, cursor: 'pointer', fontFamily: FONT_BODY
               }
             }, 'Reset')
           )
@@ -782,7 +782,7 @@ function ManualCalculator() {
         // ---- Error ----
         error && React.createElement('div', {
           style: {
-            background: COLORS.dangerSoft, border: `1px solid #E8C2B8`, borderRadius: 8,
+            background: COLORS.dangerSoft, border: `1px solid #FECACA`, borderRadius: 2,
             padding: '12px 16px', color: COLORS.danger, fontSize: 13, marginBottom: 20
           }
         }, error),
@@ -793,21 +793,21 @@ function ManualCalculator() {
           // Duration summary banner
           React.createElement('div', {
             style: {
-              background: COLORS.ink, borderRadius: 12, padding: '20px 24px', marginBottom: 16,
+              background: COLORS.ink, borderRadius: 2, padding: '20px 24px', marginBottom: 16,
               display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12
             }
           },
             React.createElement('div', null,
-              React.createElement('div', { style: { fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#9AA3AF', marginBottom: 4 } }, 'Total Timespan'),
+              React.createElement('div', { style: { fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#94A3B8', marginBottom: 4 } }, 'Total Timespan'),
               React.createElement('div', { style: { fontFamily: FONT_MONO, fontSize: 22, fontWeight: 700, color: '#fff' } }, formatDuration(results.total))
             ),
             React.createElement('div', { style: { textAlign: 'right' } },
-              React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', marginBottom: 2 } },
+              React.createElement('div', { style: { fontSize: 11, color: '#94A3B8', marginBottom: 2 } },
                 `${startObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} `
                 + `${startObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
               ),
               React.createElement('div', { style: { fontSize: 11, color: '#666' } }, '↓'),
-              React.createElement('div', { style: { fontSize: 11, color: '#9AA3AF', marginTop: 2 } },
+              React.createElement('div', { style: { fontSize: 11, color: '#94A3B8', marginTop: 2 } },
                 `${endObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} `
                 + `${endObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
               )
@@ -856,7 +856,7 @@ function ManualCalculator() {
 
         // ---- Footer note ----
         React.createElement('div', {
-          style: { marginTop: 28, fontSize: 12, color: '#AEA89A', textAlign: 'center' }
+          style: { marginTop: 28, fontSize: 12, color: '#94A3B8', textAlign: 'center' }
         }, 'All calculations run locally in your browser — nothing is sent to a server')
       ),
 
