@@ -21,14 +21,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:description" content="Enter a start and end date/time to instantly calculate total, business, weekend, and weekday hours. Accepts any time format — 9:30, 21:30, or 2130. Free and browser-based." />
 <meta property="og:url" content="https://www.timespancalculator.com/calculator.html" />
 <meta property="og:site_name" content="Calculate My Hours" />
-<meta property="og:image" content="https://www.timespancalculator.com/og-image.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
 
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Timespan Calculator — Hours Between Two Dates & Times" />
 <meta name="twitter:description" content="Instantly calculate total, business, weekend, and weekday hours between any two dates and times. Free, runs in your browser." />
-<meta name="twitter:image" content="https://www.timespancalculator.com/og-image.png" />
 
 <script type="application/ld+json">
 {
@@ -48,7 +44,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 
 <meta name="google-adsense-account" content="ca-pub-4664800783455318">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -936,6 +931,13 @@ function ManualCalculator() {
           React.createElement(AdSlot, { width: 300, height: 600, slot: '6531266240' })
         )
       )
+    ),
+
+    // ---- Bottom ad bar ----
+    React.createElement('div', {
+      style: { padding: '16px 0', background: '#F1F5F9', borderTop: `1px solid ${COLORS.line}` }
+    },
+      React.createElement(AdSlot, { width: '100%', slot: '5026520999' })
     ),
 
     // ---- Footer ----
