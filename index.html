@@ -198,6 +198,9 @@
       * {
         box-sizing: border-box;
       }
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         margin: 0;
         font-family: "Inter", "Segoe UI", sans-serif;
@@ -292,9 +295,45 @@
       <a href="calculator.html">Single Timespan Calculator</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="#learn-more">Learn More</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div id="root"></div>
+
+    <section id="learn-more" style="max-width: 1180px; margin: 0 auto; padding: 24px 24px 8px;">
+      <div style="max-width: 1000px;">
+        <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; font-weight: 600; margin-bottom: 10px;">Guides</div>
+        <h2 style="font-family: 'Space Grotesk','Inter',sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 20px;">Learn More</h2>
+        <div class="cmh-learn-grid">
+          <a class="cmh-learn-card" href="how-to-calculate-business-hours-in-excel.html">
+            <div class="cmh-learn-label">Guide</div>
+            <div class="cmh-learn-title">How to Calculate Business Hours in Excel</div>
+            <div class="cmh-learn-desc">NETWORKDAYS, MOD formulas, and the edge cases that break them — plus a faster way to get the answer.</div>
+          </a>
+          <a class="cmh-learn-card" href="business-hours-by-country-guide.html">
+            <div class="cmh-learn-label">Guide</div>
+            <div class="cmh-learn-title">What Counts as "Business Hours"?</div>
+            <div class="cmh-learn-desc">A guide to regional weekend differences, cross-timezone teams, and industry-specific coverage windows.</div>
+          </a>
+          <a class="cmh-learn-card" href="how-to-calculate-overtime-and-weekend-hours.html">
+            <div class="cmh-learn-label">Guide</div>
+            <div class="cmh-learn-title">How to Calculate Overtime and Weekend Hours</div>
+            <div class="cmh-learn-desc">The general math behind splitting a timesheet into straight time, overtime, and weekend hours.</div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <style>
+      .cmh-learn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+      .cmh-learn-card { display: block; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 2px; padding: 18px 20px; text-decoration: none; transition: border-color 0.12s; }
+      .cmh-learn-card:hover { border-color: #1D4ED8; }
+      .cmh-learn-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #1D4ED8; margin-bottom: 6px; }
+      .cmh-learn-title { font-size: 14px; font-weight: 700; color: #0F172A; margin-bottom: 5px; line-height: 1.3; }
+      .cmh-learn-desc { font-size: 12.5px; color: #334155; line-height: 1.55; }
+      @media (max-width: 700px) {
+        .cmh-learn-grid { grid-template-columns: 1fr; }
+      }
+    </style>
 
     <section id="faq" style="max-width: 1180px; margin: 0 auto; padding: 8px 24px 48px;">
       <div style="max-width: 760px;">
@@ -341,6 +380,28 @@
       .cmh-faq-item[open] summary::before { content: "\2212"; }
       .cmh-faq-item p { font-size: 13.5px; color: #334155; line-height: 1.65; margin: 0 0 16px 18px; }
     </style>
+
+    <footer style="border-top: 1px solid #E2E8F0; padding: 24px 28px; text-align: center;">
+      <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+        <div style="display: flex; gap: 3px; align-items: center;">
+          <span style="display:inline-block;width:5px;height:12px;border-radius:2px;background:#334155;opacity:0.35;"></span>
+          <span style="display:inline-block;width:5px;height:12px;border-radius:2px;background:#334155;opacity:0.35;"></span>
+          <span style="display:inline-block;width:5px;height:12px;border-radius:2px;background:#334155;opacity:0.35;"></span>
+          <span style="display:inline-block;width:5px;height:12px;border-radius:2px;background:#334155;opacity:0.35;"></span>
+          <span style="display:inline-block;width:5px;height:12px;border-radius:2px;background:#334155;opacity:0.35;"></span>
+          <span style="display:inline-block;width:5px;height:12px;border-radius:2px;background:#2563EB;"></span>
+          <span style="display:inline-block;width:5px;height:12px;border-radius:2px;background:#2563EB;"></span>
+        </div>
+      </div>
+      <p style="font-size: 12px; color: #94A3B8; margin: 0;">© 2026 Calculate My Hours. All rights reserved.</p>
+      <p style="margin-top: 8px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+        <a href="index.html" style="font-size: 12px; color: #94A3B8; text-decoration: none;">Bulk Spreadsheet Calculator</a>
+        <a href="calculator.html" style="font-size: 12px; color: #94A3B8; text-decoration: none;">Single Timespan Calculator</a>
+        <a href="about.html" style="font-size: 12px; color: #94A3B8; text-decoration: none;">About</a>
+        <a href="contact.html" style="font-size: 12px; color: #94A3B8; text-decoration: none;">Contact</a>
+        <a href="privacy-policy.html" style="font-size: 12px; color: #94A3B8; text-decoration: none;">Privacy</a>
+      </p>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -1217,6 +1278,20 @@
                     },
                   },
                   "Contact",
+                ),
+                React.createElement(
+                  "a",
+                  {
+                    href: "#learn-more",
+                    style: {
+                      fontSize: 13,
+                      color: "#94A3B8",
+                      textDecoration: "none",
+                      fontFamily: FONT_BODY,
+                      fontWeight: 500,
+                    },
+                  },
+                  "Learn More",
                 ),
                 React.createElement(
                   "a",
@@ -2699,18 +2774,6 @@
                   slot: "1995247130",
                 }),
               ),
-              React.createElement(
-                "div",
-                {
-                  style: {
-                    marginTop: 28,
-                    fontSize: 12,
-                    color: "#94A3B8",
-                    textAlign: "center",
-                  },
-                },
-                "Business Hours are configurable above. All calculations happen locally in your browser — nothing is uploaded to a server.",
-              ),
             ),
             w &&
               React.createElement(
@@ -2731,109 +2794,6 @@
                   label: "Advertisement",
                 }),
               ),
-          ),
-          React.createElement(
-            "div",
-            {
-              style: {
-                borderTop: `1px solid ${COLORS.line}`,
-                padding: "24px 28px",
-                textAlign: "center",
-              },
-            },
-            React.createElement(
-              "div",
-              {
-                style: {
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: 10,
-                },
-              },
-              React.createElement(WeekStrip, { size: 4, gap: 3 }),
-            ),
-            React.createElement(
-              "div",
-              {
-                style: {
-                  fontSize: 12,
-                  color: COLORS.textMuted,
-                  marginBottom: 8,
-                },
-              },
-              "© 2026 Calculate My Hours. All rights reserved.",
-            ),
-            React.createElement(
-              "div",
-              {
-                style: {
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: 16,
-                  flexWrap: "wrap",
-                },
-              },
-              React.createElement(
-                "a",
-                {
-                  href: "index.html",
-                  style: {
-                    fontSize: 12,
-                    color: COLORS.textMuted,
-                    textDecoration: "none",
-                  },
-                },
-                "Bulk Spreadsheet Calculator",
-              ),
-              React.createElement(
-                "a",
-                {
-                  href: "calculator.html",
-                  style: {
-                    fontSize: 12,
-                    color: COLORS.textMuted,
-                    textDecoration: "none",
-                  },
-                },
-                "Single Timespan Calculator",
-              ),
-              React.createElement(
-                "a",
-                {
-                  href: "about.html",
-                  style: {
-                    fontSize: 12,
-                    color: COLORS.textMuted,
-                    textDecoration: "none",
-                  },
-                },
-                "About",
-              ),
-              React.createElement(
-                "a",
-                {
-                  href: "contact.html",
-                  style: {
-                    fontSize: 12,
-                    color: COLORS.textMuted,
-                    textDecoration: "none",
-                  },
-                },
-                "Contact",
-              ),
-              React.createElement(
-                "a",
-                {
-                  href: "privacy-policy.html",
-                  style: {
-                    fontSize: 12,
-                    color: COLORS.textMuted,
-                    textDecoration: "none",
-                  },
-                },
-                "Privacy",
-              ),
-            ),
           ),
         );
       }

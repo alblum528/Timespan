@@ -11,36 +11,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About — Calculate My Hours | Time Duration Calculator</title>
-<meta name="description" content="Learn how Calculate My Hours works — a free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps." />
-<link rel="canonical" href="https://www.timespancalculator.com/about.html" />
+<title>How to Calculate Business Hours in Excel (NETWORKDAYS, MOD & Where They Break) | Calculate My Hours</title>
+<meta name="description" content="A practical guide to calculating business hours between two dates in Excel — NETWORKDAYS, NETWORKDAYS.INTL, MOD-based partial-day formulas, and the edge cases that break them." />
+<meta name="keywords" content="calculate business hours excel, networkdays formula, networkdays.intl, excel business hours between two dates, mod formula time, excel time formulas" />
+<link rel="canonical" href="https://www.timespancalculator.com/how-to-calculate-business-hours-in-excel.html" />
 
-<meta property="og:type" content="website" />
-<meta property="og:title" content="About — Calculate My Hours" />
-<meta property="og:description" content="A free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps. Nothing is uploaded to a server." />
-<meta property="og:url" content="https://www.timespancalculator.com/about.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to Calculate Business Hours in Excel (NETWORKDAYS, MOD & Where They Break)" />
+<meta property="og:description" content="A practical guide to calculating business hours between two dates in Excel — the formulas, the edge cases, and a faster alternative." />
+<meta property="og:url" content="https://www.timespancalculator.com/how-to-calculate-business-hours-in-excel.html" />
 <meta property="og:site_name" content="Calculate My Hours - Time Duration Calculator" />
 <meta property="og:image" content="https://www.timespancalculator.com/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="About — Calculate My Hours" />
-<meta name="twitter:description" content="A free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps. Nothing is uploaded to a server." />
+<meta name="twitter:title" content="How to Calculate Business Hours in Excel (NETWORKDAYS, MOD & Where They Break)" />
+<meta name="twitter:description" content="A practical guide to calculating business hours between two dates in Excel — the formulas, the edge cases, and a faster alternative." />
 <meta name="twitter:image" content="https://www.timespancalculator.com/og-image.png" />
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "name": "About — Calculate My Hours",
-  "url": "https://www.timespancalculator.com/about.html",
-  "description": "Learn how Calculate My Hours works — a free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps.",
-  "isPartOf": {
-    "@type": "WebSite",
+  "@type": "Article",
+  "headline": "How to Calculate Business Hours in Excel (NETWORKDAYS, MOD & Where They Break)",
+  "description": "A practical guide to calculating business hours between two dates in Excel — NETWORKDAYS, NETWORKDAYS.INTL, MOD-based partial-day formulas, and the edge cases that break them.",
+  "url": "https://www.timespancalculator.com/how-to-calculate-business-hours-in-excel.html",
+  "datePublished": "2026-07-14",
+  "dateModified": "2026-07-14",
+  "author": {
+    "@type": "Organization",
+    "name": "Calculate My Hours"
+  },
+  "publisher": {
+    "@type": "Organization",
     "name": "Calculate My Hours",
-    "url": "https://www.timespancalculator.com/",
-	"logo": "https://www.timespancalculator.com/og-image.png"
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.timespancalculator.com/og-image.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.timespancalculator.com/how-to-calculate-business-hours-in-excel.html"
   }
 }
 </script>
@@ -59,8 +72,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "About",
-      "item": "https://www.timespancalculator.com/about.html"
+      "name": "How to Calculate Business Hours in Excel",
+      "item": "https://www.timespancalculator.com/how-to-calculate-business-hours-in-excel.html"
     }
   ]
 }
@@ -75,7 +88,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <style>
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
 
   :root {
     --ink: #0F172A;
@@ -97,7 +109,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color: var(--ink);
   }
 
-  /* ---- Header ---- */
   .site-header {
     background: var(--ink);
     padding: 16px 28px;
@@ -123,7 +134,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color: #94A3B8;
   }
 
-  /* ---- WeekStrip ---- */
   .week-strip {
     display: flex;
     gap: 3px;
@@ -138,7 +148,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .week-strip span.weekday { background: #334155; opacity: 0.35; }
   .week-strip span.weekend { background: #2563EB; }
 
-  /* ---- Top ad strip ---- */
   .ad-strip-top {
     padding: 16px 0;
     background: #F1F5F9;
@@ -147,7 +156,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content: center;
   }
 
-  /* ---- Three-column body layout ---- */
   .body-columns {
     display: flex;
     gap: 0;
@@ -157,7 +165,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     padding: 32px 16px;
   }
 
-  /* Left sidebar */
   .sidebar-left {
     width: 180px;
     flex-shrink: 0;
@@ -169,14 +176,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     padding-right: 16px;
   }
 
-  /* Main content */
   .page-wrap {
     flex: 1;
     min-width: 0;
     padding: 0 16px;
+    max-width: 760px;
   }
 
-  /* Right sidebar */
   .sidebar-right {
     width: 300px;
     flex-shrink: 0;
@@ -188,30 +194,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     padding-left: 16px;
   }
 
-  /* ---- Ad placeholders ---- */
-  .ad-placeholder {
-    background: #F1F5F9;
-    border: 1px dashed var(--line);
-    border-radius: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    text-align: center;
-  }
-  .ad-placeholder .ad-label {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .ad-placeholder .ad-size {
-    font-size: 11px;
-    color: #B8B2A4;
-  }
-
-  /* ---- Bottom ad strip ---- */
   .ad-strip-bottom {
     padding: 20px 0;
     background: #F1F5F9;
@@ -220,7 +202,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content: center;
   }
 
-  /* ---- Content styles ---- */
   .eyebrow {
     font-size: 11px;
     letter-spacing: 0.1em;
@@ -232,50 +213,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     align-items: center;
     gap: 10px;
   }
+  .byline {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 24px;
+  }
   h1 {
     font-family: 'Space Grotesk', 'Inter', sans-serif;
-    font-size: 34px;
+    font-size: 32px;
     font-weight: 700;
     letter-spacing: -0.01em;
-    margin: 0 0 16px;
-    line-height: 1.15;
+    margin: 0 0 12px;
+    line-height: 1.18;
   }
   .lead {
     font-size: 15px;
     color: var(--ink-soft);
     line-height: 1.7;
     margin: 0 0 32px;
-  }
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    padding: 18px 20px;
-  }
-  .card-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-  .card-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--forest);
-    margin-bottom: 5px;
-  }
-  .card-desc {
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    line-height: 1.55;
   }
   .section {
     background: var(--card);
@@ -286,7 +241,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .section h2 {
     font-family: 'Space Grotesk', 'Inter', sans-serif;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 600;
     margin: 0 0 10px;
     letter-spacing: -0.01em;
@@ -298,59 +253,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin: 0 0 10px;
   }
   .section p:last-child { margin-bottom: 0; }
-  .privacy-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--forest-soft);
-    border: 1px solid #BFDBFE;
-    border-radius: 2px;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--forest);
-    margin-top: 14px;
+  .section ul, .section ol {
+    margin: 0 0 10px;
+    padding-left: 20px;
   }
-  .learn-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-  .learn-card {
-    display: block;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    padding: 18px 20px;
-    text-decoration: none;
-    transition: border-color 0.12s;
-  }
-  .learn-card:hover { border-color: var(--forest); }
-  .learn-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--forest);
+  .section li {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
     margin-bottom: 6px;
   }
-  .learn-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 5px;
-    line-height: 1.3;
-  }
-  .learn-desc {
+  .section a { color: var(--forest); }
+  code, .formula {
+    display: block;
+    background: #0F172A;
+    color: #E2E8F0;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: 12.5px;
-    color: var(--ink-soft);
-    line-height: 1.55;
+    line-height: 1.6;
+    padding: 14px 16px;
+    border-radius: 2px;
+    overflow-x: auto;
+    margin: 10px 0;
   }
-  @media (max-width: 700px) {
-    .learn-grid { grid-template-columns: 1fr; }
+  .callout {
+    background: var(--amber-soft);
+    border: 1px solid #BFDBFE;
+    border-radius: 2px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--forest);
+    line-height: 1.6;
+    margin-top: 10px;
   }
-
+  .related-list {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .related-list li {
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
   .cta-wrap {
     margin-top: 32px;
     text-align: center;
@@ -367,7 +311,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .cta-wrap a:hover { background: var(--ink-soft); }
 
-  /* ---- Footer ---- */
   .site-footer {
     border-top: 1px solid var(--line);
     padding: 24px 28px;
@@ -386,13 +329,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .site-footer a { color: var(--muted); text-decoration: none; }
   .site-footer a:hover { color: var(--ink); }
 
-  /* ---- Responsive: hide sidebars on small screens ---- */
   @media (max-width: 900px) {
     .sidebar-left, .sidebar-right { display: none; }
     .body-columns { padding: 24px 16px; }
   }
 
-  /* ---- Hamburger button ---- */
   .ham-btn {
     display: none;
     background: none;
@@ -415,7 +356,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .ham-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .ham-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ---- Mobile nav dropdown ---- */
   .mob-nav {
     display: none;
     background: var(--ink);
@@ -472,7 +412,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="calculator.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Single Timespan Calculator</a>
     <a href="about.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">About</a>
     <a href="contact.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Contact</a>
-    <a href="#learn-more" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Learn More</a>
   </nav>
   <button class="ham-btn" id="hamBtn" aria-label="Open navigation" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -483,14 +422,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="calculator.html">Single Timespan Calculator</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
-  <a href="#learn-more">Learn More</a>
 </div>
 
 <!-- Top ad (728×90 leaderboard) -->
 <div class="ad-strip-top">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
      crossorigin="anonymous"></script>
-<!-- AboutTop_Timespan -->
+<!-- BlogTop_ExcelHours -->
 <ins class="adsbygoogle"
      style="display:inline-block;width:728px;height:90px"
      data-ad-client="ca-pub-4664800783455318"
@@ -507,7 +445,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <aside class="sidebar-left">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
      crossorigin="anonymous"></script>
-<!-- AboutLeft_TimeSpan -->
+<!-- BlogLeft_ExcelHours -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
@@ -532,106 +470,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="weekend"></span>
         <span class="weekend"></span>
       </div>
-      About this tool
+      Guide
     </div>
 
-    <h1>Built for people who live in spreadsheets</h1>
-    <p class="lead">Calculate My Hours started as a fix for one recurring annoyance: doing time math in Excel means either memorizing NETWORKDAYS syntax and MOD formulas or rebuilding a helper column from scratch every time a new file lands in your inbox. This site offers two free tools that do that math for you — a bulk spreadsheet calculator for rows of timestamps, and a single-entry calculator for a quick one-off answer. Both run entirely in your browser and calculate total, business, weekend, and weekday hours down to the minute.</p>
+    <h1>How to Calculate Business Hours in Excel (NETWORKDAYS, MOD & Where They Break)</h1>
+    <p class="byline">Updated July 14, 2026 · 7 min read</p>
+    <p class="lead">If you've ever needed to know how many working hours fall between two timestamps, you've probably run into NETWORKDAYS, then discovered it only counts whole days — and gone looking for a way to bolt on partial-day math. Here's how the formulas actually work, where they fall apart, and what to do instead.</p>
 
-    <!-- Four metric cards -->
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-label">Metric 1</div>
-        <div class="card-title">Total Hours</div>
-        <div class="card-desc">All elapsed hours between start and end, down to the minute. No exclusions.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Metric 2</div>
-        <div class="card-title">Business Hours</div>
-        <div class="card-desc">Hours on non-weekend days within a configurable daily window — e.g. 9 AM to 5 PM.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Metric 3</div>
-        <div class="card-title">Weekend Hours</div>
-        <div class="card-desc">Hours that fall on days you mark as weekend, midnight to midnight.</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Metric 4</div>
-        <div class="card-title">Weekday Hours</div>
-        <div class="card-desc">Total hours minus weekend hours — the full 24-hour span on non-weekend days.</div>
-      </div>
-    </div>
-
-    <!-- Two tools -->
     <div class="section">
-      <h2>Two tools, one job</h2>
-      <p><strong><a href="index.html" style="color:var(--forest);text-decoration:none;">Bulk Spreadsheet Calculator</a></strong> — Upload a .xlsx, .xls, .ods, or .csv file with start and end timestamp columns. The tool processes every row, appends your chosen metrics as new columns, and returns the updated file as a download. Built for payroll runs, project audits, support ticket reports, and anywhere you have a list of time ranges to measure at once.</p>
-      <p><strong><a href="calculator.html" style="color:var(--forest);text-decoration:none;">Single Timespan Calculator</a></strong> — Enter a single start and end date/time directly on the page and get all four metrics instantly. Accepts time in any format — 9:30, 21:30, or 2130 — with an AM/PM toggle that auto-updates when military time is detected. No file needed.</p>
+      <h2>The starting point: NETWORKDAYS</h2>
+      <p>Excel's built-in <code style="display:inline;padding:2px 6px;">NETWORKDAYS(start_date, end_date, [holidays])</code> counts the whole working days between two dates, automatically excluding Saturdays and Sundays. It's a reasonable starting point if all you need is a day count:</p>
+      <div class="formula">=NETWORKDAYS(A2, B2)</div>
+      <p>The catch: it assumes a Monday–Friday week and counts in whole days, not hours. If your ticket opened at 4:45 PM and closed at 9:15 AM the next day, NETWORKDAYS tells you it spans "2 days" — not the roughly 40 minutes of actual business time involved.</p>
     </div>
 
-    <!-- How it works -->
     <div class="section">
-      <h2>How it works</h2>
-      <p>Upload a spreadsheet (.xlsx, .xls, .ods, or .csv) with at least one column of start timestamps and one of end timestamps, with a header row at the top. The tool reads your file, lets you map which columns to use, and computes each selected metric row by row — calculating exact minute-level overlap with the relevant time windows.</p>
-      <p>Results are appended as new columns to your original data and returned as a downloadable .xlsx file. Your existing data is untouched; only the new columns are added.</p>
-      <p>You can select any combination of the four metrics, configure which days count as the weekend (Friday, Saturday, and/or Sunday), and set the daily start and end time for business hours calculations.</p>
+      <h2>Custom weekends with NETWORKDAYS.INTL</h2>
+      <p>If your organization doesn't run a Monday–Friday week — common across the Middle East, where the weekend often falls on Friday–Saturday or Friday only — <code style="display:inline;padding:2px 6px;">NETWORKDAYS.INTL</code> lets you specify which days count as weekend using a numeric code:</p>
+      <div class="formula">=NETWORKDAYS.INTL(A2, B2, 7, holidays_range)</div>
+      <p>The third argument is a weekend code (1 = Sat/Sun, 7 = Fri only, 11 = Sun only, and so on — Microsoft's documentation lists the full set). This solves the "which days are the weekend" problem, but it still doesn't solve the hours problem.</p>
     </div>
 
-    <!-- Privacy -->
     <div class="section">
-      <h2>Your data stays on your computer</h2>
-      <p>Everything runs locally in your browser using the <a href="https://sheetjs.com/" style="color: var(--forest);">SheetJS</a> library. When you upload a file, it is read directly into memory on your device — it is never transmitted to a server, never stored in a database, and never leaves your machine. Closing the tab clears everything.</p>
-      <div class="privacy-badge">🔒 100% client-side — nothing is uploaded</div>
+      <h2>Where it actually gets hard: partial days and business hours</h2>
+      <p>Once you need actual business hours — say, 9 AM to 5 PM — rather than whole days, the formula stops being one function and turns into a stack of nested IF, MOD, and MEDIAN logic. A commonly cited version looks something like this:</p>
+      <div class="formula">=(NETWORKDAYS(A2,B2)-1)*("17:00"-"09:00")+
+IF(NETWORKDAYS(A2,B2,,)=1,MEDIAN(MOD(B2,1),"17:00","09:00")-MEDIAN(MOD(A2,1),"17:00","09:00"),
+MEDIAN(MOD(B2,1),"17:00","09:00")-"09:00"+"17:00"-MEDIAN(MOD(A2,1),"17:00","09:00"))</div>
+      <p>This kind of formula works — for the specific 9-to-5, Monday-to-Friday scenario it was written for. The moment your business hours change, your weekend days change, or you need to exclude holidays too, you're rebuilding it from scratch, and a typo in one MEDIAN or MOD reference silently gives you a wrong number with no error to flag it.</p>
     </div>
 
-    <!-- Who it's for -->
     <div class="section">
-      <h2>Who uses this</h2>
-      <p><strong>Payroll and HR teams</strong> reconciling clock-in/clock-out exports and needing business-hours totals that exclude weekends and after-hours punches.</p>
-      <p><strong>Freelancers and contractors</strong> turning a log of session start/end times into billable hours for an invoice, without hand-adding minutes.</p>
-      <p><strong>Support and ops teams</strong> measuring how long tickets or incidents stayed open — separating time that accrued during business hours from time that piled up overnight or on weekends.</p>
-      <p><strong>Project managers and analysts</strong> auditing timestamped logs (shipping, session, or usage data) where "how much time actually elapsed" needs to be broken out by weekday vs. weekend.</p>
+      <h2>The edge cases that trip people up</h2>
+      <ul>
+        <li><strong>Shifts spanning midnight.</strong> If a shift starts at 10 PM and ends at 6 AM, most whole-day formulas don't correctly split the "before midnight" and "after midnight" business-hour portions.</li>
+        <li><strong>Holidays.</strong> NETWORKDAYS supports a holidays argument, but the MOD/MEDIAN partial-day formulas above usually don't — you'd need to add another layer of IF logic to skip holiday dates entirely.</li>
+        <li><strong>Daylight saving time.</strong> If your timestamps aren't timezone-aware, a DST transition can silently shift an hour in either direction.</li>
+        <li><strong>Weekend hours vs. business hours vs. total hours.</strong> Most formula stacks are built for exactly one of these metrics. Needing more than one means writing (and maintaining) more than one formula.</li>
+      </ul>
     </div>
 
-    <!-- Why -->
     <div class="section">
-      <h2>Why we built it</h2>
-      <p>Spreadsheet formulas for time math — NETWORKDAYS, MOD, custom VBA — are brittle, hard to audit, and require rebuilding from scratch for every new file. Getting business hours right is especially fiddly: NETWORKDAYS alone doesn't know about your 9-to-5 window, and stacking it with MOD and IF logic to handle partial days is where most homegrown formulas start breaking on edge cases — a ticket opened at 4:45 PM Friday, for instance, or a shift that spans midnight.</p>
-      <p>We wanted a reusable tool you could hand to anyone on a team: upload your file, pick your columns, get your answer — with the weekend days and business-hours window configurable instead of hardcoded to Monday–Friday, 9–5, since not every team or country works that schedule. No Excel expertise required, no formula to inherit and maintain.</p>
-      <p>The tool is free, supported by advertising, and will stay that way.</p>
+      <h2>The faster way: skip the formula</h2>
+      <p>If you find yourself rebuilding this formula for every new spreadsheet, it's usually faster to skip the formula entirely. Our <a href="index.html">Bulk Spreadsheet Calculator</a> takes a .xlsx, .xls, .ods, or .csv file, lets you map your start/end columns, and appends Total Hours, Business Hours, Weekend Hours, and Weekday Hours as new columns — with the weekend days and business-hours window configurable per run, and no formula to maintain. Everything runs in your browser, so the file never leaves your computer.</p>
+      <p>If you just need one calculation rather than a whole spreadsheet, the <a href="calculator.html">Single Timespan Calculator</a> does the same math for a single start and end date/time, instantly.</p>
+      <div class="callout">Both tools also support excluding US federal holidays or UK bank holidays from the Business Hours calculation — the piece most formula stacks skip entirely.</div>
     </div>
 
-    <!-- Who's behind it -->
     <div class="section">
-      <h2>Who's behind this</h2>
-      <p>Calculate My Hours is built and maintained independently, not by a large company. It's a small, focused project: two calculators, kept simple on purpose, with no account creation, no upsell, and no data collection beyond standard site analytics. Bug reports and feature requests go through the <a href="contact.html" style="color:var(--forest);text-decoration:none;">contact page</a> and get read by the person who built the tool.</p>
-    </div>
-
-    <!-- Learn More -->
-    <div class="section" id="learn-more">
-      <h2>Learn more</h2>
-      <div class="learn-grid">
-        <a class="learn-card" href="how-to-calculate-business-hours-in-excel.html">
-          <div class="learn-label">Guide</div>
-          <div class="learn-title">How to Calculate Business Hours in Excel</div>
-          <div class="learn-desc">NETWORKDAYS, MOD formulas, and the edge cases that break them — plus a faster way to get the answer.</div>
-        </a>
-        <a class="learn-card" href="business-hours-by-country-guide.html">
-          <div class="learn-label">Guide</div>
-          <div class="learn-title">What Counts as "Business Hours"?</div>
-          <div class="learn-desc">A guide to regional weekend differences, cross-timezone teams, and industry-specific coverage windows.</div>
-        </a>
-        <a class="learn-card" href="how-to-calculate-overtime-and-weekend-hours.html">
-          <div class="learn-label">Guide</div>
-          <div class="learn-title">How to Calculate Overtime and Weekend Hours</div>
-          <div class="learn-desc">The general math behind splitting a timesheet into straight time, overtime, and weekend hours.</div>
-        </a>
-      </div>
+      <h2>Related reading</h2>
+      <ul class="related-list">
+        <li><a href="business-hours-by-country-guide.html">What counts as "business hours"? A guide by region and industry</a></li>
+        <li><a href="how-to-calculate-overtime-and-weekend-hours.html">How to calculate overtime and weekend hours from a timesheet</a></li>
+      </ul>
     </div>
 
     <div class="cta-wrap" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a href="index.html">Bulk Spreadsheet Calculator →</a>
-      <a href="calculator.html" style="background:var(--amber);">Single Timespan Calculator →</a>
+      <a href="index.html">Try the Bulk Spreadsheet Calculator →</a>
+      <a href="calculator.html" style="background:var(--amber);">Try the Single Timespan Calculator →</a>
     </div>
 
   </main>
@@ -640,7 +536,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <aside class="sidebar-right">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
      crossorigin="anonymous"></script>
-<!-- AboutRight_Timespan -->
+<!-- BlogRight_ExcelHours -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
@@ -658,7 +554,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="ad-strip-bottom">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
      crossorigin="anonymous"></script>
-<!-- AboutBottom_Timespan -->
+<!-- BlogBottom_ExcelHours -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
