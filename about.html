@@ -11,7 +11,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About — Calculate My Hours | Easy Excel Timespan Calculator</title>
+<title>About — Calculate My Hours | Time Duration Calculator</title>
 <meta name="description" content="Learn how Calculate My Hours works — a free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps." />
 <link rel="canonical" href="https://www.timespancalculator.com/about.html" />
 
@@ -19,7 +19,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:title" content="About — Calculate My Hours" />
 <meta property="og:description" content="A free, browser-based tool that computes total, business, weekend, and weekday hours from spreadsheet timestamps. Nothing is uploaded to a server." />
 <meta property="og:url" content="https://www.timespancalculator.com/about.html" />
-<meta property="og:site_name" content="Calculate My Hours - Easy Excel Timespan Calculator" />
+<meta property="og:site_name" content="Calculate My Hours - Time Duration Calculator" />
 <meta property="og:image" content="https://www.timespancalculator.com/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -42,6 +42,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "url": "https://www.timespancalculator.com/",
 	"logo": "https://www.timespancalculator.com/og-image.png"
   }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Calculate My Hours",
+      "item": "https://www.timespancalculator.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": "https://www.timespancalculator.com/about.html"
+    }
+  ]
 }
 </script>
 
@@ -402,7 +423,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </svg>
     <div>
       <div class="header-brand-name">Calculate My Hours</div>
-      <div class="header-tagline">Free spreadsheet utility</div>
+      <div class="header-tagline">Free time duration calculator</div>
     </div>
   </a>
   <nav style="display:flex;align-items:center;gap:20px;">
@@ -410,6 +431,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="calculator.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Single Timespan Calculator</a>
     <a href="about.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">About</a>
     <a href="contact.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Contact</a>
+    <a href="privacy-policy.html" style="font-size:13px;color:#94A3B8;text-decoration:none;font-weight:500;">Privacy</a>
   </nav>
   <button class="ham-btn" id="hamBtn" aria-label="Open navigation" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -420,6 +442,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="calculator.html">Single Timespan Calculator</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
+  <a href="privacy-policy.html">Privacy</a>
 </div>
 
 <!-- Top ad (728×90 leaderboard) -->
@@ -472,7 +495,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <h1>Built for people who live in spreadsheets</h1>
-    <p class="lead">Calculate My Hours is working to create tools for people that want easy ways to do repetitive tasks. We're focused on making easy to use webapps that can be used use over and over again. Here we offer two free tools for computing hours between timestamps — a spreadsheet calculator for bulk rows of data, and a single-entry date calculator for quick one-off lookups. Both run entirely in your browser and calculate total, business, weekend, and weekday hours down to the minute.</p>
+    <p class="lead">Calculate My Hours started as a fix for one recurring annoyance: doing time math in Excel means either memorizing NETWORKDAYS syntax and MOD formulas or rebuilding a helper column from scratch every time a new file lands in your inbox. This site offers two free tools that do that math for you — a bulk spreadsheet calculator for rows of timestamps, and a single-entry calculator for a quick one-off answer. Both run entirely in your browser and calculate total, business, weekend, and weekday hours down to the minute.</p>
 
     <!-- Four metric cards -->
     <div class="card-grid">
@@ -520,11 +543,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="privacy-badge">🔒 100% client-side — nothing is uploaded</div>
     </div>
 
+    <!-- Who it's for -->
+    <div class="section">
+      <h2>Who uses this</h2>
+      <p><strong>Payroll and HR teams</strong> reconciling clock-in/clock-out exports and needing business-hours totals that exclude weekends and after-hours punches.</p>
+      <p><strong>Freelancers and contractors</strong> turning a log of session start/end times into billable hours for an invoice, without hand-adding minutes.</p>
+      <p><strong>Support and ops teams</strong> measuring how long tickets or incidents stayed open — separating time that accrued during business hours from time that piled up overnight or on weekends.</p>
+      <p><strong>Project managers and analysts</strong> auditing timestamped logs (shipping, session, or usage data) where "how much time actually elapsed" needs to be broken out by weekday vs. weekend.</p>
+    </div>
+
     <!-- Why -->
     <div class="section">
       <h2>Why we built it</h2>
-      <p>Spreadsheet formulas for time math — NETWORKDAYS, MOD, custom VBA — are brittle, hard to audit, and require rebuilding from scratch for every new file. We wanted a reusable tool you could hand to anyone on a team: upload your file, pick your columns, get your answer. No Excel expertise required.</p>
+      <p>Spreadsheet formulas for time math — NETWORKDAYS, MOD, custom VBA — are brittle, hard to audit, and require rebuilding from scratch for every new file. Getting business hours right is especially fiddly: NETWORKDAYS alone doesn't know about your 9-to-5 window, and stacking it with MOD and IF logic to handle partial days is where most homegrown formulas start breaking on edge cases — a ticket opened at 4:45 PM Friday, for instance, or a shift that spans midnight.</p>
+      <p>We wanted a reusable tool you could hand to anyone on a team: upload your file, pick your columns, get your answer — with the weekend days and business-hours window configurable instead of hardcoded to Monday–Friday, 9–5, since not every team or country works that schedule. No Excel expertise required, no formula to inherit and maintain.</p>
       <p>The tool is free, supported by advertising, and will stay that way.</p>
+    </div>
+
+    <!-- Who's behind it -->
+    <div class="section">
+      <h2>Who's behind this</h2>
+      <p>Calculate My Hours is built and maintained independently, not by a large company. It's a small, focused project: two calculators, kept simple on purpose, with no account creation, no upsell, and no data collection beyond standard site analytics. Bug reports and feature requests go through the <a href="contact.html" style="color:var(--forest);text-decoration:none;">contact page</a> and get read by the person who built the tool.</p>
     </div>
 
     <div class="cta-wrap" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
@@ -582,7 +621,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <p>© 2026 Calculate My Hours. All rights reserved.</p>
-  <p style="margin-top:8px;display:flex;justify-content:center;gap:20px;"><a href="index.html">Bulk Spreadsheet Calculator</a> <a href="calculator.html">Single Timespan Calculator</a> <a href="about.html">About</a> <a href="contact.html">Contact</a></p>
+  <p style="margin-top:8px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;"><a href="index.html">Bulk Spreadsheet Calculator</a> <a href="calculator.html">Single Timespan Calculator</a> <a href="about.html">About</a> <a href="contact.html">Contact</a> <a href="privacy-policy.html">Privacy</a></p>
 </footer>
 
 <script>

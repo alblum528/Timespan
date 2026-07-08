@@ -11,26 +11,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Timespan Calculator — Hours Between Two Dates & Times | Calculate My Hours</title>
+<title>Time Duration Calculator — Hours Between Two Dates & Times | Calculate My Hours</title>
 <meta name="description" content="Instantly calculate total hours, business hours, weekend hours, and weekday hours between any two dates and times. Enter dates manually or use the calendar picker. Free, no sign-up, runs entirely in your browser." />
-<meta name="keywords" content="hours between two dates, time between dates calculator, hours between dates and times, business hours calculator, calculate hours between two times, date time duration calculator, elapsed time calculator, timespan calculator, how many hours between two dates, weekday hours calculator" />
+<meta name="keywords" content="time duration calculator, hours between two dates, time between dates calculator, hours between dates and times, business hours calculator, calculate hours between two times, date time duration calculator, elapsed time calculator, how many hours between two dates, weekday hours calculator" />
 <link rel="canonical" href="https://www.timespancalculator.com/calculator.html" />
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Timespan Calculator — Hours Between Two Dates & Times" />
+<meta property="og:title" content="Time Duration Calculator — Hours Between Two Dates & Times | Calculate My Hours" />
 <meta property="og:description" content="Enter a start and end date/time to instantly calculate total, business, weekend, and weekday hours. Accepts any time format — 9:30, 21:30, or 2130. Free and browser-based." />
 <meta property="og:url" content="https://www.timespancalculator.com/calculator.html" />
 <meta property="og:site_name" content="Calculate My Hours" />
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Timespan Calculator — Hours Between Two Dates & Times" />
+<meta name="twitter:title" content="Time Duration Calculator — Hours Between Two Dates & Times | Calculate My Hours" />
 <meta name="twitter:description" content="Instantly calculate total, business, weekend, and weekday hours between any two dates and times. Free, runs in your browser." />
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Timespan Calculator — Hours Between Two Dates & Times",
+  "name": "Time Duration Calculator — Hours Between Two Dates & Times | Calculate My Hours",
   "url": "https://www.timespancalculator.com/calculator.html",
   "description": "Enter a start and end date/time to calculate total hours, business hours, weekend hours, and weekday hours. Accepts any time format. Runs entirely in the browser.",
   "applicationCategory": "BusinessApplication",
@@ -41,6 +41,84 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "priceCurrency": "USD",
 	"logo": "https://www.timespancalculator.com/og-image.png"
   }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Calculate My Hours",
+      "item": "https://www.timespancalculator.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Time Duration Calculator — Hours Between Two Dates & Times",
+      "item": "https://www.timespancalculator.com/calculator.html"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What time formats can I type into the Time field?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator accepts 9:30, 930, 0930, 21:30, 2130, 9:30 AM, and 9:30PM. If you enter a value in 24-hour (military) format, the AM/PM toggle updates automatically to match."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the calculator account for public holidays?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, optionally. Check the boxes to exclude US federal holidays and/or UK bank holidays, and Business Hours will skip those dates in addition to your chosen weekend days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I change which days count as the weekend?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Friday, Saturday, and Sunday can each be toggled on or off as a weekend day, which affects both the Weekend Hours and Business Hours calculations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between Business Hours and Total Hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Total Hours counts every elapsed hour between your start and end time with no exclusions. Business Hours counts only the portion of that span falling on non-weekend days within a configurable daily window, such as 9 AM to 5 PM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this calculator support time zones?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not yet — the calculator currently assumes both the start and end time are in the same local time zone. A time zone selector is on the roadmap."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data sent to a server when I calculate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All date math happens locally in your browser using JavaScript. Nothing you type is transmitted anywhere or stored."
+      }
+    }
+  ]
 }
 </script>
 
@@ -119,8 +197,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="calculator.html">Single Timespan Calculator</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
+  <a href="#faq">FAQ</a>
 </nav>
 <div id="root"></div>
+
+<section id="faq" style="max-width: 1180px; margin: 0 auto; padding: 8px 24px 48px;">
+  <div style="max-width: 760px;">
+    <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; font-weight: 600; margin-bottom: 10px;">Frequently asked questions</div>
+    <h2 style="font-family: 'Space Grotesk','Inter',sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 20px;">About the single timespan calculator</h2>
+    <div class="cmh-faq-list">
+      <details class="cmh-faq-item">
+        <summary>What time formats can I type into the Time field?</summary>
+        <p>The calculator accepts 9:30, 930, 0930, 21:30, 2130, 9:30 AM, and 9:30PM. If you enter a value in 24-hour (military) format, the AM/PM toggle updates automatically to match.</p>
+      </details>
+      <details class="cmh-faq-item">
+        <summary>Does the calculator account for public holidays?</summary>
+        <p>Yes, optionally. Check the boxes to exclude US federal holidays and/or UK bank holidays, and Business Hours will skip those dates in addition to your chosen weekend days.</p>
+      </details>
+      <details class="cmh-faq-item">
+        <summary>Can I change which days count as the weekend?</summary>
+        <p>Yes. Friday, Saturday, and Sunday can each be toggled on or off as a weekend day, which affects both the Weekend Hours and Business Hours calculations.</p>
+      </details>
+      <details class="cmh-faq-item">
+        <summary>What's the difference between Business Hours and Total Hours?</summary>
+        <p>Total Hours counts every elapsed hour between your start and end time with no exclusions. Business Hours counts only the portion of that span falling on non-weekend days within a configurable daily window, such as 9 AM to 5 PM.</p>
+      </details>
+      <details class="cmh-faq-item">
+        <summary>Does this calculator support time zones?</summary>
+        <p>Not yet — the calculator currently assumes both the start and end time are in the same local time zone. A time zone selector is on the roadmap.</p>
+      </details>
+      <details class="cmh-faq-item">
+        <summary>Is my data sent to a server when I calculate?</summary>
+        <p>No. All date math happens locally in your browser using JavaScript. Nothing you type is transmitted anywhere or stored.</p>
+      </details>
+    </div>
+  </div>
+</section>
+<style>
+  .cmh-faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .cmh-faq-item { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 2px; padding: 4px 20px; }
+  .cmh-faq-item summary { cursor: pointer; list-style: none; padding: 14px 0; font-size: 14.5px; font-weight: 600; color: #0F172A; }
+  .cmh-faq-item summary::-webkit-details-marker { display: none; }
+  .cmh-faq-item summary::before { content: "+"; display: inline-block; width: 18px; color: #1D4ED8; font-weight: 700; }
+  .cmh-faq-item[open] summary::before { content: "\2212"; }
+  .cmh-faq-item p { font-size: 13.5px; color: #334155; line-height: 1.65; margin: 0 0 16px 18px; }
+</style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -633,13 +754,14 @@ function ManualCalculator() {
         React.createElement(BrandIcon, null),
         React.createElement('div', null,
           React.createElement('div', { style: { fontFamily: FONT_DISPLAY, fontWeight: 600, fontSize: 17, color: COLORS.paper, letterSpacing: '-0.01em' } }, 'Calculate My Hours'),
-          React.createElement('div', { style: { fontSize: 11, color: '#94A3B8', fontFamily: FONT_BODY, marginTop: 2 } }, 'Free timespan utility')
+          React.createElement('div', { style: { fontSize: 11, color: '#94A3B8', fontFamily: FONT_BODY, marginTop: 2 } }, 'Free time duration calculator')
         )
       ),
       !isMobile && React.createElement('nav', { style: { display: 'flex', alignItems: 'center', gap: 20 } },
         React.createElement('a', { href: 'index.html', style: { fontSize: 13, color: '#94A3B8', textDecoration: 'none', fontWeight: 500 } }, 'Bulk Spreadsheet Calculator'),
         React.createElement('a', { href: 'about.html', style: { fontSize: 13, color: '#94A3B8', textDecoration: 'none', fontWeight: 500 } }, 'About'),
-        React.createElement('a', { href: 'contact.html', style: { fontSize: 13, color: '#94A3B8', textDecoration: 'none', fontWeight: 500 } }, 'Contact')
+        React.createElement('a', { href: 'contact.html', style: { fontSize: 13, color: '#94A3B8', textDecoration: 'none', fontWeight: 500 } }, 'Contact'),
+        React.createElement('a', { href: '#faq', style: { fontSize: 13, color: '#94A3B8', textDecoration: 'none', fontWeight: 500 } }, 'FAQ')
       )
     ),
 
@@ -670,7 +792,7 @@ function ManualCalculator() {
           ),
           React.createElement('h1', {
             style: { fontFamily: FONT_DISPLAY, fontSize: 32, fontWeight: 700, letterSpacing: '-0.01em', margin: '0 0 12px 0', lineHeight: 1.15 }
-          }, 'Single Timespan Calculator'),
+          }, 'Time Duration Calculator — Hours Between Two Dates & Times'),
           React.createElement('p', {
             style: { fontSize: 15, color: COLORS.inkSoft, lineHeight: 1.65, margin: 0, maxWidth: 580 }
           }, 'Enter a start and end date/time to instantly calculate total, business, weekend, and weekday hours. Time can be entered in any format — 9:30, 21:30, or 2130 all work.'),
@@ -953,7 +1075,8 @@ function ManualCalculator() {
         React.createElement('a', { href: 'index.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Bulk Spreadsheet Calculator'),
         React.createElement('a', { href: 'calculator.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Single Timespan Calculator'),
         React.createElement('a', { href: 'about.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'About'),
-        React.createElement('a', { href: 'contact.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Contact')
+        React.createElement('a', { href: 'contact.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Contact'),
+        React.createElement('a', { href: 'privacy-policy.html', style: { fontSize: 12, color: COLORS.textMuted, textDecoration: 'none' } }, 'Privacy')
       )
     )
   );

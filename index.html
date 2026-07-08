@@ -18,21 +18,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Free Excel Timespan Calculator - Calculate My Hours</title>
+    <title>Bulk Time Duration Calculator for Excel Spreadsheets | Calculate My Hours</title>
     <meta
       name="description"
-      content="Upload a spreadsheet with start/end timestamps and get total hours, business hours, weekend hours, and weekday hours calculated to the minute. Free, runs entirely in your browser."
+      content="Upload a spreadsheet with start/end timestamps and get total, business, weekend, and weekday hours calculated to the minute — a bulk time duration calculator built for Excel, timesheets, and payroll audits. Free, runs entirely in your browser."
     />
     <meta
       name="keywords"
-      content="hours calculator, business hours calculator, weekend hours calculator, weekday hours calculator, time between dates calculator, excel hours between two dates, timesheet calculator, payroll hours calculator, elapsed time calculator excel"
+      content="time duration calculator, hours calculator, business hours calculator, weekend hours calculator, weekday hours calculator, time between dates calculator, excel hours between two dates, timesheet calculator, payroll hours calculator, elapsed time calculator excel"
     />
     <link rel="canonical" href="https://www.timespancalculator.com/" />
 
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Free Excel Timespan Calculator - Calculate My Hours"
+      content="Bulk Time Duration Calculator for Excel Spreadsheets | Calculate My Hours"
     />
     <meta
       property="og:description"
@@ -53,7 +53,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Free Excel Timespan Calculator - Calculate My Hours"
+      content="Bulk Time Duration Calculator for Excel Spreadsheets | Calculate My Hours"
     />
     <meta
       name="twitter:description"
@@ -68,7 +68,7 @@
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Free Excel Timespan Calculator - Calculate My Hours",
+        "name": "Bulk Time Duration Calculator for Excel Spreadsheets | Calculate My Hours",
         "url": "https://www.timespancalculator.com/",
         "description": "Browser-based tool that calculates total hours, business hours, weekend hours, and weekday hours from spreadsheet timestamps, then returns the file with new columns added.",
         "applicationCategory": "BusinessApplication",
@@ -79,6 +79,92 @@
           "priceCurrency": "USD",
 		  "logo": "https://www.timespancalculator.com/og-image.png"
         }
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Calculate My Hours",
+            "item": "https://www.timespancalculator.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Bulk Time Duration Calculator for Excel Spreadsheets",
+            "item": "https://www.timespancalculator.com/"
+          }
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What file formats does the bulk spreadsheet calculator support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can upload .xlsx, .xls, .ods, or .csv files. The tool reads the file in your browser using the SheetJS library, so no server ever sees your data."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "My timestamps are split across separate date and time columns — will this still work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. When the tool detects separate start/end date and time columns, it switches to a four-column mapping mode (Start Date, Start Time, End Date, End Time) instead of requiring a single combined timestamp column."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool overwrite my original spreadsheet data?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The calculator appends new columns for each metric you choose and returns a new downloadable .xlsx file. Your original columns and your original file are left untouched."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the difference between Total, Business, Weekend, and Weekday Hours?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Total Hours is every elapsed hour between start and end with no exclusions. Business Hours counts only the hours that fall on non-weekend days within your configured daily window (e.g. 9 AM–5 PM). Weekend Hours counts hours that fall on the days you've marked as weekend, midnight to midnight. Weekday Hours is Total Hours minus Weekend Hours — the full 24-hour span on non-weekend days."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I exclude public holidays from Business Hours?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. When Business Hours is selected, you can check boxes to exclude US federal holidays and/or UK bank holidays from the calculation, in addition to your chosen weekend days."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a limit to how many rows I can upload?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There's no hard row limit built into the tool. Since everything runs in your browser rather than on a server, the practical limit is your device's memory — spreadsheets with tens of thousands of rows generally process without issue."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my spreadsheet file uploaded to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The file is read directly into your browser's memory and never transmitted anywhere. Closing the tab clears everything. Nothing is stored in a database."
+            }
+          }
+        ]
       }
     </script>
 
@@ -206,8 +292,55 @@
       <a href="calculator.html">Single Timespan Calculator</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="#faq">FAQ</a>
     </nav>
     <div id="root"></div>
+
+    <section id="faq" style="max-width: 1180px; margin: 0 auto; padding: 8px 24px 48px;">
+      <div style="max-width: 760px;">
+        <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; font-weight: 600; margin-bottom: 10px;">Frequently asked questions</div>
+        <h2 style="font-family: 'Space Grotesk','Inter',sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 20px;">About the bulk spreadsheet calculator</h2>
+        <div class="cmh-faq-list">
+          <details class="cmh-faq-item">
+            <summary>What file formats does the bulk spreadsheet calculator support?</summary>
+            <p>You can upload .xlsx, .xls, .ods, or .csv files. The tool reads the file in your browser using the SheetJS library, so no server ever sees your data.</p>
+          </details>
+          <details class="cmh-faq-item">
+            <summary>My timestamps are split across separate date and time columns — will this still work?</summary>
+            <p>Yes. When the tool detects separate start/end date and time columns, it switches to a four-column mapping mode (Start Date, Start Time, End Date, End Time) instead of requiring a single combined timestamp column.</p>
+          </details>
+          <details class="cmh-faq-item">
+            <summary>Does this tool overwrite my original spreadsheet data?</summary>
+            <p>No. The calculator appends new columns for each metric you choose and returns a new downloadable .xlsx file. Your original columns and your original file are left untouched.</p>
+          </details>
+          <details class="cmh-faq-item">
+            <summary>What's the difference between Total, Business, Weekend, and Weekday Hours?</summary>
+            <p>Total Hours is every elapsed hour between start and end with no exclusions. Business Hours counts only the hours that fall on non-weekend days within your configured daily window (e.g. 9 AM–5 PM). Weekend Hours counts hours that fall on the days you've marked as weekend, midnight to midnight. Weekday Hours is Total Hours minus Weekend Hours — the full 24-hour span on non-weekend days.</p>
+          </details>
+          <details class="cmh-faq-item">
+            <summary>Can I exclude public holidays from Business Hours?</summary>
+            <p>Yes. When Business Hours is selected, you can check boxes to exclude US federal holidays and/or UK bank holidays from the calculation, in addition to your chosen weekend days.</p>
+          </details>
+          <details class="cmh-faq-item">
+            <summary>Is there a limit to how many rows I can upload?</summary>
+            <p>There's no hard row limit built into the tool. Since everything runs in your browser rather than on a server, the practical limit is your device's memory — spreadsheets with tens of thousands of rows generally process without issue.</p>
+          </details>
+          <details class="cmh-faq-item">
+            <summary>Is my spreadsheet file uploaded to a server?</summary>
+            <p>No. The file is read directly into your browser's memory and never transmitted anywhere. Closing the tab clears everything. Nothing is stored in a database.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+    <style>
+      .cmh-faq-list { display: flex; flex-direction: column; gap: 10px; }
+      .cmh-faq-item { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 2px; padding: 4px 20px; }
+      .cmh-faq-item summary { cursor: pointer; list-style: none; padding: 14px 0; font-size: 14.5px; font-weight: 600; color: #0F172A; }
+      .cmh-faq-item summary::-webkit-details-marker { display: none; }
+      .cmh-faq-item summary::before { content: "+"; display: inline-block; width: 18px; color: #1D4ED8; font-weight: 700; }
+      .cmh-faq-item[open] summary::before { content: "\2212"; }
+      .cmh-faq-item p { font-size: 13.5px; color: #334155; line-height: 1.65; margin: 0 0 16px 18px; }
+    </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -1035,7 +1168,7 @@
                       marginTop: 2,
                     },
                   },
-                  "Free timespan utility",
+                  "Free time duration calculator",
                 ),
               ),
             ),
@@ -1084,6 +1217,20 @@
                     },
                   },
                   "Contact",
+                ),
+                React.createElement(
+                  "a",
+                  {
+                    href: "#faq",
+                    style: {
+                      fontSize: 13,
+                      color: "#94A3B8",
+                      textDecoration: "none",
+                      fontFamily: FONT_BODY,
+                      fontWeight: 500,
+                    },
+                  },
+                  "FAQ",
                 ),
               ),
           ),
@@ -1158,7 +1305,7 @@
                       lineHeight: 1.15,
                     },
                   },
-                  "Free Easy Excel Timespan Calculator",
+                  "Bulk Time Duration Calculator for Excel Spreadsheets",
                 ),
                 React.createElement(
                   "p",
@@ -2584,6 +2731,109 @@
                   label: "Advertisement",
                 }),
               ),
+          ),
+          React.createElement(
+            "div",
+            {
+              style: {
+                borderTop: `1px solid ${COLORS.line}`,
+                padding: "24px 28px",
+                textAlign: "center",
+              },
+            },
+            React.createElement(
+              "div",
+              {
+                style: {
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: 10,
+                },
+              },
+              React.createElement(WeekStrip, { size: 4, gap: 3 }),
+            ),
+            React.createElement(
+              "div",
+              {
+                style: {
+                  fontSize: 12,
+                  color: COLORS.textMuted,
+                  marginBottom: 8,
+                },
+              },
+              "© 2026 Calculate My Hours. All rights reserved.",
+            ),
+            React.createElement(
+              "div",
+              {
+                style: {
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: 16,
+                  flexWrap: "wrap",
+                },
+              },
+              React.createElement(
+                "a",
+                {
+                  href: "index.html",
+                  style: {
+                    fontSize: 12,
+                    color: COLORS.textMuted,
+                    textDecoration: "none",
+                  },
+                },
+                "Bulk Spreadsheet Calculator",
+              ),
+              React.createElement(
+                "a",
+                {
+                  href: "calculator.html",
+                  style: {
+                    fontSize: 12,
+                    color: COLORS.textMuted,
+                    textDecoration: "none",
+                  },
+                },
+                "Single Timespan Calculator",
+              ),
+              React.createElement(
+                "a",
+                {
+                  href: "about.html",
+                  style: {
+                    fontSize: 12,
+                    color: COLORS.textMuted,
+                    textDecoration: "none",
+                  },
+                },
+                "About",
+              ),
+              React.createElement(
+                "a",
+                {
+                  href: "contact.html",
+                  style: {
+                    fontSize: 12,
+                    color: COLORS.textMuted,
+                    textDecoration: "none",
+                  },
+                },
+                "Contact",
+              ),
+              React.createElement(
+                "a",
+                {
+                  href: "privacy-policy.html",
+                  style: {
+                    fontSize: 12,
+                    color: COLORS.textMuted,
+                    textDecoration: "none",
+                  },
+                },
+                "Privacy",
+              ),
+            ),
           ),
         );
       }
