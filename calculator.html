@@ -104,6 +104,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     },
     {
       "@type": "Question",
+      "name": "What are business day hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Business day hours (also called business hours or working hours) are the hours that fall within your organization's working window on non-weekend days — commonly 9 AM to 5 PM, Monday through Friday. This calculator's Business Hours result gives you exactly that figure, with the daily window and weekend days fully configurable."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Does this calculator support time zones?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -223,11 +231,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="cmh-learn-title">How to Calculate Overtime and Weekend Hours</div>
         <div class="cmh-learn-desc">The general math behind splitting a timesheet into straight time, overtime, and weekend hours.</div>
       </a>
+      <a class="cmh-learn-card" href="how-to-count-business-days-in-excel.html">
+        <div class="cmh-learn-label">Guide</div>
+        <div class="cmh-learn-title">How to Count Business Days in Excel</div>
+        <div class="cmh-learn-desc">NETWORKDAYS, WORKDAY, and the errors that most often throw off the count.</div>
+      </a>
     </div>
   </div>
 </section>
 <style>
-  .cmh-learn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cmh-learn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
   .cmh-learn-card { display: block; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 2px; padding: 18px 20px; text-decoration: none; transition: border-color 0.12s; }
   .cmh-learn-card:hover { border-color: #1D4ED8; }
   .cmh-learn-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #1D4ED8; margin-bottom: 6px; }
@@ -258,6 +271,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <details class="cmh-faq-item">
         <summary>What's the difference between Business Hours and Total Hours?</summary>
         <p>Total Hours counts every elapsed hour between your start and end time with no exclusions. Business Hours counts only the portion of that span falling on non-weekend days within a configurable daily window, such as 9 AM to 5 PM.</p>
+      </details>
+      <details class="cmh-faq-item">
+        <summary>What are business day hours?</summary>
+        <p>Business day hours (also called business hours or working hours) are the hours that fall within your organization's working window on non-weekend days — commonly 9 AM to 5 PM, Monday through Friday. This calculator's Business Hours result gives you exactly that figure, with the daily window and weekend days fully configurable. For a whole-day count instead, see our guide on <a href="how-to-count-business-days-in-excel.html" style="color:#1D4ED8;">counting business days in Excel</a>.</p>
       </details>
       <details class="cmh-faq-item">
         <summary>Does this calculator support time zones?</summary>
@@ -855,7 +872,7 @@ function ManualCalculator() {
           }, 'Time Duration Calculator — Hours Between Two Dates & Times'),
           React.createElement('p', {
             style: { fontSize: 15, color: COLORS.inkSoft, lineHeight: 1.65, margin: 0, maxWidth: 580 }
-          }, 'Enter a start and end date/time to instantly calculate total, business, weekend, and weekday hours. Time can be entered in any format — 9:30, 21:30, or 2130 all work.'),
+          }, 'This calculator finds the hours between two dates and times — total, business, weekend, and weekday hours, all at once. Enter a start and end date/time and time can be entered in any format — 9:30, 21:30, or 2130 all work.'),
           React.createElement('a', {
             href: 'index.html',
             style: {

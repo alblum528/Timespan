@@ -13,7 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>How to Calculate Business Hours in Excel (NETWORKDAYS, MOD & Where They Break) | Calculate My Hours</title>
 <meta name="description" content="A practical guide to calculating business hours between two dates in Excel — NETWORKDAYS, NETWORKDAYS.INTL, MOD-based partial-day formulas, and the edge cases that break them." />
-<meta name="keywords" content="calculate business hours excel, networkdays formula, networkdays.intl, excel business hours between two dates, mod formula time, excel time formulas" />
+<meta name="keywords" content="calculate business hours excel, calculating working hours in excel, working hours formula excel, networkdays formula, networkdays.intl, excel business hours between two dates, mod formula time, excel time formulas" />
 <link rel="canonical" href="https://www.timespancalculator.com/how-to-calculate-business-hours-in-excel.html" />
 
 <meta property="og:type" content="article" />
@@ -477,7 +477,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <h1>How to Calculate Business Hours in Excel (NETWORKDAYS, MOD & Where They Break)</h1>
     <p class="byline">Updated July 14, 2026 · 7 min read</p>
-    <p class="lead">If you've ever needed to know how many working hours fall between two timestamps, you've probably run into NETWORKDAYS, then discovered it only counts whole days — and gone looking for a way to bolt on partial-day math. Here's how the formulas actually work, where they fall apart, and what to do instead.</p>
+    <p class="lead">If you've ever needed to know how many working hours (or business hours — same thing, different name) fall between two timestamps, you've probably run into NETWORKDAYS, then discovered it only counts whole days — and gone looking for a way to bolt on partial-day math. Here's how the formulas actually work, where they fall apart, and what to do instead.</p>
+    <p class="lead" style="margin-top:-20px;">Note: if what you actually need is a whole-day count rather than an hour-level figure, see our separate guide on <a href="how-to-count-business-days-in-excel.html">counting business days in Excel</a> — NETWORKDAYS and WORKDAY handle that case on their own, without any of the partial-day math below.</p>
 
     <div class="section">
       <h2>The starting point: NETWORKDAYS</h2>
@@ -520,8 +521,15 @@ MEDIAN(MOD(B2,1),"17:00","09:00")-"09:00"+"17:00"-MEDIAN(MOD(A2,1),"17:00","09:0
     </div>
 
     <div class="section">
+      <h2>Frequently asked questions</h2>
+      <p><strong>Is "working hours" the same as "business hours" in Excel?</strong><br />Yes. "Working hours," "business hours," and "office hours" are used interchangeably in most spreadsheets and formulas — there's no functional difference. All the NETWORKDAYS/MOD formulas above apply equally whichever term you use.</p>
+      <p><strong>What's the difference between counting business days and calculating working hours?</strong><br />Counting business days (NETWORKDAYS, WORKDAY) gives you a whole-number day count and ignores time entirely. Calculating working hours needs the partial-day math covered in this guide, because a shift or ticket rarely starts and ends exactly at midnight. See our <a href="how-to-count-business-days-in-excel.html">guide to counting business days in Excel</a> if a day count is actually all you need.</p>
+    </div>
+
+    <div class="section">
       <h2>Related reading</h2>
       <ul class="related-list">
+        <li><a href="how-to-count-business-days-in-excel.html">How to count business days in Excel (NETWORKDAYS, WORKDAY & common errors)</a></li>
         <li><a href="business-hours-by-country-guide.html">What counts as "business hours"? A guide by region and industry</a></li>
         <li><a href="how-to-calculate-overtime-and-weekend-hours.html">How to calculate overtime and weekend hours from a timesheet</a></li>
       </ul>

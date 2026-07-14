@@ -11,34 +11,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>How to Calculate Overtime and Weekend Hours from a Timesheet | Calculate My Hours</title>
-<meta name="description" content="A practical guide to splitting a raw timesheet into straight time, overtime, and weekend hours — the common thresholds, the common mistakes, and how to automate the math." />
-<meta name="keywords" content="calculate overtime hours, weekend hours timesheet, overtime calculator, timesheet hours breakdown, payroll hours calculation, overtime threshold" />
-<link rel="canonical" href="https://www.timespancalculator.com/how-to-calculate-overtime-and-weekend-hours.html" />
+<title>How to Count Business Days in Excel (NETWORKDAYS, WORKDAY & Common Errors) | Calculate My Hours</title>
+<meta name="description" content="A practical guide to counting business days between two dates in Excel — NETWORKDAYS, NETWORKDAYS.INTL, WORKDAY, WORKDAY.INTL, and the errors that most often throw off the count." />
+<meta name="keywords" content="count business days in excel, business days formula in excel, excel calculate business days, networkdays formula, workday function excel, business days between two dates, networkdays.intl" />
+<link rel="canonical" href="https://www.timespancalculator.com/how-to-count-business-days-in-excel.html" />
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="How to Calculate Overtime and Weekend Hours from a Timesheet" />
-<meta property="og:description" content="A practical guide to splitting a raw timesheet into straight time, overtime, and weekend hours — thresholds, mistakes, and how to automate the math." />
-<meta property="og:url" content="https://www.timespancalculator.com/how-to-calculate-overtime-and-weekend-hours.html" />
+<meta property="og:title" content="How to Count Business Days in Excel (NETWORKDAYS, WORKDAY & Common Errors)" />
+<meta property="og:description" content="A practical guide to counting business days between two dates in Excel — the formulas, the errors that throw off the count, and when you need hours instead of days." />
+<meta property="og:url" content="https://www.timespancalculator.com/how-to-count-business-days-in-excel.html" />
 <meta property="og:site_name" content="Calculate My Hours - Time Duration Calculator" />
 <meta property="og:image" content="https://www.timespancalculator.com/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="How to Calculate Overtime and Weekend Hours from a Timesheet" />
-<meta name="twitter:description" content="A practical guide to splitting a raw timesheet into straight time, overtime, and weekend hours — thresholds, mistakes, and how to automate the math." />
+<meta name="twitter:title" content="How to Count Business Days in Excel (NETWORKDAYS, WORKDAY & Common Errors)" />
+<meta name="twitter:description" content="A practical guide to counting business days between two dates in Excel — the formulas, the errors that throw off the count, and when you need hours instead of days." />
 <meta name="twitter:image" content="https://www.timespancalculator.com/og-image.png" />
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "How to Calculate Overtime and Weekend Hours from a Timesheet",
-  "description": "A practical guide to splitting a raw timesheet into straight time, overtime, and weekend hours — the common thresholds, the common mistakes, and how to automate the math.",
-  "url": "https://www.timespancalculator.com/how-to-calculate-overtime-and-weekend-hours.html",
-  "datePublished": "2026-07-14",
-  "dateModified": "2026-07-14",
+  "headline": "How to Count Business Days in Excel (NETWORKDAYS, WORKDAY & Common Errors)",
+  "description": "A practical guide to counting business days between two dates in Excel — NETWORKDAYS, NETWORKDAYS.INTL, WORKDAY, WORKDAY.INTL, and the errors that most often throw off the count.",
+  "url": "https://www.timespancalculator.com/how-to-count-business-days-in-excel.html",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
   "author": {
     "@type": "Organization",
     "name": "Calculate My Hours"
@@ -53,7 +53,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.timespancalculator.com/how-to-calculate-overtime-and-weekend-hours.html"
+    "@id": "https://www.timespancalculator.com/how-to-count-business-days-in-excel.html"
   }
 }
 </script>
@@ -72,8 +72,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "How to Calculate Overtime and Weekend Hours from a Timesheet",
-      "item": "https://www.timespancalculator.com/how-to-calculate-overtime-and-weekend-hours.html"
+      "name": "How to Count Business Days in Excel",
+      "item": "https://www.timespancalculator.com/how-to-count-business-days-in-excel.html"
     }
   ]
 }
@@ -264,25 +264,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-bottom: 6px;
   }
   .section a { color: var(--forest); }
-  table.hours-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13.5px;
+  code, .formula {
+    display: block;
+    background: #0F172A;
+    color: #E2E8F0;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 12.5px;
+    line-height: 1.6;
+    padding: 14px 16px;
+    border-radius: 2px;
+    overflow-x: auto;
     margin: 10px 0;
   }
-  table.hours-table th, table.hours-table td {
-    text-align: left;
-    padding: 9px 12px;
-    border-bottom: 1px solid var(--line);
-  }
-  table.hours-table th {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    font-weight: 700;
-  }
-  table.hours-table td { color: var(--ink-soft); }
   .callout {
     background: var(--amber-soft);
     border: 1px solid #BFDBFE;
@@ -290,16 +283,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     padding: 14px 18px;
     font-size: 13px;
     color: var(--forest);
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-  .disclaimer {
-    background: #FEF9E7;
-    border: 1px solid #FDE68A;
-    border-radius: 2px;
-    padding: 14px 18px;
-    font-size: 12.5px;
-    color: #92400E;
     line-height: 1.6;
     margin-top: 10px;
   }
@@ -443,13 +426,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Top ad (responsive) -->
 <div class="ad-strip-top">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
-     crossorigin="anonymous"></script>
-<!-- BlogTop_Overtime -->
+<!-- TODO: create an AdSense ad unit for this page in the dashboard and paste its slot ID below (BlogTop_BusinessDays) -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="1905657346"
+     data-ad-slot="0000000001"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -462,13 +443,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- Left sidebar ads -->
   <aside class="sidebar-left">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
-     crossorigin="anonymous"></script>
-<!-- BlogLeft_Overtime -->
+<!-- TODO: create an AdSense ad unit for this page in the dashboard and paste its slot ID below (BlogLeft_BusinessDays) -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="9846927789"
+     data-ad-slot="0000000002"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -492,75 +471,72 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       Guide
     </div>
 
-    <h1>How to Calculate Overtime and Weekend Hours from a Timesheet</h1>
-    <p class="byline">Updated July 14, 2026 · 6 min read</p>
-    <p class="lead">Turning a raw list of clock-in/clock-out timestamps into "straight time," "overtime," and "weekend hours" sounds simple until you actually try it in a spreadsheet. Here's how the split typically works, the thresholds involved, and the mistakes that most often throw the numbers off.</p>
-
-    <div class="disclaimer">This article explains common conventions for splitting timesheet hours — it is general information, not legal, tax, or payroll advice. Overtime rules vary by country, state/province, industry, and individual employment agreement. Confirm the applicable rules with your local labor authority, payroll provider, or legal counsel before applying them.</div>
+    <h1>How to Count Business Days in Excel (NETWORKDAYS, WORKDAY & Common Errors)</h1>
+    <p class="byline">Updated July 13, 2026 · 6 min read</p>
+    <p class="lead">If what you need is a plain day count — how many working days fall between two dates, or what date lands five business days from now — Excel handles it in a single formula. No MOD, no MEDIAN, no partial-day math. Here's how NETWORKDAYS and WORKDAY work, where they differ from business-hours formulas, and the mistakes that most often throw off the count.</p>
 
     <div class="section">
-      <h2>Straight time vs. overtime: the basic split</h2>
-      <p>Most systems start with the same two buckets: <strong>straight time</strong> (hours worked up to a standard threshold) and <strong>overtime</strong> (hours worked beyond it, typically paid at a higher rate). The threshold and the multiplier are where the variation begins.</p>
+      <h2>Counting the days between two dates: NETWORKDAYS</h2>
+      <p><code style="display:inline;padding:2px 6px;">NETWORKDAYS(start_date, end_date, [holidays])</code> returns the number of whole working days between two dates, excluding Saturdays and Sundays:</p>
+      <div class="formula">=NETWORKDAYS(A2, B2)</div>
+      <p>The detail that trips people up: NETWORKDAYS counts <em>both</em> the start and end date if they fall on workdays. A Monday-to-Friday range returns 5, not 4 — because it's counting calendar days elapsed inclusively, not the gap between them. If you actually want an exclusive count, subtract 1 from the result.</p>
+      <p>To exclude holidays as well as weekends, pass a range of holiday dates as the third argument:</p>
+      <div class="formula">=NETWORKDAYS(A2, B2, D2:D15)</div>
+    </div>
+
+    <div class="section">
+      <h2>Custom weekends: NETWORKDAYS.INTL</h2>
+      <p>NETWORKDAYS assumes a Saturday–Sunday weekend. If that's not your organization's schedule — common across the Middle East, where the weekend often falls on Friday–Saturday or Friday only — <code style="display:inline;padding:2px 6px;">NETWORKDAYS.INTL</code> lets you specify which days count as weekend using a numeric code:</p>
+      <div class="formula">=NETWORKDAYS.INTL(A2, B2, 7, D2:D15)</div>
+      <p>The third argument is a weekend code — 1 for Sat/Sun (the default), 7 for Friday only, 11 for Sunday only, and so on; Microsoft's documentation lists the full set of 14 preset codes, plus a 7-character string format if none of the presets fit (e.g. <code style="display:inline;padding:2px 6px;">"0000011"</code> marks only the 6th and 7th listed days as weekend).</p>
+    </div>
+
+    <div class="section">
+      <h2>Going the other direction: WORKDAY and WORKDAY.INTL</h2>
+      <p>NETWORKDAYS answers "how many business days are between these two dates?" <code style="display:inline;padding:2px 6px;">WORKDAY</code> answers the reverse question — "what date is N business days from this start date?" It's the formula behind most "ships in 5 business days" or "due in 10 working days" calculations:</p>
+      <div class="formula">=WORKDAY(A2, 5)</div>
+      <p>A negative value for <em>days</em> counts backward instead of forward — useful for "what was the date 3 business days before this deadline?" Like its counterpart, <code style="display:inline;padding:2px 6px;">WORKDAY.INTL</code> adds the same weekend-code and holiday arguments as NETWORKDAYS.INTL, so you're not stuck with a Monday–Friday assumption.</p>
+    </div>
+
+    <div class="section">
+      <h2>The errors that most often throw off the count</h2>
       <ul>
-        <li>In the US, the federal default under the Fair Labor Standards Act is overtime after 40 hours in a workweek, at 1.5× the regular rate — but several states (California among them) also apply daily overtime after 8 hours in a single day.</li>
-        <li>Many other countries define overtime differently — some by daily thresholds, some by weekly, some with different multipliers for weekday vs. weekend overtime.</li>
-        <li>Some employment contracts define their own thresholds entirely, independent of the statutory minimum.</li>
+        <li><strong>Off-by-one confusion.</strong> NETWORKDAYS counts both endpoints inclusively. If your mental model is "days between" (exclusive), the formula will look like it's returning one too many.</li>
+        <li><strong>Holiday dates stored as text.</strong> If your holiday range was pasted or imported and the cells are formatted as text rather than real dates, Excel won't recognize them as dates to exclude — and it won't throw an error. The formula just quietly returns a number that's too high.</li>
+        <li><strong>#VALUE! errors from non-date cells.</strong> This usually means one of your start/end date cells contains a date imported as text (common with CSV exports) rather than an actual Excel date serial.</li>
+        <li><strong>Dates and times mixed in the same cell.</strong> NETWORKDAYS looks only at the date portion and ignores time entirely. A start of 11:59 PM and an end of 12:01 AM the next day still register as spanning two calendar days — even though only two minutes actually elapsed.</li>
       </ul>
-      <p>Because of this variation, there's no single formula that's correct everywhere — the calculation always starts with knowing which threshold applies to the specific worker and jurisdiction.</p>
     </div>
 
     <div class="section">
-      <h2>Weekend and holiday premiums</h2>
-      <p>On top of the straight time/overtime split, many pay structures add a separate premium for hours worked on weekends or public holidays — sometimes regardless of whether the weekly overtime threshold has been crossed. This means a given hour of work can potentially fall into more than one premium category at once (e.g., "weekend" and "overtime" simultaneously), and how those stack — additively or as separate line items — again depends on the specific policy in place.</p>
-    </div>
-
-    <div class="section">
-      <h2>Turning raw timestamps into these categories</h2>
-      <p>Regardless of which thresholds apply, the underlying data problem is the same: you have a list of start and end timestamps, and you need to know how many of the total hours fall into each bucket. In practice that usually means computing, for each shift or pay period:</p>
-      <ol>
-        <li><strong>Total hours</strong> — every hour worked, no exclusions.</li>
-        <li><strong>Weekend hours</strong> — hours that fall on whichever days count as the weekend for that worker or region.</li>
-        <li><strong>Business/weekday hours</strong> — the remainder, typically within a defined daily window.</li>
-        <li>Then, separately, apply the relevant overtime threshold to the weekly or daily total to determine how much of it is straight time vs. overtime.</li>
-      </ol>
-      <p>Steps 1–3 are exactly what our <a href="index.html">Bulk Spreadsheet Calculator</a> automates: upload a timesheet with start/end timestamp columns and it appends Total Hours, Business Hours, Weekend Hours, and Weekday Hours for every row, with configurable weekend days and business-hours window. Step 4 (applying your specific overtime threshold) is a policy decision that depends on your jurisdiction, so it's worth applying on top of those totals rather than assuming a single universal rule.</p>
-    </div>
-
-    <div class="section">
-      <h2>Common mistakes</h2>
-      <ul>
-        <li><strong>Assuming Saturday/Sunday is the weekend for everyone.</strong> If any part of the workforce operates on a different week (see our <a href="business-hours-by-country-guide.html">guide to business hours by region</a>), a hardcoded Saturday/Sunday rule will misclassify their hours.</li>
-        <li><strong>Not handling shifts that cross midnight.</strong> A shift that starts Friday night and ends Saturday morning needs to be split at the day boundary, or the weekend-hours count will be wrong.</li>
-        <li><strong>Forgetting holidays entirely.</strong> A holiday that falls on a normal weekday still needs to be excluded from "regular business hours" if your policy pays it differently.</li>
-        <li><strong>Double-counting or dropping overlapping premiums.</strong> When weekend and overtime premiums can both apply to the same hour, it's easy to either double-pay or miss one — worth checking explicitly rather than assuming the spreadsheet formula handles it.</li>
-      </ul>
+      <h2>Business days vs. business hours — not the same formula</h2>
+      <p>If a plain day count is genuinely what you need, NETWORKDAYS and WORKDAY are usually sufficient on their own — there's no reason to reach for a separate tool. Where they run out of road is exactly the case above: once you need actual elapsed <em>hours</em>, not days — a partial first day, a partial last day, or a precise business-hours window like 9 AM–5 PM — day-counting formulas can't get you there. That's a different formula stack entirely (see our guide on <a href="how-to-calculate-business-hours-in-excel.html">calculating business hours in Excel</a>), or, if you'd rather skip rebuilding the formula, our <a href="calculator.html">Single Timespan Calculator</a> and <a href="index.html">Bulk Spreadsheet Calculator</a> compute Total, Business, Weekend, and Weekday Hours to the minute, with configurable weekend days and optional US/UK holiday exclusion.</p>
+      <div class="callout">Short version: need a day count? Stick with NETWORKDAYS/WORKDAY. Need the hours — including partial days — inside that range? That's what our calculators are built for.</div>
     </div>
 
     <div class="section">
       <h2>Related reading</h2>
       <ul class="related-list">
         <li><a href="how-to-calculate-business-hours-in-excel.html">How to calculate business hours in Excel (NETWORKDAYS, MOD & where they break)</a></li>
-        <li><a href="how-to-count-business-days-in-excel.html">How to count business days in Excel (NETWORKDAYS, WORKDAY & common errors)</a></li>
         <li><a href="business-hours-by-country-guide.html">What counts as "business hours"? A guide by region and industry</a></li>
+        <li><a href="how-to-calculate-overtime-and-weekend-hours.html">How to calculate overtime and weekend hours from a timesheet</a></li>
       </ul>
     </div>
 
     <div class="cta-wrap" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a href="index.html">Try the Bulk Spreadsheet Calculator →</a>
-      <a href="calculator.html" style="background:var(--amber);">Try the Single Timespan Calculator →</a>
+      <a href="calculator.html">Try the Single Timespan Calculator →</a>
+      <a href="index.html" style="background:var(--amber);">Try the Bulk Spreadsheet Calculator →</a>
     </div>
 
   </main>
 
   <!-- Right sidebar ads -->
   <aside class="sidebar-right">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
-     crossorigin="anonymous"></script>
-<!-- BlogRight_Overtime -->
+<!-- TODO: create an AdSense ad unit for this page in the dashboard and paste its slot ID below (BlogRight_BusinessDays) -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="6966412338"
+     data-ad-slot="0000000003"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -572,13 +548,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Bottom leaderboard ad -->
 <div class="ad-strip-bottom">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4664800783455318"
-     crossorigin="anonymous"></script>
-<!-- BlogBottom_Overtime -->
+<!-- TODO: create an AdSense ad unit for this page in the dashboard and paste its slot ID below (BlogBottom_BusinessDays) -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-4664800783455318"
-     data-ad-slot="4340248992"
+     data-ad-slot="0000000004"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
