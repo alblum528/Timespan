@@ -211,6 +211,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </nav>
 <div id="root"></div>
 
+<section id="how-it-works" style="max-width: 1180px; margin: 0 auto; padding: 24px 24px 8px;">
+  <div style="max-width: 780px;">
+    <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; font-weight: 600; margin-bottom: 10px;">How it works</div>
+    <h2 style="font-family: 'Space Grotesk','Inter',sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 14px;">One calculation, four numbers</h2>
+    <p style="font-size: 14.5px; color: #334155; line-height: 1.7; margin: 0 0 14px;">Type in a start date/time and an end date/time and the calculator runs the instant you finish typing — no submit button, no page reload. It returns four numbers at once: Total Hours (every hour that passed, no exclusions), Business Hours (only the portion inside your configured working window, on non-weekend days), Weekend Hours (everything on the days you've marked as weekend), and Weekday Hours (total minus weekend). All four update live if you change the weekend days, the business-hours window, or add holidays.</p>
+    <p style="font-size: 14.5px; color: #334155; line-height: 1.7; margin: 0 0 14px;">This is the calculation that trips up spreadsheet formulas the hardest: wall-clock time and business time diverge fast around a weekend. Here's a real example.</p>
+
+    <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 2px; padding: 20px 22px; margin: 0 0 16px;">
+      <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94A3B8; margin-bottom: 10px;">Worked example</div>
+      <p style="font-size: 13.5px; color: #334155; line-height: 1.6; margin: 0 0 12px;">A support ticket opens <strong>Friday at 4:30 PM</strong> and closes <strong>Monday at 9:15 AM</strong>. Weekend is set to Saturday and Sunday, business hours to 9 AM–5 PM.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
+        <div style="border: 1px solid #E2E8F0; border-radius: 2px; padding: 10px 14px;">
+          <div style="font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;">Total Hours</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: #0F172A;">64h 45m</div>
+        </div>
+        <div style="border: 1px solid #E2E8F0; border-radius: 2px; padding: 10px 14px;">
+          <div style="font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;">Business Hours</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: #2563EB;">0h 45m</div>
+        </div>
+        <div style="border: 1px solid #E2E8F0; border-radius: 2px; padding: 10px 14px;">
+          <div style="font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;">Weekend Hours</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: #0F172A;">48h 0m</div>
+        </div>
+        <div style="border: 1px solid #E2E8F0; border-radius: 2px; padding: 10px 14px;">
+          <div style="font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;">Weekday Hours</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: #0F172A;">16h 45m</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: #64748B; line-height: 1.6; margin: 12px 0 0;">By the wall clock, the ticket sat open for almost 65 hours. By business time, it was open for 45 minutes — 30 on Friday afternoon, 15 more Monday morning. That gap is the whole reason Total Hours and Business Hours get reported separately.</p>
+    </div>
+
+    <p style="font-size: 14.5px; color: #334155; line-height: 1.7; margin: 0;">People reach for this version of the tool for one-off answers: how long a flight or shift actually ran, how many billable hours a single work session covers, or how long an incident stayed open when someone needs the number in the next five minutes, not after mapping spreadsheet columns. For a whole file of timestamps at once, the <a href="index.html" style="color:#1D4ED8;">bulk spreadsheet calculator</a> runs the same math across every row.</p>
+  </div>
+</section>
+
 <section id="learn-more" style="max-width: 1180px; margin: 0 auto; padding: 24px 24px 8px;">
   <div style="max-width: 1000px;">
     <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; font-weight: 600; margin-bottom: 10px;">Guides</div>
